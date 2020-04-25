@@ -7,6 +7,7 @@ cmake_minimum_required (VERSION 3.8)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/WORDS.TXT
     ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
-add_executable (BoardBuilder "main.cpp" "main.h" "fileExplorer.cpp" "fileExplorer.h" "boardIO.cpp" "boardIO.h" "color.h")
+add_executable (BoardBuilder "main.cpp" "main.h" "fileExplorer.cpp" "fileExplorer.h" "boardIO.cpp" "boardIO.h" "color.h" "word.cpp" "word.h" 
+"board.cpp" "board.h")
 
 # TODO: Add tests and install targets if needed.
