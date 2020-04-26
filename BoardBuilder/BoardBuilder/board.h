@@ -1,6 +1,7 @@
+#include "word.h"
 #pragma once
 
-#include "word.h"
+
 #include<utility>
 #include<vector>
 
@@ -15,6 +16,9 @@ public:
 	}
 	std::pair<int, int> getWidthLimits() {
 		return widthLimits;
+	}
+	std::pair<int, int> getSize() {
+		return size;
 	}
 private:
 	std::pair<int, int> heightLimits = std::make_pair(2,20);
