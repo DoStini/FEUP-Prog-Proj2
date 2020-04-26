@@ -10,6 +10,7 @@ class Board {
 public:
 	bool setHeight(int height);
 	bool setWidth(int width);
+	bool checkFit(Word word, std::string possibleText);
 	bool addWord(Word word);
 	std::pair<int, int> getHeightLimits() {
 		return heightLimits;

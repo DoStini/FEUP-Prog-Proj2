@@ -11,7 +11,7 @@
 #include <string>
 #include <sstream>
 
-void inputLimits(Board &board) {
+void inputLimits(Board& board) {
 	std::stringstream ss;
 	int input;
 
@@ -47,6 +47,69 @@ void inputLimits(Board &board) {
 	}
 }
 
+char inputLocation(char limit, std::string message) {
+	char location;
+
+	printMessage(message, Color::WHITE, Color::BLACK);
+
+	while (!checkInputOrSTOP(location) || toupper(location) < 'A' || toupper(location) > toupper(limit)) {
+		clearScreen();
+
+		printMessage("Input was invalid, please try again.", RED, BLACK);
+
+		printMessage(message, Color::WHITE, Color::BLACK);
+	}
+
+	return location;
+}
+
+void inputWords(Board& board) {
+	std::stringstream ss;
+	std::pair<int, int> size = board.getSize();
+	char line, column, orientation;
+
+	while (true) {
+		Word newWord;
+
+		char upperLineLimit = (size.first - 1 + 'A');
+		ss.str(std::string());
+		ss << "Line of word? [A, " << upperLineLimit << "]";
+		line = inputLocation(upperLineLimit, ss.str());
+		
+		if (checkStop(line)) break;
+
+		clearScreen();
+
+		char upperColumnLimit = (size.second - 1 + 'a');
+		ss.str(std::string());
+		ss << "Column of word? [a, " << upperColumnLimit << "]";
+		column = inputLocation(upperColumnLimit, ss.str());
+
+		if (checkStop(column)) break;
+
+		newWord.setPosition(std::make_pair(line, column));
+
+		clearScreen();
+
+		ss.str(std::string());
+		ss << "The word is in line " << (char) toupper(line) << " and column " << (char) tolower(column);
+		printMessage(ss.str());
+		printMessage("Is the word horizontal or vertical? (H, V)", WHITE, BLACK);
+		while (!checkInput(orientation) || !newWord.setOrientation(orientation)) {
+			clearScreen();
+
+			printMessage("Input was invalid, please try again.", RED, BLACK);
+
+			ss.str(std::string());
+			ss << "The word is in line " << (char)toupper(line) << " and column " << (char)tolower(column);
+			printMessage(ss.str());
+			printMessage("Is the word horizontal or vertical? (H, V)", WHITE, BLACK);
+		}
+
+		clearScreen();
+	}
+}
+
 int main()
 {
 	std::vector<std::string> words;
@@ -75,9 +138,17 @@ int main()
 
 		if (checkInput(input) && toupper(input) == 'Y') break;
 	}
-	
 
-
+	clearScreen();
 	
+	printMessage("You will now be asked to input the words into the board.");
+	printMessage("To stop input and save all changes into a file you can do the following:");
+	printMessage("If in Windows, at any point, press CTRL+Z.", GREEN, BLACK);
+	printMessage("If in Linux or Mac OS, at any point, press CTRL+D.", GREEN, BLACK);
+	waitForKey();
+
+	clearScreen();
+	
+	inputWords(board);
 	return 0;
 }

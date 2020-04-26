@@ -15,7 +15,7 @@ void printMessage(std::string message, int bgColor, int fgColor, std::string end
 }
 
 bool checkStop(char input) {
-	return std::cin.eof() || std::toupper(input) == 'S';
+	return std::cin.eof();
 }
 
 void clearScreen() {

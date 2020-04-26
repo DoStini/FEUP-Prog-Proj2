@@ -6,9 +6,10 @@
 class Word {
 public:
 	bool setText(std::vector<std::string> dictionary, std::string _text);
-	bool setPosition(char _orientation, std::pair<int, int> _startPos);
+	bool setOrientation(char _orientation);
+	void setPosition(std::pair<char, char> _startPos);
 private:
 	std::string text;
-	std::pair<int, int> startPos;
+	std::pair<char, char> startPos;
 	char orientation = '\0';
 };
