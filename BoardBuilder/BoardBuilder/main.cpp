@@ -14,10 +14,10 @@
 
 void inputLimits(Board& board) {
 	std::stringstream ss;
-	int input;
+	unsigned short input;
 
-	int heightLowerLimit = board.getHeightLimits().first;
-	int heightUpperLimit = board.getHeightLimits().second;
+	unsigned short heightLowerLimit = board.getHeightLimits().first;
+	unsigned short heightUpperLimit = board.getHeightLimits().second;
 	ss << "What are the number of lines on the board? [" << heightLowerLimit << ", " << heightUpperLimit << "]";
 	printMessage(ss.str(), Color::WHITE, Color::BLACK);
 	while (!checkInput(input) || !board.setHeight(input)) {
@@ -32,8 +32,8 @@ void inputLimits(Board& board) {
 
 	clearScreen();
 
-	int widthLowerLimit = board.getWidthLimits().first;
-	int widthUpperLimit = board.getWidthLimits().second;
+	unsigned short widthLowerLimit = board.getWidthLimits().first;
+	unsigned short widthUpperLimit = board.getWidthLimits().second;
 	ss.str(std::string());
 	ss << "What are the number of columns on the board? [" << widthLowerLimit << ", " << widthUpperLimit << "]";
 	printMessage(ss.str(), Color::WHITE, Color::BLACK);
@@ -68,7 +68,7 @@ char inputLocation(char limit, std::string message) {
 void inputWords(Board& board, const std::vector<std::string>& words) {
 	std::stringstream ss;
 	std::string text;
-	std::pair<int, int> size = board.getSize();
+	std::pair<unsigned short, unsigned short> size = board.getSize();
 	char line, column, orientation, input;
 
 	while (true) {
@@ -153,7 +153,7 @@ int main()
 {
 	std::vector<std::string> words;
 	std::stringstream ss;
-	std::pair<int, int> size;
+	std::pair<unsigned short, unsigned short> size;
 	char input;
 	Board board;
 	readWords(words);

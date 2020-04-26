@@ -14,7 +14,7 @@ bool Word::setText(const std::vector<std::string> &dictionary, std::string _text
 	return false;
 }
 
-void Word::setPosition(std::pair<int, int> _startPos) {
+void Word::setPosition(std::pair<unsigned short, unsigned short> _startPos) {
 	this->startPos.first = _startPos.first;
 	this->startPos.second = _startPos.second;
 }

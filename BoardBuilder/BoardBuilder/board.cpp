@@ -2,7 +2,7 @@
 #include<utility>
 #include<vector>
 
-bool Board::setHeight(int height) {
+bool Board::setHeight(unsigned short height) {
 	if (height > this->heightLimits.second || height < heightLimits.first) {
 		return false;
 	}
@@ -11,7 +11,7 @@ bool Board::setHeight(int height) {
 	return true;
 }
 
-bool Board::setWidth(int width) {
+bool Board::setWidth(unsigned short width) {
 	if (width > this->widthLimits.second || width < widthLimits.first) {
 		return false;
 	}
@@ -21,9 +21,10 @@ bool Board::setWidth(int width) {
 }
 
 bool Board::checkFit(Word word) {
-	int textSize = word.getText().size(), location, max;
+	int textSize = word.getText().size();
+	unsigned short location, max;
 	char orientation = word.getOrientation();
-	std::pair<int, int> startPos = word.getStartPos();
+	std::pair<unsigned short, unsigned short> startPos = word.getStartPos();
 
 	if (orientation == 'H') {
 		location = startPos.second;
