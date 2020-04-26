@@ -69,10 +69,11 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 	std::stringstream ss;
 	std::string text;
 	std::pair<int, int> size = board.getSize();
-	char line, column, orientation;
+	char line, column, orientation, input;
 
 	while (true) {
 		Word newWord;
+		//Maybe show a representation of the board at the start
 
 		printMessage("What is the word?", WHITE, BLACK);
 		while (!checkInputOrSTOP(text) || !newWord.setText(words, text)) {
@@ -93,6 +94,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 		line = inputLocation(upperLineLimit, ss.str());
 		
 		if (checkStop()) break;
+		line = toupper(line);
 
 		clearScreen();
 
@@ -102,14 +104,12 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 		column = inputLocation(upperColumnLimit, ss.str());
 
 		if (checkStop()) break;
+		column = tolower(column);
 
-		newWord.setPosition(std::make_pair(line, column));
+		newWord.setPosition(std::make_pair(line - 'A', column - 'a'));
 
 		clearScreen();
 
-		ss.str(std::string());
-		ss << "The word is in line " << (char) toupper(line) << " and column " << (char) tolower(column);
-		printMessage(ss.str());
 		printMessage("Is the word horizontal or vertical? (H, V)", WHITE, BLACK);
 		while (!checkInputOrSTOP(orientation) || !newWord.setOrientation(orientation)) {
 			clearScreen();
@@ -117,13 +117,33 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 
 			printMessage("Input was invalid, please try again.", RED, BLACK);
 
-			ss.str(std::string());
-			ss << "The word is in line " << (char)toupper(line) << " and column " << (char)tolower(column);
-			printMessage(ss.str());
 			printMessage("Is the word horizontal or vertical? (H, V)", WHITE, BLACK);
 		}
 
 		if (checkStop()) break;
+
+		clearScreen();
+
+		ss.str(std::string());
+		ss << "So the word is '" << text << "', it's orientation is " << orientation << ", and is in line " << (char)line << " and column " << (char)column << ".";
+		printMessage(ss.str());
+		printMessage("Is this correct? (Y, N)", Color::WHITE, Color::BLACK);
+
+		if (checkInputOrSTOP(input)) {
+			clearScreen();
+			if (checkStop()) break;
+
+			if (toupper(input) == 'Y') {
+				if (board.addWord(newWord)) {
+					printMessage("Success!");
+				}
+				else {
+					printMessage("Error! The word does not fit in the board or intersects with another word.", RED, BLACK);
+				}
+
+				waitForKey();
+			}
+		}
 
 		clearScreen();
 	}

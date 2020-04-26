@@ -14,9 +14,9 @@ bool Word::setText(const std::vector<std::string> &dictionary, std::string _text
 	return false;
 }
 
-void Word::setPosition(std::pair<char, char> _startPos) {
-	this->startPos.first = toupper(_startPos.first);
-	this->startPos.second = tolower(_startPos.second);
+void Word::setPosition(std::pair<int, int> _startPos) {
+	this->startPos.first = _startPos.first;
+	this->startPos.second = _startPos.second;
 }
 
 bool Word::setOrientation(char _orientation) {
