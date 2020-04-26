@@ -50,6 +50,6 @@ bool checkInputOrSTOP(T& input, char delimiter = '\n') {
 void getString(std::string& string);
 void printMessage(std::string message, std::string end = "\n");
 void printMessage(std::string message, int bgColor, int fgColor, std::string end = "\n");
-bool checkStop(char input);
+bool checkStop();
 void clearScreen();
 void waitForKey();

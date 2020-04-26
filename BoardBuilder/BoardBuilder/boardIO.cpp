@@ -14,7 +14,7 @@ void printMessage(std::string message, int bgColor, int fgColor, std::string end
 	std::cout << "\033[" << COLOR[bgColor].first << ";" << COLOR[fgColor].second << "m" << message << "\033[0m" << end;
 }
 
-bool checkStop(char input) {
+bool checkStop() {
 	return std::cin.eof();
 }
 

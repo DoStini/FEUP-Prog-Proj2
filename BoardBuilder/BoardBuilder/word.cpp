@@ -1,10 +1,17 @@
 #include "word.h"
+#include <algorithm>
 #include<string>
 #include<vector>
 
 
-bool Word::setText(std::vector<std::string> dictionary, std::string _text) {
-	return true;
+bool Word::setText(const std::vector<std::string> &dictionary, std::string _text) {
+	if (std::binary_search(dictionary.begin(), dictionary.end(), _text)) {
+		this->text = _text;
+
+		return true;
+	}
+
+	return false;
 }
 
 void Word::setPosition(std::pair<char, char> _startPos) {

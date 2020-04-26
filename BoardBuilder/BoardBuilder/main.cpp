@@ -10,6 +10,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <algorithm>
 
 void inputLimits(Board& board) {
 	std::stringstream ss;
@@ -54,6 +55,7 @@ char inputLocation(char limit, std::string message) {
 
 	while (!checkInputOrSTOP(location) || toupper(location) < 'A' || toupper(location) > toupper(limit)) {
 		clearScreen();
+		if (checkStop()) break;
 
 		printMessage("Input was invalid, please try again.", RED, BLACK);
 
@@ -63,20 +65,34 @@ char inputLocation(char limit, std::string message) {
 	return location;
 }
 
-void inputWords(Board& board) {
+void inputWords(Board& board, const std::vector<std::string>& words) {
 	std::stringstream ss;
+	std::string text;
 	std::pair<int, int> size = board.getSize();
 	char line, column, orientation;
 
 	while (true) {
 		Word newWord;
 
+		printMessage("What is the word?", WHITE, BLACK);
+		while (!checkInputOrSTOP(text) || !newWord.setText(words, text)) {
+			clearScreen();
+			if (checkStop()) break;
+
+			printMessage("Input was invalid or word is not real, please try again.", RED, BLACK);
+
+			printMessage("What is the word?", WHITE, BLACK);
+		}
+		if (checkStop()) break;
+
+		clearScreen();
+
 		char upperLineLimit = (size.first - 1 + 'A');
 		ss.str(std::string());
 		ss << "Line of word? [A, " << upperLineLimit << "]";
 		line = inputLocation(upperLineLimit, ss.str());
 		
-		if (checkStop(line)) break;
+		if (checkStop()) break;
 
 		clearScreen();
 
@@ -85,7 +101,7 @@ void inputWords(Board& board) {
 		ss << "Column of word? [a, " << upperColumnLimit << "]";
 		column = inputLocation(upperColumnLimit, ss.str());
 
-		if (checkStop(column)) break;
+		if (checkStop()) break;
 
 		newWord.setPosition(std::make_pair(line, column));
 
@@ -95,8 +111,9 @@ void inputWords(Board& board) {
 		ss << "The word is in line " << (char) toupper(line) << " and column " << (char) tolower(column);
 		printMessage(ss.str());
 		printMessage("Is the word horizontal or vertical? (H, V)", WHITE, BLACK);
-		while (!checkInput(orientation) || !newWord.setOrientation(orientation)) {
+		while (!checkInputOrSTOP(orientation) || !newWord.setOrientation(orientation)) {
 			clearScreen();
+			if (checkStop()) break;
 
 			printMessage("Input was invalid, please try again.", RED, BLACK);
 
@@ -105,6 +122,8 @@ void inputWords(Board& board) {
 			printMessage(ss.str());
 			printMessage("Is the word horizontal or vertical? (H, V)", WHITE, BLACK);
 		}
+
+		if (checkStop()) break;
 
 		clearScreen();
 	}
@@ -118,7 +137,7 @@ int main()
 	char input;
 	Board board;
 	readWords(words);
-	
+
 	printMessage("Welcome to the Scrabble Junior Board Builder Tool.");
 	printMessage("Creating a Board is easy, don't worry. Just follow the instructions and answer all of the questions.");
 	waitForKey();
@@ -149,6 +168,6 @@ int main()
 
 	clearScreen();
 	
-	inputWords(board);
+	inputWords(board, words);
 	return 0;
 }

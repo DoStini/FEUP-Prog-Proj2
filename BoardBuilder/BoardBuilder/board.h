@@ -1,7 +1,6 @@
-#include "word.h"
 #pragma once
 
-
+#include "word.h"
 #include<utility>
 #include<vector>
 

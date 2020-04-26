@@ -5,7 +5,7 @@
 
 class Word {
 public:
-	bool setText(std::vector<std::string> dictionary, std::string _text);
+	bool setText(const std::vector<std::string> &dictionary, std::string _text);
 	bool setOrientation(char _orientation);
 	void setPosition(std::pair<char, char> _startPos);
 private:
