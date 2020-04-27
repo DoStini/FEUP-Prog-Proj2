@@ -39,6 +39,16 @@ bool Board::checkFit(Word word) {
 	return true;
 }
 
+bool Board::checkIntersections(Word word) {
+	bool intersects = false;
+	std::vector<Word>::iterator insertIterator = words.end();
+
+	for (std::vector<Word>::iterator it = words.begin(); it != words.end(); it++) {
+		int wordSize = word.getText().size();
+		int itSize = (*it).getText().size();
+	}
+}
+
 bool Board::addWord(Word word) {
 	if (checkFit(word)) {
 		words.push_back(word);

@@ -10,6 +10,7 @@ public:
 	bool setHeight(unsigned short height);
 	bool setWidth(unsigned short width);
 	bool checkFit(Word word);
+	bool checkIntersections(Word word);
 	bool addWord(Word word);
 	std::pair<unsigned short, unsigned short> getHeightLimits() { return heightLimits; }
 	std::pair<unsigned short, unsigned short> getWidthLimits() { return widthLimits; }
