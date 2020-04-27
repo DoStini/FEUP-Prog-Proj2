@@ -3,18 +3,27 @@
 #include <sstream>
 #include "Board.h"
 #include "Word.h"
+#include "IO.h"
 
-using std::ifstream, std::stringstream;
+using std::ifstream;
+using std::stringstream;
 
 Board::Board() = default;
 
 Board::Board(string fileName){
-
+    readBoard(fileName);
+    showBoard();
 }
 
 Board::~Board() {
-    free(letters);
+    /*
+    for (int i = 0; i < vSize; ++i) {
+        free((char *) letters[i]);
+    }
+    free((char **) letters);
+    */
 }
+
 
 void Board::readBoard(string fileName) {
     ifstream f_in;
@@ -22,6 +31,7 @@ void Board::readBoard(string fileName) {
 
     if (!f_in.is_open()){
         std::cerr << "File not found!";
+        return;
     }
 
     char sep;
@@ -30,25 +40,35 @@ void Board::readBoard(string fileName) {
 
     f_in >> vSize >> sep >> hSize;
 
-    initWordVectors();
-
     unsigned short int verticalIdx;
     unsigned short int horizontalIdx;
 
-    while (f_in){
+    initArray();
+    initWordVectors();
+    int counter = 0;
+    while (!f_in.eof()){
         f_in >> position >> sep >> word;
 
         verticalIdx = (int) position[0] - (int) 'A';
         horizontalIdx = (int) position[1] - (int) 'a';
 
         writeOnArray(word, sep == 'V', verticalIdx, horizontalIdx);
-
+        counter++;
         if (sep == 'V'){
-            vWords[verticalIdx].push_back(Word(word, horizontalIdx));
-        }
-        else{
             vWords[horizontalIdx].push_back(Word(word, verticalIdx));
         }
+        else{
+            hWords[verticalIdx].push_back(Word(word, horizontalIdx));
+        }
+    }
+}
+
+void Board::showBoard() {
+    for (int i = 0; i < vSize; ++i) {
+        for (int j = 0; j < hSize; ++j) {
+            std::cout << letters[i][j] << ' ';
+        }
+        std::cout << std::endl;
     }
 }
 
@@ -57,14 +77,14 @@ void Board::initArray() {
     for (int v = 0; v < vSize; ++v) {
         letters[v] = (char *) malloc(hSize * sizeof(char));
         for (int h = 0; h < hSize; ++h) {
-            letters[v][h] = 0;
+            letters[v][h] = ' ';
         }
     }
 }
 
 void Board::writeOnArray(string word, bool vertical, unsigned short int vIdx, unsigned short int hIdx){
     for (int i = 0; i < word.length(); ++i) {
-        letters[vIdx + i*vertical][hIdx + !vertical*(!vertical)] = word[i];                         // If vertical, changes vIdx, otherwise changes hIdx
+        letters[vIdx + i*vertical][hIdx + i*!vertical] = word[i];                         // If vertical, changes vIdx, otherwise changes hIdx
     }
 }
 
@@ -79,6 +99,13 @@ void Board::initWordVectors() {
     }
 }
 
-char Board::readLetter(unsigned short int pos[2]) {
+char Board::getTile(unsigned short int pos[2]) {
     return letters[pos[0]][pos[1]];
+}
+
+unsigned short int Board::getHSize(){
+    return hSize;
+}
+unsigned short int Board::getVSize(){
+    return vSize;
 }

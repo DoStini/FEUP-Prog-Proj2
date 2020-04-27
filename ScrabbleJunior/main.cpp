@@ -1,23 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <time.h>
 
-using std::cout, std::cin, std::vector;
-
-
-
-
-
-
-
-
-
-
+#include "Game.h"
 
 
 int main() {
-    vector<char> chars = {'a', 'b', 'c'};
-    chars.erase(chars.begin() + 1);
-    for (auto charara:chars) {
-        cout << charara;
-    }
+    srand(time(NULL));
+    Board board("board.txt");
+    Game game(2, board);
+    std::cout << "Hello";
 }

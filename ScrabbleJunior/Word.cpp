@@ -2,10 +2,12 @@
 
 #include "Word.h"
 
+Word::Word() = default;
+
 Word::Word(std::string word, unsigned short int start){
     this->start = start;
     this->end = start + word.length() - 1;
-
+    this -> word = word;
 
     for (int i = 0; i < word.length() ; ++i) {
         Letter letter;

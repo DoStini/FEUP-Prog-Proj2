@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_GENERATOR "MinGW Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "../CMakeLists.txt"
+  "../board.txt"
   "CMakeFiles/3.15.3/CMakeCCompiler.cmake"
   "CMakeFiles/3.15.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.15.3/CMakeRCCompiler.cmake"
@@ -48,6 +49,7 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+  "board.txt"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 

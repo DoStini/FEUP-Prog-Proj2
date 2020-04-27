@@ -10,17 +10,16 @@ public:
     Game(unsigned short int numPlayers, Board board);
     ~Game();
     void initPlayers(unsigned short int numPlayers);
-    void initTiles(Board &board);
+    void initPot();
     char getTile();
-    bool playerMove(Player &player, Board &board);
+    bool playerMove(Player &player);
 
 private:
-    vector<char> tiles;
+    vector<char> pot;                     // The bag of tiles
     unsigned short int numPlayers;
-    Player *players;
+    vector<Player> players;
     Board board;
 };
-
 
 
 #endif

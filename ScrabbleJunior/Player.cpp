@@ -3,12 +3,19 @@
 
 
 
-void Player::initTiles(Board &board){
+Player::Player() = default;
 
-    unsigned short int index = rand()&board.;
+Player::Player(vector<char> &pot){
+    initTiles(pot);
+}
+
+void Player::initTiles(vector<char> &pot){
+    unsigned short int index;
 
     for (int i = 0; i < 7; ++i) {
-
+        index = rand()%pot.size();
+        tiles[i] = pot[i];
+        pot.erase(pot.begin() + i);
     }
 }
 

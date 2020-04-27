@@ -6,7 +6,35 @@
 
 #IncludeRegexTransform: 
 
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/main.cpp
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.cpp
+iostream
+-
+fstream
+-
+sstream
+-
+Board.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
+Word.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
+IO.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
+
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
+iostream
+-
+Word.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
+
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
+iostream
+-
+string
+-
+limits
+-
+
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
 iostream
 -
 vector

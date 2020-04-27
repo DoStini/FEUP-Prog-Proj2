@@ -7,13 +7,15 @@
 
 class Player{
 public:
+    Player();
+    Player(vector<char> &pot);
     unsigned short int checkTiles(char letter);
-    void initTiles(Board &board);
+    void initTiles(vector<char> &pot);
     void setTile(char letter, unsigned short int pos);
 private:
     char tiles[7];
-    unsigned short int score;
-    std::string name;
+    unsigned short int score = 0;
+    std::string name = "";
 };
 
 #endif

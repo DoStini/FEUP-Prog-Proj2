@@ -119,5 +119,8 @@
 		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
+		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/board.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
 	</Project>
 </CodeBlocks_project_file>

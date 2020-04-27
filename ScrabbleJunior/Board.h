@@ -8,7 +8,8 @@
 #include <iostream>
 #include "Word.h"
 
-using std::string, std::vector;
+using std::string;
+using std::vector;
 
 class Board {
 public:
@@ -17,11 +18,13 @@ public:
     ~Board();                                   // Using malloc for array of char
 
     void readBoard(string fileName);
+    void showBoard();
     void initArray();
     void writeOnArray(string word, bool vertical, unsigned short int vIdx, unsigned short int hIdx);
     void initWordVectors();
-    char readLetter(unsigned short int pos[2]);
-    void showBoard();
+    char getTile(unsigned short int *pos);
+    unsigned short int getHSize();
+    unsigned short int getVSize();
 private:
     vector<vector<Word>> hWords;
     vector<vector<Word>> vWords;
