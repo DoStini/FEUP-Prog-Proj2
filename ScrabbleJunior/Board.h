@@ -12,6 +12,7 @@ using std::string, std::vector;
 
 class Board {
 public:
+    Board();
     Board(string fileName);
     ~Board();                                   // Using malloc for array of char
 
@@ -19,7 +20,8 @@ public:
     void initArray();
     void writeOnArray(string word, bool vertical, unsigned short int vIdx, unsigned short int hIdx);
     void initWordVectors();
-
+    char readLetter(unsigned short int pos[2]);
+    void showBoard();
 private:
     vector<vector<Word>> hWords;
     vector<vector<Word>> vWords;

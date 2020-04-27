@@ -6,9 +6,14 @@
 
 using std::ifstream, std::stringstream;
 
+Board::Board() = default;
+
 Board::Board(string fileName){
 
+}
 
+Board::~Board() {
+    free(letters);
 }
 
 void Board::readBoard(string fileName) {
@@ -72,4 +77,8 @@ void Board::initWordVectors() {
         vector<Word> vec = {};
         hWords.push_back(vec);
     }
+}
+
+char Board::readLetter(unsigned short int pos[2]) {
+    return letters[pos[0]][pos[1]];
 }
