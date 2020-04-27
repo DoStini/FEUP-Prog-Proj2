@@ -20,41 +20,38 @@ bool Board::setWidth(unsigned short width) {
 	return true;
 }
 
-bool Board::checkFit(Word word) {
-	int textSize = word.getText().size();
-	unsigned short location, max;
-	char orientation = word.getOrientation();
-	std::pair<unsigned short, unsigned short> startPos = word.getStartPos();
+bool Board::checkFit(Word word, unsigned short max) {
+	std::pair<unsigned short, unsigned short> location = word.getLocation();
 
-	if (orientation == 'H') {
-		location = startPos.second;
-		max = this->size.second;
-	}
-	else {
-		location = startPos.first;
-		max = this->size.first;
-	}
-
-	if (location + textSize > max) return false;
-	return true;
+	return !(location.second >= max || location.first < 0);
 }
 
-bool Board::checkIntersections(Word word) {
-	bool intersects = false;
-	std::vector<Word>::iterator insertIterator = words.end();
+// TODO
+bool Board::checkIntersections(Word word, std::vector<Word> orientationWords) {
+	/*bool intersects = false;
+	WordsIterator insertIterator = orientationWords.end();
 
-	for (std::vector<Word>::iterator it = words.begin(); it != words.end(); it++) {
-		int wordSize = word.getText().size();
-		int itSize = (*it).getText().size();
-	}
+	for (WordsIterator it = orientationWords.begin(); it != orientationWords.end(); it++) {
+		if((*it).getLocation().)
+	}*/
+
+	return false;
 }
 
-bool Board::addWord(Word word) {
-	if (checkFit(word)) {
-		words.push_back(word);
 
+bool Board::addHWord(Word word, unsigned short position) {
+	if (checkFit(word, size.second)) {
 		return true;
 	}
 
 	return false;
 }
+
+bool Board::addVWord(Word word, unsigned short position) {
+	if (checkFit(word, size.first)) {
+		return false;
+	}
+
+	return false;
+}
+

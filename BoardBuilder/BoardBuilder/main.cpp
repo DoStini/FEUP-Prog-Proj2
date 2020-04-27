@@ -106,12 +106,10 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 		if (checkStop()) break;
 		column = tolower(column);
 
-		newWord.setPosition(std::make_pair(line - 'A', column - 'a'));
-
 		clearScreen();
 
 		printMessage("Is the word horizontal or vertical? (H, V)", WHITE, BLACK);
-		while (!checkInputOrSTOP(orientation) || !newWord.setOrientation(orientation)) {
+		while (!checkInputOrSTOP(orientation) || (toupper(orientation) != 'H' && toupper(orientation) != 'V')) {
 			clearScreen();
 			if (checkStop()) break;
 
@@ -119,10 +117,13 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 
 			printMessage("Is the word horizontal or vertical? (H, V)", WHITE, BLACK);
 		}
-
+		orientation = toupper(orientation);
 		if (checkStop()) break;
 
+		newWord.setLocation(std::make_pair(line - 'A', column - 'a'), orientation);
+
 		clearScreen();
+		std::cout << newWord.getLocation().first << " " << newWord.getLocation().second << std::endl;
 
 		ss.str(std::string());
 		ss << "So the word is '" << text << "', it's orientation is " << orientation << ", and is in line " << (char)line << " and column " << (char)column << ".";
@@ -134,7 +135,8 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 			if (checkStop()) break;
 
 			if (toupper(input) == 'Y') {
-				if (board.addWord(newWord)) {
+				if ((orientation == 'H' && board.addHWord(newWord, line-'A')) ||
+					(orientation == 'V' && board.addVWord(newWord, column - 'a'))) {
 					printMessage("Success!");
 				}
 				else {

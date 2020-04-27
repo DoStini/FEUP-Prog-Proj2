@@ -6,13 +6,10 @@
 class Word {
 public:
 	bool setText(const std::vector<std::string> &dictionary, std::string _text);
-	bool setOrientation(char _orientation);
-	void setPosition(std::pair<unsigned short, unsigned short> _startPos);
+	bool setLocation(std::pair<unsigned short, unsigned short> _location, char orientation);
 	std::string getText() { return text; }
-	std::pair<unsigned short, unsigned short> getStartPos() { return startPos; }
-	char getOrientation() { return orientation; }
+	std::pair<unsigned short, unsigned short> getLocation() { return location; }
 private:
 	std::string text;
-	std::pair<unsigned short, unsigned short> startPos;
-	char orientation = '\0';
+	std::pair<unsigned short, unsigned short> location;
 };
