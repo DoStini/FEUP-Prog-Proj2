@@ -14,19 +14,18 @@ bool Word::setText(const std::vector<std::string> &dictionary, std::string _text
 	return false;
 }
 
-void Word::setPosition(std::pair<unsigned short, unsigned short> _startPos) {
-	this->startPos.first = _startPos.first;
-	this->startPos.second = _startPos.second;
-}
+bool Word::setLocation(std::pair<unsigned short, unsigned short> _location, char orientation) {
+	if (text.empty()) return false;
+	orientation = toupper(orientation);
 
-bool Word::setOrientation(char _orientation) {
-	_orientation = toupper(_orientation);
-
-	if (_orientation == 'H' || _orientation == 'V') {
-		this->orientation = _orientation;
-
-		return true;
+	if (orientation == 'H') {
+		this->location.first = _location.second;
+		this->location.second = _location.second + text.size() - 1;
 	}
-	
-	return false;
+	else if (orientation == 'V') {
+		this->location.first = _location.first;
+		this->location.second = _location.first + text.size() - 1;
+	}
+
+	return true;
 }
