@@ -5,11 +5,13 @@
 #include "Player.h"
 
 
-Game::Game(unsigned short int numPlayers, Board board){
+Game::Game(unsigned short int numPlayers, Board *boardPtr){
     this -> numPlayers = numPlayers;
-    this -> board = board;
+    this -> boardPtr = boardPtr;
     initPot();
     initPlayers(numPlayers);
+
+    playerMove(players[0]);
 }
 
 Game::~Game() {
@@ -29,11 +31,11 @@ void Game::initPot() {
     char temp;
     int temp2;
     unsigned short int pos[2];
-    for (int i = 0; i < board.getVSize(); ++i) {
+    for (int i = 0; i < boardPtr->getVSize(); ++i) {
         pos[0] = i;
-        for (int j = 0; j < board.getHSize(); ++j) {
+        for (int j = 0; j < boardPtr->getHSize(); ++j) {
             pos[1] = j;
-            temp = board.getTile(pos);
+            temp = boardPtr->getTile(pos);
             if (temp != ' '){
                 pot.push_back(temp);
                 temp2++;
@@ -50,25 +52,52 @@ char Game::getTile() {
     return tile;
 }
 
-bool Game::playerMove(Player &player) {
-    printMessage("Enter the position on the board in the format 'Aa': ");
+//void Game::inputMove(int &intPosition){
+
+//}
+
+bool Game::inputMove(unsigned short int intPosition[2], Player &player){
+    printMessage("This is your boardPtr: ");
+    player.showTiles();
+    printMessage("Enter the position on the boardPtr in the format 'Aa':", " ");
     char position[2];
     while(!checkInput(position, '\n')){
         printMessage("Your input was invalid.");
-        printMessage("Re-enter the position on the board in the format 'Aa': ");
+        printMessage("Re-enter the position on the boardPtr in the format 'Aa': ");
     }
 
-    unsigned short int intPosition[2];
     intPosition[0] = position[0] - 'A';
     intPosition[1] = position[1] - 'a';
-    unsigned short int playerTileIndex = player.checkTiles(board.getTile(intPosition));
-    if (!playerTileIndex){
+    unsigned short int playerTileIndex = player.checkTiles(boardPtr->getTile(intPosition));
+    if (playerTileIndex == -1){
         printMessage("You don't own that tile!");
         return false;
     }
     else{
-        Word hWord;
-        Word vWord;
+        return true;
+    }
+}
+
+bool Game::playerMove(Player &player) {                     // Maybe change later to short int (we have array of players)
+    unsigned short int pos[2];
+    if (!inputMove(pos, player)){
+        return false;
+    }
+    else{
+        Word *hWordPtr = boardPtr->findWord(pos[0], pos[1], false);
+        Word *vWordPtr = boardPtr->findWord(pos[1], pos[0], true);
+
+        if (hWordPtr != NULL){                                      //This is spaggethi
+            if (hWordPtr->validMove(pos[1])){
+                hWordPtr->coverLetter(pos[1]);
+                if (vWordPtr != NULL) vWordPtr->coverLetter(pos[0]);
+            }
+        } else if (vWordPtr != NULL){
+            if (vWordPtr->validMove(pos[0])){
+                if(hWordPtr != NULL) hWordPtr->coverLetter(pos[1]);
+                vWordPtr->coverLetter(pos[0]);
+            }
+        }
     }
     return true;
 }

@@ -6,37 +6,41 @@
 
 #IncludeRegexTransform: 
 
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.cpp
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
 iostream
 -
-fstream
--
-sstream
+Word.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
+
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.h
+iostream
 -
 Board.h
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
-Word.h
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
-IO.h
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
+Player.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
 
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
-iostream
--
-Word.h
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
-
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
 iostream
 -
 string
 -
-limits
--
+Board.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
 
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
 iostream
 -
 vector
 -
+
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/main.cpp
+iostream
+-
+vector
+-
+time.h
+-
+Game.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.h
 

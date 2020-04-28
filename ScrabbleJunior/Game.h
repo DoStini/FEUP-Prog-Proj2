@@ -7,18 +7,19 @@
 
 class Game{
 public:
-    Game(unsigned short int numPlayers, Board board);
+    Game(unsigned short int numPlayers, Board *boardPtr);
     ~Game();
     void initPlayers(unsigned short int numPlayers);
     void initPot();
     char getTile();
+    bool inputMove(unsigned short int intPosition[2], Player &player);
     bool playerMove(Player &player);
 
 private:
     vector<char> pot;                     // The bag of tiles
     unsigned short int numPlayers;
     vector<Player> players;
-    Board board;
+    Board *boardPtr;
 };
 
 

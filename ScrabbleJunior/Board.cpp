@@ -16,12 +16,10 @@ Board::Board(string fileName){
 }
 
 Board::~Board() {
-    /*
     for (int i = 0; i < vSize; ++i) {
-        free((char *) letters[i]);
+        free(letters[i]);
     }
-    free((char **) letters);
-    */
+    free(letters);
 }
 
 
@@ -61,6 +59,25 @@ void Board::readBoard(string fileName) {
             hWords[verticalIdx].push_back(Word(word, horizontalIdx));
         }
     }
+}
+
+Word *Board::findWord(unsigned short int index, unsigned short int charPos, bool vertical){
+    if (vertical){
+        for (int i = 0; i < vWords[index].size(); ++i) {
+            if (vWords[index][i].inWord(charPos)){
+                return &vWords[index][i];
+            }
+        }
+    }
+    else{
+        for (int i = 0; i < hWords[index].size(); ++i) {
+            if (hWords[index][i].inWord(charPos)) {
+                return &hWords[index][i];
+            }
+        }
+    }
+
+    return NULL;
 }
 
 void Board::showBoard() {

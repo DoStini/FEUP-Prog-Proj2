@@ -19,6 +19,7 @@ public:
 
     void readBoard(string fileName);
     void showBoard();
+    Word *findWord(unsigned short int index, unsigned short int charPos, bool vertical);
     void initArray();
     void writeOnArray(string word, bool vertical, unsigned short int vIdx, unsigned short int hIdx);
     void initWordVectors();

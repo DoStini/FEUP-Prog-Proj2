@@ -6,8 +6,11 @@
 
 
 int main() {
-    srand(time(NULL));
+    srand(0);
     Board board("board.txt");
-    Game game(2, board);
+    Game game(2, &board);
     std::cout << "Hello";
 }
+
+
+// STILL HAVE TO FIND OUT WHY CANT FREE LETTERS**

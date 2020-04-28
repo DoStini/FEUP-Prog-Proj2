@@ -19,6 +19,13 @@ void Player::initTiles(vector<char> &pot){
     }
 }
 
+void Player::showTiles() {
+    for (int i = 0; i < 7; ++i) {
+        std::cout << tiles[i] << ' ';
+    }
+    std::cout << std::endl;
+}
+
 unsigned short int Player::checkTiles(char letter){
     for (int i = 0; i < 7; ++i) {
         if (letter == tiles[i])

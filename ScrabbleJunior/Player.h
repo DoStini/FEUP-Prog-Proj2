@@ -11,6 +11,7 @@ public:
     Player(vector<char> &pot);
     unsigned short int checkTiles(char letter);
     void initTiles(vector<char> &pot);
+    void showTiles();
     void setTile(char letter, unsigned short int pos);
 private:
     char tiles[7];
