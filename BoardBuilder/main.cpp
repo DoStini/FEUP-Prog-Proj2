@@ -73,7 +73,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 
 	while (true) {
 		Word newWord;
-		//Maybe show a representation of the board at the start
+		board.showBoard();
 
 		printMessage("What is the word?", WHITE, BLACK);
 		while (!checkInputOrSTOP(text) || !newWord.setText(words, text)) {
@@ -178,9 +178,9 @@ int main()
 
 		if (checkInput(input) && toupper(input) == 'Y') break;
 	}
-	board.initializeWords();
 
 	clearScreen();
+	board.initializeWords();
 	
 	printMessage("You will now be asked to input the words into the board.");
 	printMessage("To stop input and save all changes into a file you can do the following:");

@@ -4,6 +4,11 @@
 #include<string>
 #include<vector>
 
+bool Word::intersects(Word otherWord) {
+	std::pair<unsigned short, unsigned short> otherLocation = otherWord.getLocation();
+
+	return (location.first - 1 > otherLocation.second || location.second + 1 < otherLocation.first);
+}
 
 bool Word::setText(const std::vector<std::string> &dictionary, std::string _text) {
 	if (std::binary_search(dictionary.begin(), dictionary.end(), stringToLower(_text))) {
