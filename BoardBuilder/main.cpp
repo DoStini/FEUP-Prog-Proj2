@@ -79,6 +79,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 		while (!checkInputOrSTOP(text) || !newWord.setText(words, text)) {
 			clearScreen();
 			if (checkStop()) break;
+			board.showBoard();
 
 			printMessage("Input was invalid or word is not real, please try again.", RED, BLACK);
 
@@ -127,23 +128,23 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 		ss.str(std::string());
 		ss << "So the word is '" << text << "', it's orientation is " << orientation << ", and is in line " << (char)line << " and column " << (char)column << ".";
 		printMessage(ss.str());
-		printMessage("Is this correct? (Y, N)", Color::WHITE, Color::BLACK);
+		printMessage("Is this correct? (N to retry)", Color::WHITE, Color::BLACK);
+		getChar(input);
 
-		if (checkInputOrSTOP(input)) {
+		if (toupper(input) != 'N') {
 			clearScreen();
-			if (checkStop()) break;
+			if (input == EOF) break;
 
-			if (toupper(input) == 'Y') {
-				if ((orientation == 'H' && board.addWord(newWord, line-'A', orientation)) ||
-					(orientation == 'V' && board.addWord(newWord, column - 'a', orientation))) {
-					printMessage("Success!");
-				}
-				else {
-					printMessage("Error! The word does not fit in the board or intersects with another word.", RED, BLACK);
-				}
-
-				waitForKey();
+			if ((orientation == 'H' && board.addWord(newWord, line-'A', orientation)) ||
+				(orientation == 'V' && board.addWord(newWord, column - 'a', orientation))) {
+				printMessage("Success!");
 			}
+			else {
+				printMessage("Error! The word does not fit in the board or intersects with another word.", RED, BLACK);
+			}
+
+			waitForKey();
+			
 		}
 
 		clearScreen();
@@ -174,9 +175,10 @@ int main()
 		ss.str(std::string());
 		ss << "Your input was: " << size.first << "x" << size.second;
 		printMessage(ss.str());
-		printMessage("Is this correct? (Y, N)", Color::WHITE, Color::BLACK);
+		printMessage("Is this correct? (N to retry)", Color::WHITE, Color::BLACK);
+		getChar(input);
 
-		if (checkInput(input) && toupper(input) == 'Y') break;
+		if (toupper(input) != 'N') break;
 	}
 
 	clearScreen();
