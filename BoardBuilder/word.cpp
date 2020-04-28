@@ -1,12 +1,13 @@
 #include "word.h"
+#include "boardIO.h"
 #include <algorithm>
 #include<string>
 #include<vector>
 
 
 bool Word::setText(const std::vector<std::string> &dictionary, std::string _text) {
-	if (std::binary_search(dictionary.begin(), dictionary.end(), _text)) {
-		this->text = _text;
+	if (std::binary_search(dictionary.begin(), dictionary.end(), stringToLower(_text))) {
+		this->text = stringToUpper(_text);
 
 		return true;
 	}
@@ -20,11 +21,11 @@ bool Word::setLocation(std::pair<unsigned short, unsigned short> _location, char
 
 	if (orientation == 'H') {
 		this->location.first = _location.second;
-		this->location.second = _location.second + text.size() - 1;
+		this->location.second = _location.second + (unsigned short) text.size() - 1;
 	}
 	else if (orientation == 'V') {
 		this->location.first = _location.first;
-		this->location.second = _location.first + text.size() - 1;
+		this->location.second = _location.first + (unsigned short) text.size() - 1;
 	}
 
 	return true;

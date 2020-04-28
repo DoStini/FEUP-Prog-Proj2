@@ -20,6 +20,15 @@ bool Board::setWidth(unsigned short width) {
 	return true;
 }
 
+bool Board::initializeWords() {
+	if (size.first == 0 || size.second == 0) return false;
+
+	vWords = (std::vector<Word>*) malloc(size.second * sizeof(std::vector<Word>));
+	hWords = (std::vector<Word>*) malloc(size.first * sizeof(std::vector<Word>));
+
+	return true;
+}
+
 bool Board::checkFit(Word word, unsigned short max) {
 	std::pair<unsigned short, unsigned short> location = word.getLocation();
 
@@ -41,6 +50,8 @@ bool Board::checkIntersections(Word word, std::vector<Word> orientationWords) {
 
 bool Board::addHWord(Word word, unsigned short position) {
 	if (checkFit(word, size.second)) {
+		hWords[position].push_back(word);
+
 		return true;
 	}
 
@@ -49,7 +60,9 @@ bool Board::addHWord(Word word, unsigned short position) {
 
 bool Board::addVWord(Word word, unsigned short position) {
 	if (checkFit(word, size.first)) {
-		return false;
+		vWords[position].push_back(word);
+
+		return true;
 	}
 
 	return false;

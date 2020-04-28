@@ -123,7 +123,6 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 		newWord.setLocation(std::make_pair(line - 'A', column - 'a'), orientation);
 
 		clearScreen();
-		std::cout << newWord.getLocation().first << " " << newWord.getLocation().second << std::endl;
 
 		ss.str(std::string());
 		ss << "So the word is '" << text << "', it's orientation is " << orientation << ", and is in line " << (char)line << " and column " << (char)column << ".";
@@ -179,6 +178,7 @@ int main()
 
 		if (checkInput(input) && toupper(input) == 'Y') break;
 	}
+	board.initializeWords();
 
 	clearScreen();
 	

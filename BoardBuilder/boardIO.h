@@ -53,3 +53,5 @@ void printMessage(std::string message, int bgColor, int fgColor, std::string end
 bool checkStop();
 void clearScreen();
 void waitForKey();
+std::string stringToLower(std::string str);
+std::string stringToUpper(std::string str);
