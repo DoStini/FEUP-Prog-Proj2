@@ -7,7 +7,13 @@
 bool Word::intersects(Word otherWord) {
 	std::pair<unsigned short, unsigned short> otherLocation = otherWord.getLocation();
 
-	return (location.first - 1 > otherLocation.second || location.second + 1 < otherLocation.first);
+	return !(location.first - 1 > otherLocation.second || location.second + 1 < otherLocation.first);
+}
+
+bool Word::isAfter(Word otherWord) {
+	std::pair<unsigned short, unsigned short> otherLocation = otherWord.getLocation();
+
+	return (location.first - 1 > otherLocation.second);
 }
 
 bool Word::setText(const std::vector<std::string> &dictionary, std::string _text) {

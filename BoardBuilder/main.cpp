@@ -134,8 +134,8 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 			if (checkStop()) break;
 
 			if (toupper(input) == 'Y') {
-				if ((orientation == 'H' && board.addHWord(newWord, line-'A')) ||
-					(orientation == 'V' && board.addVWord(newWord, column - 'a'))) {
+				if ((orientation == 'H' && board.addWord(newWord, line-'A', orientation)) ||
+					(orientation == 'V' && board.addWord(newWord, column - 'a', orientation))) {
 					printMessage("Success!");
 				}
 				else {

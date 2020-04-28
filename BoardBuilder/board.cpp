@@ -11,18 +11,25 @@ Board::Board() {
 
 Board::~Board() {
 	for (int l = 0; l < size.first; l++) {
-		free(letters[l]);
+		delete letters[l];
 	}
-	free(letters);
+	delete letters;
 
-	free(vWords);
-	free(hWords);
+	delete[] vWords;
+	delete[] hWords;
 }
 
 void Board::showBoard() {
+	std::cout << "  ";
+	for (unsigned short c = 0; c < size.second; c++) {
+		std::cout << (char)(c + 'a') << ' ';
+	}
+	std::cout << std::endl;
+
 	for (unsigned short l = 0; l < size.first; l++) {
+		std::cout << (char)(l + 'A') << " ";
 		for (unsigned short c = 0; c < size.second; c++) {
-			std::cout << letters[l][c] << "t";
+			std::cout << letters[l][c] << " ";
 		}
 		std::cout << std::endl;
 	}
@@ -52,9 +59,9 @@ bool Board::initializeWords() {
 	vWords = new std::vector<Word>[size.second];
 	hWords = new std::vector<Word>[size.first];
 
-	letters = (char**)calloc(size.first, sizeof(char*));
+	letters = new (char(*[size.first]));
 	for (unsigned short l = 0; l < size.first; l++) {
-		letters[l] = (char*)calloc(size.second, sizeof(char));
+		letters[l] = new char[size.second];
 		for (unsigned short c = 0; c < size.second; c++) {
 			letters[l][c] = ' ';
 		}
@@ -69,16 +76,20 @@ bool Board::checkFit(Word word, unsigned short max) {
 	return !(location.second >= max || location.first < 0);
 }
 
-// TODO
-bool Board::checkIntersections(Word word, std::vector<Word> orientationWords) {
-	bool intersects = false;
-	WordsIterator insertIterator;
+WordsIterator Board::checkIntersections(Word word, std::vector<Word>& orientationWords) {
+	WordsIterator result;
+	result.invalid = false;
 
-	for (insertIterator = orientationWords.begin(); insertIterator != orientationWords.end(); insertIterator++) {
-
+	for (result.iterator = orientationWords.begin(); result.iterator != orientationWords.end(); result.iterator++) {
+		if (!word.isAfter(*result.iterator)) break;
 	}
 
-	return false;
+	if (result.iterator != orientationWords.end()) result.invalid = word.intersects(*result.iterator);
+	
+	if (result.invalid) return result;
+
+
+	return result;
 }
 
 void Board::writeOnArray(Word word, bool vertical, unsigned short position) {
@@ -92,7 +103,7 @@ void Board::writeOnArray(Word word, bool vertical, unsigned short position) {
 	}
 
 	for (unsigned short i = 0; i < text.size(); i++) {
-		letters[line][col] = text[i];                         // If vertical, changes vIdx, otherwise changes hIdx
+		letters[line][col] = text[i];
 
 		line += vertical;
 		col += !vertical;
@@ -100,25 +111,33 @@ void Board::writeOnArray(Word word, bool vertical, unsigned short position) {
 }
 
 
-bool Board::addHWord(Word word, unsigned short position) {
-	if (checkFit(word, size.second)) {
-		writeOnArray(word, false, position);
-		hWords[position].push_back(word);
+bool Board::addWord(Word word, unsigned short position, char orientation) {
+	WordsIterator result;
+	std::vector<Word>* words;
+	unsigned short limit;
+	bool vertical;
 
-		return true;
+	if (orientation == 'H') {
+		vertical = false;
+		limit = size.second;
+		words = hWords;
+	}
+	else {
+		vertical = true;
+		limit = size.first;
+		words = vWords;
+	}
+
+	if (checkFit(word, limit)) {
+		result = checkIntersections(word, words[position]);
+
+		if (!result.invalid) {
+			writeOnArray(word, orientation == 'V', position);
+			words[position].insert(result.iterator, word);
+
+			return true;
+		}
 	}
 
 	return false;
 }
-
-bool Board::addVWord(Word word, unsigned short position) {
-	if (checkFit(word, size.first)) {
-		writeOnArray(word, true, position);
-		vWords[position].push_back(word);
-
-		return true;
-	}
-
-	return false;
-}
-
