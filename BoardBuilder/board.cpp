@@ -80,6 +80,7 @@ bool Board::checkFit(Word word, unsigned short max) {
 WordsIterator Board::checkIntersections(Word word, Coordinate position, bool vertical) {
 	WordsIterator result;
 	std::string text = word.getText();
+	size_t textSize = text.size();
 	
 	std::vector<Word>* orientationWords = vertical ? &vWords[position.second] : &hWords[position.first];
 	position.first++; position.second++;
@@ -94,13 +95,13 @@ WordsIterator Board::checkIntersections(Word word, Coordinate position, bool ver
 	if (result.invalid) return result;
 
 	if (letters[position.first - vertical][position.second - !vertical] != ' ' ||
-		letters[position.first + vertical][position.second + !vertical] != ' ') {
+		letters[position.first + (vertical*textSize)][position.second + (!vertical * textSize)] != ' ') {
 		result.invalid = true;
 
 		return result;
 	}
 
-	for (int i = 0; i < text.size(); i++) {
+	for (int i = 0; i < textSize; i++) {
 		int lineStart = position.first - !vertical, lineEnd = position.first + !vertical;
 		int columnStart = position.second - vertical, columnEnd = position.second + vertical;
 
