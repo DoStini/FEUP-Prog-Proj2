@@ -18,14 +18,14 @@ public:
 	bool setHeight(unsigned short height);
 	bool setWidth(unsigned short width);
 	bool initializeWords();
-	bool addWord(Word word, unsigned short position, char orientation);
+	bool addWord(Word word, Coordinate position, bool vertical);
 
 	std::pair<unsigned short, unsigned short> getHeightLimits() { return heightLimits; }
 	std::pair<unsigned short, unsigned short> getWidthLimits() { return widthLimits; }
 	std::pair<unsigned short, unsigned short> getSize() { return size; }
 private:
 	bool checkFit(Word word, unsigned short max);
-	WordsIterator checkIntersections(Word word, std::vector<Word>& orientationWords);
+	WordsIterator checkIntersections(Word word, Coordinate position, bool vertical);
 	void writeOnArray(Word word, bool vertical, unsigned short position);
 
 	std::pair<unsigned short, unsigned short> heightLimits;

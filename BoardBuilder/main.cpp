@@ -131,12 +131,13 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 		printMessage("Is this correct? (N to retry)", Color::WHITE, Color::BLACK);
 		getChar(input);
 
+		Coordinate position = std::make_pair(line - 'A', column - 'a');
+
 		if (toupper(input) != 'N') {
 			clearScreen();
 			if (input == EOF) break;
 
-			if ((orientation == 'H' && board.addWord(newWord, line-'A', orientation)) ||
-				(orientation == 'V' && board.addWord(newWord, column - 'a', orientation))) {
+			if (board.addWord(newWord, position, orientation == 'V')) {
 				printMessage("Success!");
 			}
 			else {

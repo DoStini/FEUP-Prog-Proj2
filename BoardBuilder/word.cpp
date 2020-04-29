@@ -5,13 +5,13 @@
 #include<vector>
 
 bool Word::intersects(Word otherWord) {
-	std::pair<unsigned short, unsigned short> otherLocation = otherWord.getLocation();
+	Coordinate otherLocation = otherWord.getLocation();
 
 	return !(location.first - 1 > otherLocation.second || location.second + 1 < otherLocation.first);
 }
 
 bool Word::isAfter(Word otherWord) {
-	std::pair<unsigned short, unsigned short> otherLocation = otherWord.getLocation();
+	Coordinate otherLocation = otherWord.getLocation();
 
 	return (location.first - 1 > otherLocation.second);
 }
@@ -26,7 +26,7 @@ bool Word::setText(const std::vector<std::string> &dictionary, std::string _text
 	return false;
 }
 
-bool Word::setLocation(std::pair<unsigned short, unsigned short> _location, char orientation) {
+bool Word::setLocation(Coordinate _location, char orientation) {
 	if (text.empty()) return false;
 	orientation = toupper(orientation);
 
