@@ -27,6 +27,9 @@ void Player::showTiles() {
 }
 
 unsigned short int Player::checkTiles(char letter){
+    vector<char>::iterator it = std::find(tiles.begin(), tiles.end(), letter);
+    return it != tiles.end() ? it-tiles.begin() : -1;
+
     for (int i = 0; i < 7; ++i) {
         if (letter == tiles[i])
             return i;
@@ -41,3 +44,6 @@ void Player::removeTile(char letter){
     tiles.erase(std::find(tiles.begin(), tiles.end(), letter));
 }
 
+void Player::addPoints(unsigned short int points){
+    score += points;
+}

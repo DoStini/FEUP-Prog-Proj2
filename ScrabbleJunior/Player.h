@@ -14,6 +14,7 @@ public:
     void showTiles();
     void addTile(char letter);
     void removeTile(char letter);
+    void addPoints(unsigned short int);
 private:
     vector<char> tiles;
     unsigned short int score = 0;

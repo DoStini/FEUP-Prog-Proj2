@@ -84,28 +84,25 @@ bool Game::playerMove(Player &player) {                     // Maybe change late
         Word *hWordPtr = boardPtr->findWord(pos[0], pos[1], false);
         Word *vWordPtr = boardPtr->findWord(pos[1], pos[0], true);
 
-        if (hWordPtr != NULL){                                      //This is spaggethi
-            if (hWordPtr->validMove(pos[1])){
-                gotValidMove(player, pos, boardPtr->getTile(pos));
 
-                hWordPtr->coverLetter(pos[1]);
-                if (vWordPtr != NULL) vWordPtr->coverLetter(pos[0]);
-            }
-        } else if (vWordPtr != NULL){
-            if (vWordPtr->validMove(pos[0])){
-                gotValidMove(player, pos, boardPtr->getTile(pos));
+        bool valid = false;
 
-                if(hWordPtr != NULL) hWordPtr->coverLetter(pos[1]);
-                vWordPtr->coverLetter(pos[0]);
+        valid = (hWordPtr != NULL && hWordPtr->validMove(pos[1])) || (vWordPtr != NULL && vWordPtr->validMove(pos[0]));
 
-            }
+        if (valid){
+            gotValidMove(player, pos, boardPtr->getTile(pos), hWordPtr, vWordPtr);
+        }
+        else{
+            return false;
         }
     }
 }
 
-void Game::gotValidMove(Player &player, unsigned short int pos[2], char letter){
-    std::cout << letter;
+void Game::gotValidMove(Player &player, unsigned short int pos[2], char letter, Word *hWordPtr, Word *vWordPtr){
+    if(hWordPtr != NULL) hWordPtr->coverLetter(pos[1]);
+    if(vWordPtr != NULL) vWordPtr->coverLetter(pos[0]);
     char newTile = getRandomTile();
     player.removeTile(letter);
     player.addTile(newTile);
+    player.addPoints(hWordPtr->completedWord() + vWordPtr->completedWord());
 }
