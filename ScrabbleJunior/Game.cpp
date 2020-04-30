@@ -11,12 +11,11 @@ Game::Game(unsigned short int numPlayers, Board *boardPtr){
     initPot();
     initPlayers(numPlayers);
 
-    playerMove(players[0]);
+    while (1){
+        playerMove(players[0]);
+    }
 }
 
-Game::~Game() {
-
-}
 
 void Game::initPlayers(unsigned short numPlayers) {
     players.reserve(numPlayers);
@@ -38,14 +37,12 @@ void Game::initPot() {
             temp = boardPtr->getTile(pos);
             if (temp != ' '){
                 pot.push_back(temp);
-                temp2++;
             }
         }
     }
-    std::cout << temp2;
 }
 
-char Game::getTile() {
+char Game::getRandomTile() {
     unsigned short int index = rand()%pot.size();
     char tile = pot[index];
     pot.erase(pot.begin() + index);
@@ -57,7 +54,7 @@ char Game::getTile() {
 //}
 
 bool Game::inputMove(unsigned short int intPosition[2], Player &player){
-    printMessage("This is your boardPtr: ");
+    printMessage("This is your board: ");
     player.showTiles();
     printMessage("Enter the position on the boardPtr in the format 'Aa':", " ");
     char position[2];
@@ -89,15 +86,26 @@ bool Game::playerMove(Player &player) {                     // Maybe change late
 
         if (hWordPtr != NULL){                                      //This is spaggethi
             if (hWordPtr->validMove(pos[1])){
+                gotValidMove(player, pos, boardPtr->getTile(pos));
+
                 hWordPtr->coverLetter(pos[1]);
                 if (vWordPtr != NULL) vWordPtr->coverLetter(pos[0]);
             }
         } else if (vWordPtr != NULL){
             if (vWordPtr->validMove(pos[0])){
+                gotValidMove(player, pos, boardPtr->getTile(pos));
+
                 if(hWordPtr != NULL) hWordPtr->coverLetter(pos[1]);
                 vWordPtr->coverLetter(pos[0]);
+
             }
         }
     }
-    return true;
+}
+
+void Game::gotValidMove(Player &player, unsigned short int pos[2], char letter){
+    std::cout << letter;
+    char newTile = getRandomTile();
+    player.removeTile(letter);
+    player.addTile(newTile);
 }

@@ -81,7 +81,15 @@ Word *Board::findWord(unsigned short int index, unsigned short int charPos, bool
 }
 
 void Board::showBoard() {
+
+    std::cout << "  ";
+    for (unsigned short c = 0; c < hSize; c++) {
+        std::cout << (char)(c + 'a') << ' ';
+    }
+    std::cout << std::endl;
+
     for (int i = 0; i < vSize; ++i) {
+        std::cout << (char)(i + 'A') << " ";
         for (int j = 0; j < hSize; ++j) {
             std::cout << letters[i][j] << ' ';
         }

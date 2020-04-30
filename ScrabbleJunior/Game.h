@@ -8,12 +8,12 @@
 class Game{
 public:
     Game(unsigned short int numPlayers, Board *boardPtr);
-    ~Game();
     void initPlayers(unsigned short int numPlayers);
     void initPot();
-    char getTile();
+    char getRandomTile();
     bool inputMove(unsigned short int intPosition[2], Player &player);
     bool playerMove(Player &player);
+    void gotValidMove(Player &player, unsigned short int pos[2], char letter);
 
 private:
     vector<char> pot;                     // The bag of tiles

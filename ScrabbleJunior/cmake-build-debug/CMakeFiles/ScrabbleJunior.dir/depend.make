@@ -27,6 +27,7 @@ CMakeFiles/ScrabbleJunior.dir/Word.cpp.obj: ../Word.h
 
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Board.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Game.h
+CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../IO.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Player.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Word.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../main.cpp

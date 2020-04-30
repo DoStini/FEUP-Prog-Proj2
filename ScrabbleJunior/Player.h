@@ -12,9 +12,10 @@ public:
     unsigned short int checkTiles(char letter);
     void initTiles(vector<char> &pot);
     void showTiles();
-    void setTile(char letter, unsigned short int pos);
+    void addTile(char letter);
+    void removeTile(char letter);
 private:
-    char tiles[7];
+    vector<char> tiles;
     unsigned short int score = 0;
     std::string name = "";
 };

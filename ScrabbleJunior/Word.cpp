@@ -26,6 +26,9 @@ bool Word::inWord(unsigned short int position){
 }
 
 bool Word::validMove(unsigned short int position){
+    if (letters[position].covered){
+        return false;                                       // Is the position already occupied?
+    }
     for (int i = 0; i < position - start; ++i) {
         if (!letters[i].covered){
             return false;

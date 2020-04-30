@@ -1,6 +1,6 @@
 #include <iostream>
+#include <algorithm>
 #include "Player.h"
-
 
 
 Player::Player() = default;
@@ -14,7 +14,7 @@ void Player::initTiles(vector<char> &pot){
 
     for (int i = 0; i < 7; ++i) {
         index = rand()%pot.size();
-        tiles[i] = pot[i];
+        tiles.push_back(pot[i]);
         pot.erase(pot.begin() + i);
     }
 }
@@ -34,6 +34,10 @@ unsigned short int Player::checkTiles(char letter){
     return -1;
 }
 
-void Player::setTile(char letter, unsigned short int pos){
-    tiles[pos] = letter;
+void Player::addTile(char letter){
+    tiles.push_back(letter);
 }
+void Player::removeTile(char letter){
+    tiles.erase(std::find(tiles.begin(), tiles.end(), letter));
+}
+

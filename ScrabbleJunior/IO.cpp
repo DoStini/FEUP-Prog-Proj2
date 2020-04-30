@@ -3,6 +3,11 @@
 #include "color.h"
 #include "IO.h"
 
+
+
+using namespace std;
+
+
 void getString(std::string &string) {
     std::getline(std::cin, string);
 }
