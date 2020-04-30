@@ -3,6 +3,8 @@
 #include<utility>
 #include<vector>
 #include<algorithm>
+#include<sstream>
+#include<fstream>
 
 Board::Board() {
 	heightLimits = std::make_pair(2, 20);
@@ -20,20 +22,23 @@ Board::~Board() {
 	delete[] hWords;
 }
 
-void Board::showBoard() {
-	std::cout << "  ";
+std::string Board::showBoard() {
+	std::stringstream output;
+
+	output << "  ";
 	for (unsigned short c = 0; c < size.second; c++) {
-		std::cout << (char)(c + 'a') << ' ';
+		output << (char)(c + 'a') << ' ';
 	}
-	std::cout << std::endl;
+	output << std::endl;
 
 	for (unsigned short l = 1; l <= size.first; l++) {
-		std::cout << (char)((l-1) + 'A') << " ";
+		output << (char)((l - 1) + 'A') << " ";
 		for (unsigned short c = 1; c <= size.second; c++) {
-			std::cout << letters[l][c] << " ";
+			output << letters[l][c] << " ";
 		}
-		std::cout << std::endl;
+		output << std::endl;
 	}
+	return output.str();
 }
 
 bool Board::setHeight(unsigned short height) {
@@ -81,6 +86,8 @@ WordsIterator Board::checkIntersections(Word word, Coordinate position, bool ver
 	WordsIterator result;
 	std::string text = word.getText();
 	size_t textSize = text.size();
+	int lineStart, lineEnd;
+	int columnStart, columnEnd;
 	
 	std::vector<Word>* orientationWords = vertical ? &vWords[position.second] : &hWords[position.first];
 	position.first++; position.second++;
@@ -102,8 +109,8 @@ WordsIterator Board::checkIntersections(Word word, Coordinate position, bool ver
 	}
 
 	for (int i = 0; i < textSize; i++) {
-		int lineStart = position.first - !vertical, lineEnd = position.first + !vertical;
-		int columnStart = position.second - vertical, columnEnd = position.second + vertical;
+		lineStart = position.first - !vertical, lineEnd = position.first + !vertical;
+		columnStart = position.second - vertical, columnEnd = position.second + vertical;
 
 		if (letters[lineStart][columnStart] != ' ' ||
 			letters[lineEnd][columnEnd] != ' ') {
@@ -168,4 +175,28 @@ bool Board::addWord(Word word, Coordinate position, bool vertical) {
 	}
 
 	return false;
+}
+
+void Board::saveBoard() {
+	std::ofstream saveFile("../BOARD.TXT");
+	std::vector<Word>::iterator it;
+
+	saveFile << size.first << 'x' << size.second << std::endl;
+
+	for (int i = 0; i < size.first; i++) {
+		for (it = hWords[i].begin(); it != hWords[i].end(); it++) {
+			saveFile << (char)(i + 'A') << (char)(it->getLocation().first + 'a') << " H " << it->getText() << std::endl;
+		}
+	}
+
+	for (int i = 0; i < size.second; i++) {
+		for (it = vWords[i].begin(); it != vWords[i].end(); it++) {
+			saveFile << (char)(it->getLocation().first + 'A') << (char)(i + 'a') << " V " << it->getText() << std::endl;
+		}
+	}
+
+	saveFile << "########" << std::endl;
+	saveFile << showBoard() << std::endl;
+
+	saveFile.close();
 }

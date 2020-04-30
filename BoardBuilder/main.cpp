@@ -73,13 +73,13 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 
 	while (true) {
 		Word newWord;
-		board.showBoard();
+		printMessage(board.showBoard());
 
 		printMessage("What is the word?", WHITE, BLACK);
 		while (!checkInputOrSTOP(text) || !newWord.setText(words, text)) {
 			clearScreen();
 			if (checkStop()) break;
-			board.showBoard();
+			printMessage(board.showBoard());
 
 			printMessage("Input was invalid or word is not real, please try again.", RED, BLACK);
 
@@ -194,5 +194,6 @@ int main()
 	clearScreen();
 	
 	inputWords(board, words);
+	board.saveBoard();
 	return 0;
 }

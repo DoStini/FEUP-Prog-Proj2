@@ -14,11 +14,12 @@ public:
 	Board();
 	~Board();
 
-	void showBoard();
+	std::string showBoard();
 	bool setHeight(unsigned short height);
 	bool setWidth(unsigned short width);
 	bool initializeWords();
 	bool addWord(Word word, Coordinate position, bool vertical);
+	void saveBoard();
 
 	std::pair<unsigned short, unsigned short> getHeightLimits() { return heightLimits; }
 	std::pair<unsigned short, unsigned short> getWidthLimits() { return widthLimits; }
