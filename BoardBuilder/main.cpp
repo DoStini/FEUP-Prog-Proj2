@@ -89,6 +89,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 
 		clearScreen();
 
+		printMessage(board.showBoard());
 		char upperLineLimit = (size.first - 1 + 'A');
 		ss.str(std::string());
 		ss << "Line of word? [A, " << upperLineLimit << "]";
@@ -99,6 +100,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 
 		clearScreen();
 
+		printMessage(board.showBoard());
 		char upperColumnLimit = (size.second - 1 + 'a');
 		ss.str(std::string());
 		ss << "Column of word? [a, " << upperColumnLimit << "]";
@@ -109,6 +111,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 
 		clearScreen();
 
+		printMessage(board.showBoard());
 		printMessage("Is the word horizontal or vertical? (H, V)", WHITE, BLACK);
 		while (!checkInputOrSTOP(orientation) || (toupper(orientation) != 'H' && toupper(orientation) != 'V')) {
 			clearScreen();
@@ -125,6 +128,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 
 		clearScreen();
 
+		printMessage(board.showBoard());
 		ss.str(std::string());
 		ss << "So the word is '" << text << "', it's orientation is " << orientation << ", and is in line " << (char)line << " and column " << (char)column << ".";
 		printMessage(ss.str());
@@ -194,6 +198,13 @@ int main()
 	clearScreen();
 	
 	inputWords(board, words);
+
+	clearScreen();
+
 	board.saveBoard();
+	std::cin.clear();
+
+	printMessage("Your input has been saved into the BOARD.TXT file.");
+	waitForKey();
 	return 0;
 }
