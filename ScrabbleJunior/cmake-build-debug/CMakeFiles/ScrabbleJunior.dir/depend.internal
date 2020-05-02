@@ -5,9 +5,11 @@ CMakeFiles/ScrabbleJunior.dir/Board.cpp.obj
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.cpp
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
+ D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
 CMakeFiles/ScrabbleJunior.dir/Game.cpp.obj
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
+ D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.cpp
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
@@ -18,15 +20,14 @@ CMakeFiles/ScrabbleJunior.dir/IO.cpp.obj
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.cpp
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
 CMakeFiles/ScrabbleJunior.dir/Player.cpp.obj
- D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.cpp
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
- D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
 CMakeFiles/ScrabbleJunior.dir/Word.cpp.obj
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.cpp
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
+ D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h

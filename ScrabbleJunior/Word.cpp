@@ -10,7 +10,9 @@ Word::Word(std::string word, unsigned short int start){
     this -> word = word;
 
     for (int i = 0; i < word.length() ; ++i) {
-
+        char letter;
+        letter = word[i];
+        letters.push_back(letter);
         covered.push_back(false);
     }
 }
@@ -40,6 +42,15 @@ bool Word::validMove(unsigned short int position){
 */
 }
 
+int Word::findPlayable(){
+    std::vector<bool>::iterator it = std::find(covered.begin(), covered.end(), false);
+    return it != covered.end() ? it - covered.begin() : -1;
+}
+
+char Word::getLetter(unsigned short int pos){
+    return letters[pos];
+}
+
 bool Word::completedWord(){
     return std::find(covered.begin(), covered.end(), false) == covered.end();
 }
@@ -48,4 +59,3 @@ bool Word::completedWord(){
 void Word::coverLetter(unsigned short int position){
     covered[position - start] = true;
 }
-

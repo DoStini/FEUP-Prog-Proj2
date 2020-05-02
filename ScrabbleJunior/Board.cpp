@@ -2,8 +2,6 @@
 #include <fstream>
 #include <sstream>
 #include "Board.h"
-#include "Word.h"
-#include "IO.h"
 
 using std::ifstream;
 using std::stringstream;
@@ -133,4 +131,29 @@ unsigned short int Board::getHSize(){
 }
 unsigned short int Board::getVSize(){
     return vSize;
+}
+
+bool Board::analyseMoves(vector<char> playerTiles, Player &player){
+    for (int i = 0; i < hSize; ++i) {
+        for (int j = 0; j < hWords[i].size(); ++j) {
+            Word cWord = hWords[i][j];
+            short int idx = cWord.findPlayable();
+
+            if (idx != -1 && player.checkTiles(cWord.getLetter(idx))){
+                return true;
+            }
+        }
+    }
+
+    for (int i = 0; i < vSize; ++i) {
+        for (int j = 0; j < vWords[i].size(); ++j) {
+            Word cWord = vWords[i][j];
+            short int idx = cWord.findPlayable();
+
+            if (idx != -1 && player.checkTiles(cWord.getLetter(idx))){
+                return true;
+            }
+        }
+    }
+    return false;
 }

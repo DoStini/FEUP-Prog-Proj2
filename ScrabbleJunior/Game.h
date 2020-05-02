@@ -2,8 +2,11 @@
 #define SCRABBLEJUNIOR_GAME_H
 
 #include <iostream>
+#include "IO.h"
 #include "Board.h"
 #include "Player.h"
+#include "Color.h"
+
 
 class Game{
 public:
@@ -14,6 +17,7 @@ public:
     bool inputMove(unsigned short int intPosition[2], Player &player);
     bool playerMove(Player &player);
     void gotValidMove(Player &player, unsigned short int pos[2], char letter, Word *hWordPtr, Word *vWordPtr);
+    void gameManager();
 
 private:
     vector<char> pot;                     // The bag of tiles

@@ -6,7 +6,10 @@
 #define SCRABBLEJUNIOR_BOARD_H
 
 #include <iostream>
+
+#include "Player.h"
 #include "Word.h"
+#include "IO.h"
 
 using std::string;
 using std::vector;
@@ -26,6 +29,8 @@ public:
     char getTile(unsigned short int *pos);
     unsigned short int getHSize();
     unsigned short int getVSize();
+
+    bool analyseMoves(vector<char> playerTiles, Player &player);
 private:
     vector<vector<Word>> hWords;
     vector<vector<Word>> vWords;

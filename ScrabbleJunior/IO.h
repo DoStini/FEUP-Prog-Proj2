@@ -1,24 +1,9 @@
-//
-// Created by morei on 4/27/2020.
-//
-
-#ifndef SCRABBLEJUNIOR_IO_H
-#define SCRABBLEJUNIOR_IO_H
-
+#pragma once
 #include<iostream>
-#include<string>
 #include <limits>
-#include <ctime>
-#include <cstdlib>
+#include <iostream>
 #include <windows.h>
-
-using namespace std;
-
-
-//==========================================================================================
-// Position the cursor at column 'x', line 'y'
-// The coodinates of upper left corner of the screen are (x,y)=(0,0)
-
+#include<string>
 
 template <typename T>
 bool checkInput(T& input, char delimiter = '\n') {
@@ -66,11 +51,15 @@ bool checkInputOrSTOP(T& input, char delimiter = '\n') {
 }
 
 void getString(std::string& string);
+void getChar(char& input);
 void printMessage(std::string message, std::string end = "\n");
 void printMessage(std::string message, int bgColor, int fgColor, std::string end = "\n");
 bool checkStop();
-void clearScreen();
+void clearScreen(short xPos, short yPos);
 void waitForKey();
-
-
-#endif //SCRABBLEJUNIOR_IO_H
+std::string stringToLower(std::string str);
+std::string stringToUpper(std::string str);
+void setColor(unsigned int color);
+void setColor(unsigned int color, unsigned int background_color);
+void gotoxy(int x, int y);
+void replaceVisualChar(int x, int y, char letter, unsigned int fgColor, unsigned int bgColor);

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 project(ScrabbleJunior)
 
 set(CMAKE_CXX_STANDARD 14)
-
+set(CMAKE_EXE_LINKER_FLAGS "-static")
 
 configure_file(board.txt
                ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)

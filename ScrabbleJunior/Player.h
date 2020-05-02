@@ -3,20 +3,23 @@
 
 #include <iostream>
 #include <string>
-#include "Board.h"
+#include <vector>
+
 
 class Player{
 public:
     Player();
-    Player(vector<char> &pot);
-    unsigned short int checkTiles(char letter);
-    void initTiles(vector<char> &pot);
+    Player(std::vector<char> &pot, std::string name);
+    short int checkTiles(char letter);
+    void initTiles(std::vector<char> &pot);
     void showTiles();
     void addTile(char letter);
     void removeTile(char letter);
     void addPoints(unsigned short int);
+    std::string getName();
+    std::string setName(std::string name);
 private:
-    vector<char> tiles;
+    std::vector<char> tiles;
     unsigned short int score = 0;
     std::string name = "";
 };
