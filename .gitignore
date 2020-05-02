@@ -2,6 +2,7 @@
 *.d
 .vs/
 build/
+BOARD.TXT
 
 # Compiled Object files
 *.slo
@@ -27,6 +28,8 @@ build/
 *.la
 *.a
 *.lib
+*.ilk
+*.pdb
 
 # Executables
 *.exe

@@ -7,7 +7,7 @@
 void readWords(std::vector<std::string> &words) {
 	std::ifstream f_in;
 
-	f_in.open("WORDS.TXT");
+	f_in.open("Assets/WORDS.TXT");
 	if (!f_in.is_open()) {
 		std::cerr << "Words file was not found, was it deleted?" << std::endl;
 		exit(1);
