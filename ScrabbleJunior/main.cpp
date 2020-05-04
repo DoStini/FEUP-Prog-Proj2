@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <algorithm>
 #include <windows.h>
+#include <zconf.h>
 #include "IO.h"
 #include "Color.h"
 #include "Game.h"
@@ -20,16 +21,8 @@ int main() {
     //cout << std::find(viktor.begin(), viktor.end(), 3) - viktor.begin();
     srand(0);
     Board board("board.txt");
-    Game game(1, &board);
-/*
-    printMessage("Hello World", YELLOW, BLUE);
-    Sleep(3000);
-    gotoxy(0, 0);
-    printMessage("Good ", RED, BLACK);
-    Sleep(3000);
-    clearScreen();
-    waitForKey();
-    */
+    Game game(3, &board);
+
 }
 
 

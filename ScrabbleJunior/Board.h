@@ -30,7 +30,7 @@ public:
     unsigned short int getHSize();
     unsigned short int getVSize();
 
-    bool analyseMoves(vector<char> playerTiles, Player &player);
+    bool analyseMoves(Player &player);
 private:
     vector<vector<Word>> hWords;
     vector<vector<Word>> vWords;

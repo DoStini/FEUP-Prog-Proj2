@@ -16,6 +16,7 @@ public:
     void addTile(char letter);
     void removeTile(char letter);
     void addPoints(unsigned short int);
+    unsigned short int getScore();
     std::string getName();
     std::string setName(std::string name);
 private:

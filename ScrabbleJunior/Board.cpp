@@ -97,6 +97,9 @@ void Board::showBoard() {
 
 void Board::initArray() {
     letters = (char **) malloc(vSize * sizeof(char *));
+
+
+
     for (int v = 0; v < vSize; ++v) {
         letters[v] = (char *) malloc(hSize * sizeof(char));
         for (int h = 0; h < hSize; ++h) {
@@ -133,7 +136,7 @@ unsigned short int Board::getVSize(){
     return vSize;
 }
 
-bool Board::analyseMoves(vector<char> playerTiles, Player &player){
+bool Board::analyseMoves(Player &player){
     for (int i = 0; i < hSize; ++i) {
         for (int j = 0; j < hWords[i].size(); ++j) {
             Word cWord = hWords[i][j];

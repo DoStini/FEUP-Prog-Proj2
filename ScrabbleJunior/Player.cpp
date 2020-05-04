@@ -47,6 +47,10 @@ void Player::removeTile(char letter){
     tiles.erase(std::find(tiles.begin(), tiles.end(), letter));
 }
 
+unsigned short int Player::getScore(){
+    return score;
+}
+
 void Player::addPoints(unsigned short int points){
     score += points;
 }

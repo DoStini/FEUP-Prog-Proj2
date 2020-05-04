@@ -22,12 +22,6 @@ vector
 string
 -
 
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.cpp
-iostream
--
-Game.h
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.h
-
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.h
 iostream
 -
@@ -39,14 +33,6 @@ Player.h
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
 Color.h
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
-
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.cpp
-color.h
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
-IO.h
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
-string
--
 
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
 iostream
@@ -73,4 +59,26 @@ iostream
 -
 vector
 -
+
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/main.cpp
+iostream
+-
+vector
+-
+time.h
+-
+cstdlib
+-
+algorithm
+-
+windows.h
+-
+zconf.h
+-
+IO.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
+Color.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
+Game.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.h
 

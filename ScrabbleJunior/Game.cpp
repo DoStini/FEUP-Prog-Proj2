@@ -1,22 +1,37 @@
 #include <iostream>
 #include "Game.h"
 
-
 short int XBEG = 2;
 short int YBEG = 1;
+
+
 
 Game::Game(unsigned short int numPlayers, Board *boardPtr){
     this -> numPlayers = numPlayers;
     this -> boardPtr = boardPtr;
     initPot();
     initPlayers(numPlayers);
-    while (1){
-        playerMove(players[0]);
-    }
+    std::cout << std::endl << std::endl;
+
+    gameManager();
+
 }
 
 void Game::gameManager() {
-
+    while (1){
+        for (int i = 0; i < numPlayers; ++i) {
+            for (int j = 0; j < 2; ++j) {
+                if (boardPtr->analyseMoves(players[i])){
+                    playerMove(players[i]);
+                }
+                else{
+                    std:: cout << "You have no moves left..." << std::endl;
+                    waitForKey();
+                    break;
+                }
+            }
+        }
+    }
 }
 
 
@@ -62,17 +77,16 @@ char Game::getRandomTile() {
 //}
 
 bool Game::inputMove(unsigned short int intPosition[2], Player &player){
-    clearScreen(XBEG + boardPtr->getHSize() + 2, YBEG + boardPtr->getVSize() + 2);
-    printMessage("This is your board, ", "");
-    printMessage(player.getName(), "");
-    printMessage(":", " ");
+    clearScreen(0, YBEG + boardPtr->getVSize() + 2);
+    std::cout << player.getName() << "'s score: " << player.getScore() << std::endl << "This is your board: ";
     player.showTiles();
-    printMessage("Enter the position on the boardPtr in the format 'Aa':", " ");
+    std::cout << "Enter the position on the boardPtr in the format 'Aa': ";
+
     string position;
     while(1){
         if (checkInput(position, '\n') && position.length() == 2) {
-            if (position[0] >= 'A' && position[0] <= 'Z' &&
-                position[1] >= 'a' && position[1] <= 'z') {
+            if (position[0] >= 'A' && position[0] <= ('A' + boardPtr->getVSize() ) &&
+                position[1] >= 'a' && position[1] <= ('a' + boardPtr->getHSize())) {
                 break;
             }
         }
@@ -86,6 +100,7 @@ bool Game::inputMove(unsigned short int intPosition[2], Player &player){
     short int playerTileIndex = player.checkTiles(boardPtr->getTile(intPosition));
     if (playerTileIndex == -1){
         printMessage("You don't own that tile!");
+        waitForKey();
         return false;
     }
     else{
@@ -111,6 +126,8 @@ bool Game::playerMove(Player &player) {                     // Maybe change late
             gotValidMove(player, pos, boardPtr->getTile(pos), hWordPtr, vWordPtr);
         }
         else{
+            std::cout << "That move is illegal!" << std::endl;
+            waitForKey();
             return false;
         }
     }
