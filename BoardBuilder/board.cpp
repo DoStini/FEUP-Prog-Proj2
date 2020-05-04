@@ -22,21 +22,38 @@ Board::~Board() {
 	delete[] hWords;
 }
 
-std::string Board::showBoard() {
+std::string Board::showBoard(bool color) {
 	std::stringstream output;
 
-	output << "  ";
+	output << "   ";
 	for (unsigned short c = 0; c < size.second; c++) {
-		output << (char)(c + 'a') << ' ';
+		output << (char)(c + 'a');
+		if (c != size.second - 1) output << "   ";
 	}
 	output << std::endl;
 
 	for (unsigned short l = 1; l <= size.first; l++) {
 		output << (char)((l - 1) + 'A') << " ";
+		if (color) output << "\033[47;30m";
+		output << " ";
 		for (unsigned short c = 1; c <= size.second; c++) {
 			output << letters[l][c] << " ";
+			if (c != size.second) output << "| ";
 		}
+
 		output << std::endl;
+		if (l != size.first) {
+			if (color) output << "\033[0m";
+			output << "  ";
+			if (color) output << "\033[47;30m";
+			output << "---";
+			for (unsigned short c = 1; c < size.second; c++) {
+				output << "+---";
+			}
+			output << std::endl;
+		}
+
+		if (color) output << "\033[0m";
 	}
 	return output.str();
 }
@@ -196,7 +213,7 @@ void Board::saveBoard() {
 	}
 
 	saveFile << "########" << std::endl;
-	saveFile << showBoard() << std::endl;
+	saveFile << showBoard(false) << std::endl;
 
 	saveFile.close();
 }
