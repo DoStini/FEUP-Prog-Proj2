@@ -6,14 +6,18 @@
 
 #IncludeRegexTransform: 
 
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.cpp
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.cpp
+iostream
+-
 algorithm
 -
-Word.h
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
+Player.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
 
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
 iostream
+-
+string
 -
 vector
 -

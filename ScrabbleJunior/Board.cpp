@@ -98,6 +98,8 @@ void Board::showBoard() {
 void Board::initArray() {
     letters = (char **) malloc(vSize * sizeof(char *));
 
+
+
     for (int v = 0; v < vSize; ++v) {
         letters[v] = (char *) malloc(hSize * sizeof(char));
         for (int h = 0; h < hSize; ++h) {
@@ -157,9 +159,4 @@ bool Board::analyseMoves(Player &player){
         }
     }
     return false;
-}
-
-
-void Board::setTempBoard(unsigned short int pos[2]){
-    tempBoard[pos[0]][pos[1]] = true;
 }
