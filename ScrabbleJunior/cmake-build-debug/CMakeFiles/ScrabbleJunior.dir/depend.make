@@ -3,6 +3,7 @@
 
 CMakeFiles/ScrabbleJunior.dir/Board.cpp.obj: ../Board.cpp
 CMakeFiles/ScrabbleJunior.dir/Board.cpp.obj: ../Board.h
+CMakeFiles/ScrabbleJunior.dir/Board.cpp.obj: ../Color.h
 CMakeFiles/ScrabbleJunior.dir/Board.cpp.obj: ../IO.h
 CMakeFiles/ScrabbleJunior.dir/Board.cpp.obj: ../Player.h
 CMakeFiles/ScrabbleJunior.dir/Board.cpp.obj: ../Word.h

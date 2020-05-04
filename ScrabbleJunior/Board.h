@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Word.h"
 #include "IO.h"
+#include "Color.h"
 
 using std::string;
 using std::vector;
@@ -31,12 +32,16 @@ public:
     unsigned short int getVSize();
 
     bool analyseMoves(Player &player);
+
+    void setTempBoard(unsigned short int pos[2]);
 private:
     vector<vector<Word>> hWords;
     vector<vector<Word>> vWords;
     unsigned short int hSize;
     unsigned short int vSize;
     char **letters;
+
+    bool ** tempBoard;
 };
 
 

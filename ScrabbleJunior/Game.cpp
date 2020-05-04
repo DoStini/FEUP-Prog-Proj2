@@ -22,7 +22,11 @@ void Game::gameManager() {
         for (int i = 0; i < numPlayers; ++i) {
             for (int j = 0; j < 2; ++j) {
                 if (boardPtr->analyseMoves(players[i])){
-                    playerMove(players[i]);
+                    bool valid = true;
+                    while (valid){
+                        valid = !playerMove(players[i]);
+                    }
+                    boardPtr->showBoard();
                 }
                 else{
                     std:: cout << "You have no moves left..." << std::endl;
@@ -123,6 +127,8 @@ bool Game::playerMove(Player &player) {                     // Maybe change late
         valid = (hWordPtr != NULL && hWordPtr->validMove(pos[1])) || (vWordPtr != NULL && vWordPtr->validMove(pos[0]));
 
         if (valid){
+            boardPtr->setTempBoard(pos);
+
             gotValidMove(player, pos, boardPtr->getTile(pos), hWordPtr, vWordPtr);
         }
         else{

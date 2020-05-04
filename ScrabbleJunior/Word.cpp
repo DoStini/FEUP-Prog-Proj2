@@ -27,7 +27,7 @@ bool Word::inWord(unsigned short int position){
 }
 
 bool Word::validMove(unsigned short int position){
-    if (covered[position]){
+    if (covered[position - start]){   // missing - start
         return false;                                       // Is the position already occupied?
     }
 
