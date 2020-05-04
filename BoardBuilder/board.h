@@ -14,7 +14,7 @@ public:
 	Board();
 	~Board();
 
-	std::string showBoard();
+	std::string showBoard(bool color = true);
 	bool setHeight(unsigned short height);
 	bool setWidth(unsigned short width);
 	bool initializeWords();
