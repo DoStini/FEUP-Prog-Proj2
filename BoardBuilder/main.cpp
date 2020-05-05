@@ -70,7 +70,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 	std::string deletePrompt, text;
 	std::pair<unsigned short, unsigned short> size = board.getSize();
 	char line, column, orientation, input;
-	bool success;
+	short success;
 
 	while (true) {
 		Word newWord;
@@ -157,12 +157,18 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 				success = board.addWord(newWord, position, orientation == 'V');
 			}
 
-			if (success) {
+			if (success == 1) {
 				printMessage("Success!");
 			}
 			else {
-				if(stringToUpper(deletePrompt) == "DELETE") printMessage("Error! That word is not on the board.", RED, BLACK);
-				else printMessage("Error! The word does not fit in the board, intersects with another word.", RED, BLACK);
+				if (stringToUpper(deletePrompt) == "DELETE") {
+					if(success == 0) printMessage("Error! That word is not on the board.", RED, BLACK);
+					else {
+						printMessage("Error! Can't delete that word.", RED, BLACK);
+						printMessage("Deleting that word creates an illegal board disposition.", RED, BLACK);
+					}
+				}
+				else printMessage("Error! The word does not fit in the board or intersects with another word.", RED, BLACK);
 			}
 
 			waitForKey();

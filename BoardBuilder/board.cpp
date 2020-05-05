@@ -78,6 +78,20 @@ bool Board::initializeWords() {
 	return true;
 }
 
+char** Board::copyLetters() {
+	char** copy;
+
+	copy = new (char(*[(size_t)size.first + 2]));
+	for (unsigned short l = 0; l < size.first + 2; l++) {
+		copy[l] = new char[(size_t)size.second + 2];
+		for (unsigned short c = 0; c < size.second + 2; c++) {
+			copy[l][c] = letters[l][c];
+		}
+	}
+
+	return copy;
+}
+
 bool Board::checkFit(Word word, unsigned short max) {
 	std::pair<unsigned short, unsigned short> location = word.getLocation();
 
@@ -233,11 +247,32 @@ WordsIterator Board::checkWordOnBoard(Word word, Coordinate position, bool verti
 	return result;
 }
 
-bool Board::deleteWord(Word word, Coordinate position, bool vertical) {
+bool Board::checkLegalDelete(std::pair<unsigned short, unsigned short> limits, unsigned position, bool vertical) {
+	unsigned short first = limits.first;
+	unsigned short line = first, col = position;
+
+	if (!vertical) {
+		line = position;
+		col = first;
+	}
+	line++; col++;
+
+	for (unsigned short i = limits.first; i < limits.second; i++) {
+		if (letters[line][col] != ' ' && letters[line + vertical][col + !vertical] != ' ') return false;
+
+		line += vertical;
+		col += !vertical;
+	}
+
+	return true;
+}
+
+short Board::deleteWord(Word word, Coordinate position, bool vertical) {
 	WordsIterator result;
 	std::vector<Word>* words;
 	unsigned short location;
 	std::pair<unsigned short, unsigned short> wordLocation = word.getLocation();
+	char** letterCopy;
 
 	if (vertical) {
 		words = vWords;
@@ -250,13 +285,22 @@ bool Board::deleteWord(Word word, Coordinate position, bool vertical) {
 
 	result = checkWordOnBoard(word, position, vertical);
 
-	if (result.invalid) return false;
+	if (result.invalid) return 0;
+
+	letterCopy = copyLetters();
 
 	deleteOnArray(word, vertical, location);
 	rewriteOnArray(!vertical, wordLocation);
 
+	if (checkLegalDelete(word.getLocation(), location, vertical)) {
+		words[location].erase(result.iterator);
 
-	return true;
+		return 1;
+	}
+
+	letters = letterCopy;
+	
+	return -1;
 }
 
 void Board::saveBoard() {
