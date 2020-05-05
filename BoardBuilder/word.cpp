@@ -22,7 +22,7 @@ bool Word::operator==(Word word)
 }
 
 bool Word::setText(const std::vector<std::string> &dictionary, std::string _text) {
-	if (std::binary_search(dictionary.begin(), dictionary.end(), stringToLower(_text))) {
+	if (_text.size() > 1 && std::binary_search(dictionary.begin(), dictionary.end(), stringToLower(_text))) {
 		this->text = stringToUpper(_text);
 
 		return true;
