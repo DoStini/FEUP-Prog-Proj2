@@ -1,13 +1,14 @@
 file(REMOVE_RECURSE
+  "../ScrabbleJunior.exe"
+  "../ScrabbleJunior.exe.manifest"
+  "../ScrabbleJunior.pdb"
   "CMakeFiles/ScrabbleJunior.dir/Board.cpp.obj"
   "CMakeFiles/ScrabbleJunior.dir/Game.cpp.obj"
   "CMakeFiles/ScrabbleJunior.dir/IO.cpp.obj"
+  "CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj"
   "CMakeFiles/ScrabbleJunior.dir/Player.cpp.obj"
   "CMakeFiles/ScrabbleJunior.dir/Word.cpp.obj"
   "CMakeFiles/ScrabbleJunior.dir/main.cpp.obj"
-  "ScrabbleJunior.exe"
-  "ScrabbleJunior.exe.manifest"
-  "ScrabbleJunior.pdb"
   "libScrabbleJunior.dll.a"
 )
 

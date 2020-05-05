@@ -20,6 +20,10 @@ CMakeFiles/ScrabbleJunior.dir/IO.cpp.obj: ../Color.h
 CMakeFiles/ScrabbleJunior.dir/IO.cpp.obj: ../IO.cpp
 CMakeFiles/ScrabbleJunior.dir/IO.cpp.obj: ../IO.h
 
+CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj: ../IO.h
+CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj: ../Menu.cpp
+CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj: ../Menu.h
+
 CMakeFiles/ScrabbleJunior.dir/Player.cpp.obj: ../Player.cpp
 CMakeFiles/ScrabbleJunior.dir/Player.cpp.obj: ../Player.h
 
@@ -30,6 +34,7 @@ CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Board.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Color.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Game.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../IO.h
+CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Menu.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Player.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Word.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../main.cpp

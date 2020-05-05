@@ -203,6 +203,33 @@ IO.cpp.s:
 	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/IO.cpp.s
 .PHONY : IO.cpp.s
 
+Menu.obj: Menu.cpp.obj
+
+.PHONY : Menu.obj
+
+# target to build an object file
+Menu.cpp.obj:
+	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj
+.PHONY : Menu.cpp.obj
+
+Menu.i: Menu.cpp.i
+
+.PHONY : Menu.i
+
+# target to preprocess a source file
+Menu.cpp.i:
+	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/Menu.cpp.i
+.PHONY : Menu.cpp.i
+
+Menu.s: Menu.cpp.s
+
+.PHONY : Menu.s
+
+# target to generate assembly for a file
+Menu.cpp.s:
+	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/Menu.cpp.s
+.PHONY : Menu.cpp.s
+
 Player.obj: Player.cpp.obj
 
 .PHONY : Player.obj
@@ -302,6 +329,9 @@ help:
 	@echo ... IO.obj
 	@echo ... IO.i
 	@echo ... IO.s
+	@echo ... Menu.obj
+	@echo ... Menu.i
+	@echo ... Menu.s
 	@echo ... Player.obj
 	@echo ... Player.i
 	@echo ... Player.s
