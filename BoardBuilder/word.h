@@ -11,6 +11,7 @@ public:
 	bool setLocation(Coordinate _location, char orientation);
 	bool intersects(Word otherWord);
 	bool isAfter(Word otherWord);
+	bool operator ==(const Word word);
 	std::string getText() { return text; }
 	Coordinate getLocation() { return location; }
 private:

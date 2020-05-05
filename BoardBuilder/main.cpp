@@ -67,14 +67,22 @@ char inputLocation(char limit, std::string message) {
 
 void inputWords(Board& board, const std::vector<std::string>& words) {
 	std::stringstream ss;
-	std::string text;
+	std::string deletePrompt, text;
 	std::pair<unsigned short, unsigned short> size = board.getSize();
 	char line, column, orientation, input;
+	short success;
 
 	while (true) {
 		Word newWord;
 		printMessage(board.showBoard());
 
+		printMessage("Add or delete? (write 'delete' to delete, anything else to continue)", WHITE, BLACK);
+		getString(deletePrompt);
+
+		clearScreen();
+		if (checkStop()) break;
+
+		printMessage(board.showBoard());
 		printMessage("What is the word?", WHITE, BLACK);
 		while (!checkInputOrSTOP(text) || !newWord.setText(words, text)) {
 			clearScreen();
@@ -116,6 +124,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 		while (!checkInputOrSTOP(orientation) || (toupper(orientation) != 'H' && toupper(orientation) != 'V')) {
 			clearScreen();
 			if (checkStop()) break;
+			printMessage(board.showBoard());
 
 			printMessage("Input was invalid, please try again.", RED, BLACK);
 
@@ -141,11 +150,25 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 			clearScreen();
 			if (input == EOF) break;
 
-			if (board.addWord(newWord, position, orientation == 'V')) {
+			if (stringToUpper(deletePrompt) == "DELETE") {
+				success = board.deleteWord(newWord, position, orientation == 'V');
+			}
+			else {
+				success = board.addWord(newWord, position, orientation == 'V');
+			}
+
+			if (success == 1) {
 				printMessage("Success!");
 			}
 			else {
-				printMessage("Error! The word does not fit in the board or intersects with another word.", RED, BLACK);
+				if (stringToUpper(deletePrompt) == "DELETE") {
+					if(success == 0) printMessage("Error! That word is not on the board.", RED, BLACK);
+					else {
+						printMessage("Error! Can't delete that word.", RED, BLACK);
+						printMessage("Deleting that word creates an illegal board disposition.", RED, BLACK);
+					}
+				}
+				else printMessage("Error! The word does not fit in the board or intersects with another word.", RED, BLACK);
 			}
 
 			waitForKey();

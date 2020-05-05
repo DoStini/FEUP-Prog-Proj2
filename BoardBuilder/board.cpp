@@ -1,10 +1,12 @@
 #include "board.h"
 #include "boardIO.h"
+#include "color.h"
 #include<utility>
 #include<vector>
 #include<algorithm>
 #include<sstream>
 #include<fstream>
+#include <cassert>
 
 Board::Board() {
 	heightLimits = std::make_pair(2, 20);
@@ -91,6 +93,20 @@ bool Board::initializeWords() {
 	}
 
 	return true;
+}
+
+char** Board::copyLetters() {
+	char** copy;
+
+	copy = new (char(*[(size_t)size.first + 2]));
+	for (unsigned short l = 0; l < size.first + 2; l++) {
+		copy[l] = new char[(size_t)size.second + 2];
+		for (unsigned short c = 0; c < size.second + 2; c++) {
+			copy[l][c] = letters[l][c];
+		}
+	}
+
+	return copy;
 }
 
 bool Board::checkFit(Word word, unsigned short max) {
@@ -192,6 +208,116 @@ bool Board::addWord(Word word, Coordinate position, bool vertical) {
 	}
 
 	return false;
+}
+
+void Board::deleteOnArray(Word word, bool vertical, unsigned short position) {
+	unsigned short first = word.getLocation().first;
+	unsigned short line = first, col = position;
+	std::string text = word.getText();
+
+	if (!vertical) {
+		line = position;
+		col = first;
+	}
+	line++; col++;
+
+	for (unsigned short i = 0; i < text.size(); i++) {
+		letters[line][col] = ' ';
+
+		line += vertical;
+		col += !vertical;
+	}
+}
+
+void Board::rewriteOnArray(bool vertical, std::pair<unsigned short, unsigned short> limits) {
+	std::vector<Word>* words = vWords;
+	unsigned short limit = size.second;
+
+	if (!vertical) {
+		words = hWords;
+		limit = size.first;
+	}
+
+	assert((limits.first >= 0 && limits.second < limit), "Limits out of bounds");	
+
+	for (unsigned short i = limits.first; i <= limits.second; i++) {
+		for (std::vector<Word>::iterator it = words[i].begin(); it != words[i].end(); it++) {
+			writeOnArray(*it, vertical, i);
+		}
+	}
+}
+
+WordsIterator Board::checkWordOnBoard(Word word, Coordinate position, bool vertical) {
+	WordsIterator result;
+	std::string text = word.getText();
+	size_t textSize = text.size();
+
+	std::vector<Word>* orientationWords = vertical ? &vWords[position.second] : &hWords[position.first];
+	result.invalid = false;
+
+	for (result.iterator = (*orientationWords).begin(); result.iterator != (*orientationWords).end(); result.iterator++) {
+		if (!word.isAfter(*result.iterator)) break;
+	}
+
+	result.invalid = result.iterator == orientationWords->end() || !(word == (*result.iterator));
+
+	return result;
+}
+
+bool Board::checkLegalDelete(std::pair<unsigned short, unsigned short> limits, unsigned position, bool vertical) {
+	unsigned short first = limits.first;
+	unsigned short line = first, col = position;
+
+	if (!vertical) {
+		line = position;
+		col = first;
+	}
+	line++; col++;
+
+	for (unsigned short i = limits.first; i < limits.second; i++) {
+		if (letters[line][col] != ' ' && letters[line + vertical][col + !vertical] != ' ') return false;
+
+		line += vertical;
+		col += !vertical;
+	}
+
+	return true;
+}
+
+short Board::deleteWord(Word word, Coordinate position, bool vertical) {
+	WordsIterator result;
+	std::vector<Word>* words;
+	unsigned short location;
+	std::pair<unsigned short, unsigned short> wordLocation = word.getLocation();
+	char** letterCopy;
+
+	if (vertical) {
+		words = vWords;
+		location = position.second;
+	}
+	else {
+		words = hWords;
+		location = position.first;
+	}
+
+	result = checkWordOnBoard(word, position, vertical);
+
+	if (result.invalid) return 0;
+
+	letterCopy = copyLetters();
+
+	deleteOnArray(word, vertical, location);
+	rewriteOnArray(!vertical, wordLocation);
+
+	if (checkLegalDelete(word.getLocation(), location, vertical)) {
+		words[location].erase(result.iterator);
+
+		return 1;
+	}
+
+	letters = letterCopy;
+	
+	return -1;
 }
 
 void Board::saveBoard() {
