@@ -42,8 +42,8 @@ void Board::readBoard(string fileName) {
     initArray();
     initWordVectors();
     int counter = 0;
-	while (f_in.peek() != '#') {
-		f_in >> position[0] >> position[1] >> sep >> word;
+    while (f_in.peek() != '#'){
+        f_in >> position >> sep >> word;
 
 
 
