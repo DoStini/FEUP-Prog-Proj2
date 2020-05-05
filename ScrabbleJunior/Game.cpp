@@ -43,7 +43,7 @@ bool Game::gameManager() {
     }
 }
 
-Player Game::checkWinner(){
+void Game::checkWinner(){
     std::sort(players.begin(), players.end(), [](Player p1, Player p2){ return p1.getScore() < p2.getScore();});
 
     short int max = players[0].getScore();

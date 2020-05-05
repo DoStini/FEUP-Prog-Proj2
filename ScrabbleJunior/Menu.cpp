@@ -104,7 +104,7 @@ const std::vector<std::string> titleE{
 
 const std::vector<std::string> title[8] = { titleS, titleC, titleR, titleA, titleB, titleB, titleL, titleE };
 
-void dropLetter(std::vector<std::string> letter, int num) {
+void dropLetter(std::vector<std::string> letter, int num, unsigned short int xStart) {
 	size_t distanceFallen, relativeDistanceToBottom;
 
 	for (int i = letter.size() - 1; i >= 0; i--) {
@@ -113,7 +113,7 @@ void dropLetter(std::vector<std::string> letter, int num) {
 		for (std::vector<std::string>::const_reverse_iterator it = letter.crbegin(); it != letter.crend() - i; it++) {
 			relativeDistanceToBottom = it - letter.crbegin();
 
-			gotoxy(num * 19, distanceFallen - relativeDistanceToBottom);
+			gotoxy(num * 19 + xStart, distanceFallen - relativeDistanceToBottom);
 			std::cout << *it;
 		}
 		Sleep(50);
@@ -122,7 +122,7 @@ void dropLetter(std::vector<std::string> letter, int num) {
 
 void showTitle() {
 	for (int letter = 0; letter < 8; letter++) {
-		dropLetter(title[letter], letter);
+		dropLetter(title[letter], letter, 8);
 	}
 	
 	gotoxy(0, titleA.size() + 2);
