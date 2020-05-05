@@ -1,1 +1,2 @@
-void dropDown();
+void showTitle();
+void showOptions();

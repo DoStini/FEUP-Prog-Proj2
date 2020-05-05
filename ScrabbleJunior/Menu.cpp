@@ -120,10 +120,37 @@ void dropLetter(std::vector<std::string> letter, int num) {
 	}
 }
 
-void dropDown() {
+void showTitle() {
 	for (int letter = 0; letter < 8; letter++) {
 		dropLetter(title[letter], letter);
 	}
 	
 	gotoxy(0, titleA.size() + 2);
+}
+
+void showCascading(std::string s, time_t t, unsigned short int xStart, unsigned short int yStart) {
+	unsigned short int lineFeed = yStart;
+	gotoxy(xStart, lineFeed);
+	for (int i = 0; i < s.length(); ++i) {
+		if (s[i] == '\n') {
+			lineFeed++;
+			gotoxy(xStart, lineFeed);
+			continue;
+		}
+		std::cout << s[i];
+		Sleep(t);
+	}
+
+}
+
+void showOptions() {
+	showCascading("\n"
+		" __  __  ____  _  _  __  __ \n"
+		"(  \\/  )( ___)( \\( )(  )(  )\n"
+		" )    (  )__)  )  (  )(__)( \n"
+		"(_/\\/\\_)(____)(_)\\_)(______)", 1, 65, 13);
+	clearScreen(66, 20);
+	std::cout << "Welcome to Scrabble Junior.";
+	gotoxy(61, 21);
+	std::cout << "Made by Andre Moreira and Nuno Alves\n";
 }
