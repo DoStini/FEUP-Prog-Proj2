@@ -16,6 +16,11 @@ bool Word::isAfter(Word otherWord) {
 	return (location.first - 1 > otherLocation.second);
 }
 
+bool Word::operator==(Word word)
+{
+	return word.getText() == text && word.getLocation().first == location.first; 
+}
+
 bool Word::setText(const std::vector<std::string> &dictionary, std::string _text) {
 	if (std::binary_search(dictionary.begin(), dictionary.end(), stringToLower(_text))) {
 		this->text = stringToUpper(_text);
