@@ -7,7 +7,7 @@
 #include "IO.h"
 #include "Color.h"
 #include "Game.h"
-#include "menu.h"
+#include "Menu.h"
 using namespace std;
 
 int main() {

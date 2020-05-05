@@ -117,7 +117,6 @@ void dropLetter(std::vector<std::string> letter, int num) {
 			std::cout << *it;
 		}
 		Sleep(50);
-		clearScreen(1000, 0);
 	}
 }
 
