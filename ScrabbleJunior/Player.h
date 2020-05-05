@@ -18,7 +18,7 @@ public:
     void addPoints(unsigned short int);
     unsigned short int getScore();
     std::string getName();
-    std::string setName(std::string name);
+    void setName(std::string name);
 private:
     std::vector<char> tiles;
     unsigned short int score = 0;

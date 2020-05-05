@@ -60,6 +60,6 @@ void Player::addPoints(unsigned short int points){
 std::string Player::getName() {
     return name;
 }
-std::string Player::setName(std::string name) {
+void Player::setName(std::string name) {
     this->name = name;
 }

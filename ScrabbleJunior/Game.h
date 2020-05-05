@@ -20,7 +20,7 @@ public:
     void gotValidMove(Player &player, unsigned short int pos[2], char letter, Word *hWordPtr, Word *vWordPtr);
     bool gameManager();
     void changeTile(Player &player);
-    Player checkWinner();
+    void checkWinner();
 
 private:
     vector<char> pot; // The bag of tiles
