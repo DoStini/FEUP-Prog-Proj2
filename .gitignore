@@ -14,6 +14,8 @@ cmake-build-debug/
 *.obj
 *.ilk
 *.pdb
+*.db
+*.sqlite
 
 # Precompiled Headers
 *.gch
