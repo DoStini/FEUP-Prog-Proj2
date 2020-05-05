@@ -20,7 +20,7 @@ public:
 	bool initializeWords();
 	bool addWord(Word word, Coordinate position, bool vertical);
 	short deleteWord(Word word, Coordinate position, bool vertical);
-	void saveBoard();
+	void saveBoard(std::string fileName);
 
 	std::pair<unsigned short, unsigned short> getHeightLimits() { return heightLimits; }
 	std::pair<unsigned short, unsigned short> getWidthLimits() { return widthLimits; }

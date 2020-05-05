@@ -320,8 +320,12 @@ short Board::deleteWord(Word word, Coordinate position, bool vertical) {
 	return -1;
 }
 
-void Board::saveBoard() {
-	std::ofstream saveFile("../BOARD.TXT");
+void Board::saveBoard(std::string fileName) {
+	std::stringstream path;
+	path.str(std::string());
+	path << "../Assets/" << fileName << ".TXT";
+
+	std::ofstream saveFile(path.str());
 	std::vector<Word>::iterator it;
 
 	saveFile << size.first << 'x' << size.second << std::endl;

@@ -182,6 +182,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 int main()
 {
 	std::vector<std::string> words;
+	std::string fileName;
 	std::stringstream ss;
 	std::pair<unsigned short, unsigned short> size;
 	char input;
@@ -221,13 +222,24 @@ int main()
 	clearScreen();
 	
 	inputWords(board, words);
+	std::cin.clear();
 
 	clearScreen();
 
-	board.saveBoard();
-	std::cin.clear();
+	printMessage("Insert the name of the file where the board will be saved.", WHITE, BLACK);
+	while (!checkInput(fileName)) {
+		clearScreen();
 
-	printMessage("Your input has been saved into the BOARD.TXT file.");
+		printMessage("Input was invalid, please try again.", RED, BLACK);
+		printMessage("Insert the name of the file where the board will be saved.", WHITE, BLACK);
+	};
+
+	board.saveBoard(fileName);
+	
+
+	ss.str(std::string());
+	ss << "Your board has been saved into the '" << fileName << ".TXT' file in the Assets folder.";
+	printMessage(ss.str());
 	waitForKey();
 	return 0;
 }
