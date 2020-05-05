@@ -21,7 +21,7 @@ void Player::initTiles(std::vector<char> &pot){
 }
 
 void Player::showTiles() {
-    for (int i = 0; i < 7; ++i) {
+    for (int i = 0; i < tiles.size(); ++i) {
         std::cout << tiles[i] << ' ';
     }
     std::cout << std::endl;

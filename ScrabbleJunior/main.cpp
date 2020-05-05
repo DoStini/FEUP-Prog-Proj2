@@ -47,9 +47,9 @@ int main() {
 
 
     srand(0);
-    Board board("board.txt");
-    Game game(3, &board);
-
+    Board board("board2.txt");
+    Game game(1, &board);
+    waitForKey();
 }
 
 

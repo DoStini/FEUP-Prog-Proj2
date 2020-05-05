@@ -1,0 +1,13 @@
+5x5
+Aa H WORD
+Dc H HAT
+Aa V WEEK
+Ad V DREAM
+########
+  a b c d e 
+A W O R D   
+B E     R   
+C E     E   
+D K   H A T 
+E       M   
+

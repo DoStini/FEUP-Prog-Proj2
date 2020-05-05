@@ -42,8 +42,10 @@ void Board::readBoard(string fileName) {
     initArray();
     initWordVectors();
     int counter = 0;
-    while (!f_in.eof()){
+    while (f_in.peek() != '#'){
         f_in >> position >> sep >> word;
+
+
 
         verticalIdx = (int) position[0] - (int) 'A';
         horizontalIdx = (int) position[1] - (int) 'a';
@@ -56,6 +58,7 @@ void Board::readBoard(string fileName) {
         else{
             hWords[verticalIdx].push_back(Word(word, horizontalIdx));
         }
+        f_in.get();
     }
 }
 

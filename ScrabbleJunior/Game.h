@@ -22,8 +22,9 @@ public:
     void changeTile(Player &player);
     Player checkWinner();
 
-        private:
+private:
     vector<char> pot; // The bag of tiles
+    unsigned short int limit;
     unsigned short int numTiles = 0;
     unsigned short int numPlayers;
     vector<Player> players;

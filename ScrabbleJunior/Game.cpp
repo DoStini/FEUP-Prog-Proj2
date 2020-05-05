@@ -11,6 +11,7 @@ Game::Game(unsigned short int numPlayers, Board *boardPtr){
     this -> numPlayers = numPlayers;
     this -> boardPtr = boardPtr;
     initPot();
+    limit = pot.size();
     initPlayers(numPlayers);
     std::cout << std::endl << std::endl;
 
@@ -20,11 +21,11 @@ Game::Game(unsigned short int numPlayers, Board *boardPtr){
 }
 
 bool Game::gameManager() {
-    while (1){
+    while (1){                                          // If number of players exceed nuber of tiles
         for (int i = 0; i < numPlayers; ++i) {
             for (int j = 0; j < 2; ++j) {
 
-                if (numTiles == 101) return true;
+                if (numTiles == limit) return true;
 
                 if (boardPtr->analyseMoves(players[i])){
                     bool valid = true;
@@ -33,6 +34,7 @@ bool Game::gameManager() {
                     }
                 }
                 else{
+                    changeTile(players[i]);
                     waitForKey();
                     break;
                 }
@@ -184,10 +186,11 @@ void Game::gotValidMove(Player &player, unsigned short int pos[2], char letter, 
 
     player.removeTile(letter);
 
-    if (!pot.size()) {
+    replaceVisualChar((XBEG + XSPACING * pos[1]), (YBEG + YSPACING * pos[0]), letter, RED, BROWN);
+
+    if (pot.size() > 0) {
         char newTile = getRandomTile();
         player.addTile(newTile);
-        replaceVisualChar((XBEG + XSPACING * pos[1]), (YBEG + YSPACING * pos[0]), letter, RED, BROWN);
     }
 }
 

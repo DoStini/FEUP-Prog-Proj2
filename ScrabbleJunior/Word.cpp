@@ -19,7 +19,8 @@ Word::Word(std::string word, unsigned short int start){
 
 bool Word::inWord(unsigned short int position){
     if (position >= start && position <= end){
-        return validMove(position);
+        return true;
+        // probably wrong return validMove(position);
     }
     else{
         return false;
