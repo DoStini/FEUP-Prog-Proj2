@@ -142,7 +142,7 @@ bool Board::analyseMoves(Player &player){
             Word cWord = hWords[i][j];
             short int idx = cWord.findPlayable();
 
-            if (idx != -1 && player.checkTiles(cWord.getLetter(idx))){
+            if (idx != -1 && player.checkTiles(cWord.getLetter(idx)) != -1){
                 return true;
             }
         }
@@ -153,7 +153,7 @@ bool Board::analyseMoves(Player &player){
             Word cWord = vWords[i][j];
             short int idx = cWord.findPlayable();
 
-            if (idx != -1 && player.checkTiles(cWord.getLetter(idx))){
+            if (idx != -1 && player.checkTiles(cWord.getLetter(idx)) != -1){
                 return true;
             }
         }

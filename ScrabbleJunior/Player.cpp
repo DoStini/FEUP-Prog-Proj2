@@ -29,7 +29,9 @@ void Player::showTiles() {
 
 short int Player::checkTiles(char letter){
     std::vector<char>::iterator it = std::find(tiles.begin(), tiles.end(), letter);
-    return it != tiles.end() ? it - tiles.begin() : -1;
+    bool temp = it != tiles.end();
+    int temp2 = it - tiles.begin();
+    return temp ? temp2 : -1;
 
     /*
     for (int i = 0; i < 7; ++i) {

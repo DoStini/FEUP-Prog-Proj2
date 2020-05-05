@@ -1,9 +1,10 @@
 #include <iostream>
 #include "Game.h"
 
-short int XBEG = 2;
-short int YBEG = 1;
-
+const int XBEG = 2;
+const int YBEG = 1;
+const int XSPACING = 2;
+const int YSPACING = 1;
 
 
 Game::Game(unsigned short int numPlayers, Board *boardPtr){
@@ -14,13 +15,17 @@ Game::Game(unsigned short int numPlayers, Board *boardPtr){
     std::cout << std::endl << std::endl;
 
     gameManager();
+    checkWinner();
 
 }
 
-void Game::gameManager() {
+bool Game::gameManager() {
     while (1){
         for (int i = 0; i < numPlayers; ++i) {
             for (int j = 0; j < 2; ++j) {
+
+                if (numTiles == 101) return true;
+
                 if (boardPtr->analyseMoves(players[i])){
                     bool valid = true;
                     while (valid){
@@ -28,12 +33,41 @@ void Game::gameManager() {
                     }
                 }
                 else{
-                    std:: cout << "You have no moves left..." << std::endl;
                     waitForKey();
                     break;
                 }
             }
         }
+    }
+}
+
+Player Game::checkWinner(){
+    std::sort(players.begin(), players.end(), [](Player p1, Player p2){ return p1.getScore() < p2.getScore();});
+
+    short int max = players[0].getScore();
+    bool tie = false;
+
+    for (int i = 1; i < players.size(); ++i) {
+        if (players[i].getScore() == max){
+            tie = true;
+        }
+        else{
+            players.resize((i+1) * sizeof(Player)); // deleting
+            break;
+        }
+    }
+    if (!tie){
+        std::cout << "The winner of the game is " << players[0].getName() << " with " << players[0].getScore() << " points!" << std::endl;
+    }
+    else{
+        std::cout << "The winners of the game are ";
+        for (int i = 0; i < players.size(); ++i) {
+            std::cout << players[i].getName();
+            if (i != players.size() - 1){
+                std::cout << ", ";
+            }
+        }
+        std::cout << " with " << players[0].getScore() << " points!" << std::endl;
     }
 }
 
@@ -138,6 +172,7 @@ bool Game::playerMove(Player &player) {                     // Maybe change late
 }
 
 void Game::gotValidMove(Player &player, unsigned short int pos[2], char letter, Word *hWordPtr, Word *vWordPtr){
+    numTiles++;
     if(hWordPtr != NULL){
         hWordPtr->coverLetter(pos[1]);
         player.addPoints(hWordPtr->completedWord());
@@ -146,10 +181,32 @@ void Game::gotValidMove(Player &player, unsigned short int pos[2], char letter, 
         vWordPtr->coverLetter(pos[0]);
         player.addPoints(vWordPtr->completedWord());
     }
-    char newTile = getRandomTile();
+
     player.removeTile(letter);
-    player.addTile(newTile);
-    replaceVisualChar((XBEG + 2*pos[1]), (YBEG + pos[0]), letter, RED, BROWN);
+
+    if (!pot.size()) {
+        char newTile = getRandomTile();
+        player.addTile(newTile);
+        replaceVisualChar((XBEG + XSPACING * pos[1]), (YBEG + YSPACING * pos[0]), letter, RED, BROWN);
+    }
 }
 
+void Game::changeTile(Player &player){
+    std:: cout << "You have no moves left..." << std::endl;
+    std::cout << "Choose one of your tiles to trade." << std::endl;
+    player.showTiles();
+    char in;
+    getChar(in);
+    while (1){
+        if (player.checkTiles(toupper(in))){
+            player.removeTile(toupper(in));
+            player.addTile(getRandomTile());
+            waitForKey();
+            break;
+        }
+        else{
+            std::cout << "You don't have that tile, re-enter." << std::endl;
+        }
+    }
+}
 

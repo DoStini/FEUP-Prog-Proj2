@@ -2,6 +2,7 @@
 #define SCRABBLEJUNIOR_GAME_H
 
 #include <iostream>
+#include <algorithm>
 #include "IO.h"
 #include "Board.h"
 #include "Player.h"
@@ -17,10 +18,13 @@ public:
     bool inputMove(unsigned short int intPosition[2], Player &player);
     bool playerMove(Player &player);
     void gotValidMove(Player &player, unsigned short int pos[2], char letter, Word *hWordPtr, Word *vWordPtr);
-    void gameManager();
+    bool gameManager();
+    void changeTile(Player &player);
+    Player checkWinner();
 
-private:
-    vector<char> pot;                     // The bag of tiles
+        private:
+    vector<char> pot; // The bag of tiles
+    unsigned short int numTiles = 0;
     unsigned short int numPlayers;
     vector<Player> players;
     Board *boardPtr;
