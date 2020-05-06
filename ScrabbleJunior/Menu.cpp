@@ -1,4 +1,5 @@
 #include "IO.h"
+#include <mmsystem.h>
 #include<iostream>
 #include<string>
 #include<sstream>
@@ -104,25 +105,35 @@ const std::vector<std::string> titleE{
 
 const std::vector<std::string> title[8] = { titleS, titleC, titleR, titleA, titleB, titleB, titleL, titleE };
 
-void dropLetter(std::vector<std::string> letter, int num, unsigned short int xStart) {
+void dropLetter(std::vector<std::string> letter, int time, int num, unsigned short int xStart, bool &wait) {
 	size_t distanceFallen, relativeDistanceToBottom;
+	int xPosition = num * 19 + xStart;
 
 	for (int i = letter.size() - 1; i >= 0; i--) {
 		distanceFallen = letter.size() - i;
 
 		for (std::vector<std::string>::const_reverse_iterator it = letter.crbegin(); it != letter.crend() - i; it++) {
+			if (GetKeyState(VK_RETURN) & 0x8000) {
+				wait = false;
+			}
 			relativeDistanceToBottom = it - letter.crbegin();
 
-			gotoxy(num * 19 + xStart, distanceFallen - relativeDistanceToBottom);
+			gotoxy(xPosition, distanceFallen - relativeDistanceToBottom);
 			std::cout << *it;
 		}
-		Sleep(50);
+		if(wait) Sleep(time);
 	}
 }
 
 void showTitle() {
+	bool wait = true;
+
 	for (int letter = 0; letter < 8; letter++) {
-		dropLetter(title[letter], letter, 8);
+		dropLetter(title[letter], 44, letter, 8, wait);
+	}
+	if (!wait) {
+		std::cin.clear();
+		std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 	}
 	
 	gotoxy(0, titleA.size() + 2);

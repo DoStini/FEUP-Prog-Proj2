@@ -1,9 +1,13 @@
+#pragma comment(lib, "winmm.lib")
 #include <iostream>
 #include <vector>
 #include <time.h>
 #include <cstdlib>
 #include <algorithm>
 #include <windows.h>
+#include <mmsystem.h>
+#include <mciapi.h>
+#include <fstream>
 #include "IO.h"
 #include "Color.h"
 #include "Game.h"
@@ -29,7 +33,11 @@ int main() {
     waitForKey();
 */
 
+	PlaySound("Sound/back.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
     showTitle();
+	Sleep(45);
     showOptions();
     waitForKey();
+
+	return NO_ERROR;
  }
