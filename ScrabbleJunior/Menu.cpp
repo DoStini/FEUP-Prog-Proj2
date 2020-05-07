@@ -1,4 +1,5 @@
 #include "IO.h"
+#include "Menu.h"
 #include <mmsystem.h>
 #include<iostream>
 #include<string>
@@ -154,14 +155,146 @@ void showCascading(std::string s, time_t t, unsigned short int xStart, unsigned 
 
 }
 
+void newGame(){
+
+}
+void showRules(){
+
+    std::vector<std::string> rules{
+            "1) On your turn, play two of your tiles by covering",
+            "letters on the gameboard squares with matching tiles.",
+            "2) Draw as many tiles from the pool as you played,",
+            "so that you have seven tiles again.",
+
+            "3) You can only play tiles in the beggining of a word,",
+            "or a a tile whose precedents in a word are all covered.",
+
+            "4) If you can play, you must play.",
+
+            "5) If you can't play any tile, trade two tiles.",
+
+            "6) The game ends when all of the letters are covered.",
+    };
+
+
+    clearScreen(0, YBEGMENU);
+
+    showCascading("\n"
+                  " ____  __  __  __    ____  ___ \n"
+                  "(  _ \\(  )(  )(  )  ( ___)/ __)\n"
+                  " )   / )(__)(  )(__  )__) \\__ \\\n"
+                  "(_)\\_)(______)(____)(____)(___/", 1, 70, YBEGMENU);
+
+    for (int i = 0; i < rules.size(); ++i) {
+        showCascading(rules[i], 2, 60,YBEGMENU + 7 + 2*i);      // 2*i -> skipping lines
+    }
+    gotoxy(70, YBEGMENU + 9 + 2*rules.size());          // Skipping lines
+    waitForKey();
+}
+
+void showInst(){
+    std::vector<std::string> rules{
+            "1) It's crucial for the program integrity that",
+            "you don't resize the window as it may break the program"
+    };
+
+
+    clearScreen(0, YBEGMENU);
+
+    showCascading("\n"
+                  " ____  __  __  __    ____  ___ \n"
+                  "(  _ \\(  )(  )(  )  ( ___)/ __)\n"
+                  " )   / )(__)(  )(__  )__) \\__ \\\n"
+                  "(_)\\_)(______)(____)(____)(___/", 1, 70, YBEGMENU);
+
+    for (int i = 0; i < rules.size(); ++i) {
+        showCascading(rules[i], 2, 60,YBEGMENU + 7 + 2*i);      // 2*i -> skipping lines
+    }
+    gotoxy(70, YBEGMENU + 9 + 2*rules.size());          // Skipping lines
+    waitForKey();
+}
+void showCredits(){
+    std::vector<std::string> credits{
+            "                              Made by:",
+            "                 Andre Moreira: github.com/DoStini",
+            "                  Nuno Alves: github.com/homailot",
+            " ",
+            "           Thank you to http://patorjk.com/software/taag/",
+            "for providing amazing ascii art to make our project more visually apealing."
+    };
+
+
+    clearScreen(0, YBEGMENU);
+
+    showCascading("\n"
+                  "  ___  ____  ____  ____  ____  ____  ___ \n"
+                  " / __)(  _ \\( ___)(  _ \\(_  _)(_  _)/ __)\n"
+                  "( (__  )   / )__)  )(_) )_)(_   )(  \\__ \\\n"
+                  " \\___)(_)\\_)(____)(____/(____) (__) (___/", 1, 63, YBEGMENU);
+
+    for (int i = 0; i < credits.size(); ++i) {
+        showCascading(credits[i], 2, 50,YBEGMENU + 7 + i);
+    }
+    gotoxy(70, YBEGMENU + 9 + credits.size());
+    waitForKey();
+}
+void showScores(){
+
+}
+void closeGame(){
+    clearScreen(0, YBEGMENU);
+    showCascading("\n"
+                  " ____  _   _  ____    ____  _  _  ____  \n"
+                  "(_  _)( )_( )( ___)  ( ___)( \\( )(  _ \\ \n"
+                  "  )(   ) _ (  )__)    )__)  )  (  )(_) )\n"
+                  " (__) (_) (_)(____)  (____)(_)\\_)(____/ ", 1, 65, YBEGMENU);
+    showCascading("Thanks for playing!",10,75, YBEGMENU + 7);
+    Sleep(1000);
+    showCascading("We hope you enjoyed your stay...",10,70, YBEGMENU + 9);
+    Sleep(1000);
+    gotoxy(70, YBEGMENU + 11);
+    waitForKey();
+    exit(1);
+}
+
+
 void showOptions() {
+    clearScreen(0, YBEGMENU);
 	showCascading("\n"
 		" __  __  ____  _  _  __  __ \n"
 		"(  \\/  )( ___)( \\( )(  )(  )\n"
 		" )    (  )__)  )  (  )(__)( \n"
-		"(_/\\/\\_)(____)(_)\\_)(______)", 1, 65, 13);
-	clearScreen(66, 20);
-	std::cout << "Welcome to Scrabble Junior.";
-	gotoxy(61, 21);
-	std::cout << "Made by Andre Moreira and Nuno Alves\n";
+		"(_/\\/\\_)(____)(_)\\_)(______)", 1, 70, YBEGMENU);
+
+	std::vector<std::string> options{
+            "Play (p)",
+            "Rules (r)",
+            "Instructions (i)",
+            "Credits (c)",
+            "Scoreboard (s)",
+            "Exit (e)",
+            "Input: "
+	};
+
+
+	showCascading("You have several commands:",1,71, YBEGMENU + 7);
+
+    for (int i = 0; i < options.size(); ++i) {
+        showCascading(options[i], 1, 75,YBEGMENU + 8 + i);
+    }
+
+    std::string command;
+    std::cin >> command;
+    std::cin.ignore(100, '\n');
+    command = stringToLower(command);
+
+    if (command == "p" || command == "play")                newGame();
+    else if (command == "i" || command == "instructions")   showInst();
+    else if (command == "r" || command == "rules")          showRules();
+    else if (command == "c" || command == "credits")        showCredits();
+    else if (command == "s" || command == "scoreboard")     showScores();
+    else if (command == "e" || command == "exit")           closeGame();
 }
+
+
+

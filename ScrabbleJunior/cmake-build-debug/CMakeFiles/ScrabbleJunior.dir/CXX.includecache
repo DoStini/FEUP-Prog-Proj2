@@ -19,8 +19,20 @@ string
 -
 
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.cpp
+IO.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
 Menu.h
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.h
+mmsystem.h
+-
+iostream
+-
+string
+-
+sstream
+-
+vector
+-
 
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.h
 windows.h

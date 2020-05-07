@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <windows.h>
 #include <mmsystem.h>
-#include <mciapi.h>
+//#include <mciapi.h>
 #include <fstream>
 #include "IO.h"
 #include "Color.h"
@@ -33,11 +33,13 @@ int main() {
     waitForKey();
 */
 
-	PlaySound("Sound/back.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+//	PlaySound("Sound/back.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
     showTitle();
 	Sleep(45);
-    showOptions();
-    waitForKey();
+
+	while (1){
+        showOptions();
+    }
 
 	return NO_ERROR;
  }

@@ -11,6 +11,8 @@
 #include <cstdlib>
 #include "IO.h"
 
+#define YBEGMENU 13
+
 
 void showTitle();
 void showCascading(std::string s, time_t t, unsigned short int xStart, unsigned short int yStart);
