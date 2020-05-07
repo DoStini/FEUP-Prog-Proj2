@@ -238,7 +238,7 @@ void Board::rewriteOnArray(bool vertical, std::pair<unsigned short, unsigned sho
 		limit = size.first;
 	}
 
-	assert((limits.first >= 0 && limits.second < limit), "Limits out of bounds");	
+	assert((limits.first >= 0 && limits.second < limit));	
 
 	for (unsigned short i = limits.first; i <= limits.second; i++) {
 		for (std::vector<Word>::iterator it = words[i].begin(); it != words[i].end(); it++) {

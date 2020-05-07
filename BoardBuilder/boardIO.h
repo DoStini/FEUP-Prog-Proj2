@@ -56,3 +56,4 @@ void clearScreen();
 void waitForKey();
 std::string stringToLower(std::string str);
 std::string stringToUpper(std::string str);
+void gotoxy(int x, int y);

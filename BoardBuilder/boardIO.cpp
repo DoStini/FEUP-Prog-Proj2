@@ -53,3 +53,7 @@ std::string stringToUpper(std::string str) {
 
 	return newCopy;
 }
+
+void gotoxy(int x, int y) {
+	std::cout << "\033[" << y << ";" << x << "f";
+}
