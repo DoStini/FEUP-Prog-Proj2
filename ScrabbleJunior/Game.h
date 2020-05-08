@@ -11,8 +11,8 @@
 
 class Game{
 public:
-    Game(unsigned short int numPlayers, Board *boardPtr);
-    void initPlayers(unsigned short int numPlayers);
+    Game(unsigned short int numPlayers,std::vector<std::string> playerNames, Board *boardPtr);
+    void initPlayers(unsigned short int numPlayers, std::vector<std::string> playerNames);
     void initPot();
     char getRandomTile();
     bool inputMove(unsigned short int intPosition[2], Player &player);

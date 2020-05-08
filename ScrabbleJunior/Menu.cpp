@@ -1,10 +1,12 @@
-#include "IO.h"
+
 #include "Menu.h"
+
 #include <mmsystem.h>
 #include<iostream>
 #include<string>
 #include<sstream>
 #include <vector>
+#include <fstream>
 
 const std::vector<std::string> titleS{
 	" .----------------. \n",
@@ -155,9 +157,92 @@ void showCascading(std::string s, time_t t, unsigned short int xStart, unsigned 
 
 }
 
-void newGame(){
 
+
+void startGame(unsigned short int numPlayers, std::vector<std::string> playerNames, std::string fileName){
+    Board board(fileName);
+    Game game(numPlayers, playerNames, &board);
 }
+
+
+
+void newGame(){
+    std::vector<std::string> phrases{
+            "          So you decided to play the game?",
+            "          How many players will be playing?",
+            "                       Input: ",
+            "What is the file of the board which you wish to load?",
+            "          Input (example: board.txt): ",
+    };
+
+    std::vector<Player> players;
+
+    clearScreen(0, YBEGMENU);
+
+    showCascading("\n"
+                  " _  _  ____  _    _     ___    __    __  __  ____ \n"
+                  "( \\( )( ___)( \\/\\/ )   / __)  /__\\  (  \\/  )( ___)\n"
+                  " )  (  )__)  )    (   ( (_-. /(__)\\  )    (  )__) \n"
+                  "(_)\\_)(____)(__/\\__)   \\___/(__)(__)(_/\\/\\_)(____)", 1, 60, YBEGMENU);
+
+    for (int i = 0; i < 3; ++i) {
+        showCascading(phrases[i], 2, 60,YBEGMENU + 7 + i);
+    }
+
+    unsigned short int numPlayers;
+
+    while (1){
+        std::cin >> numPlayers;   // If a string is give breaks program
+        if (numPlayers < 2 || numPlayers > 4){
+            clearScreen(70,YBEGMENU + 9); //(7+i=2);
+            std::cout << "Invalid, re-enter: ";
+        }
+        else{
+            break;
+        }
+    }
+
+    std::vector<std::string> playerNames;
+    std::string name;
+    for (int k = 0; k < numPlayers; ++k) {
+        gotoxy(70, YBEGMENU + 10 + k);
+        std::cout << "Player " << k + 1 << "'s name: ";
+        std::cin >> name;
+        playerNames.push_back(name);
+    }
+
+    for (int i = 3; i < phrases.size(); ++i) {
+        showCascading(phrases[i], 2, 60,YBEGMENU + 7 + numPlayers + i);
+    }
+
+
+    std::string file;
+    while (1){
+        if (checkInput(file)){
+            std::ifstream ff;
+            ff.open(file);
+            if (!ff.is_open()){
+                gotoxy(70, YBEGMENU + 12 + numPlayers);
+                std::cerr << "File does not exist!";
+                gotoxy(70, YBEGMENU + 13 + numPlayers);
+                waitForKey();
+                clearScreen(70, YBEGMENU + 11 + numPlayers);
+                std::cout << "Re-enter: ";
+            }
+            else{
+                ff.close();
+                break;
+            }
+        }
+    }
+
+
+    startGame(numPlayers, playerNames, file);
+}
+
+
+
+
 void showRules(){
 
     std::vector<std::string> rules{
@@ -192,27 +277,7 @@ void showRules(){
     waitForKey();
 }
 
-void showInst(){
-    std::vector<std::string> rules{
-            "1) It's crucial for the program integrity that",
-            "you don't resize the window as it may break the program"
-    };
 
-
-    clearScreen(0, YBEGMENU);
-
-    showCascading("\n"
-                  " ____  __  __  __    ____  ___ \n"
-                  "(  _ \\(  )(  )(  )  ( ___)/ __)\n"
-                  " )   / )(__)(  )(__  )__) \\__ \\\n"
-                  "(_)\\_)(______)(____)(____)(___/", 1, 70, YBEGMENU);
-
-    for (int i = 0; i < rules.size(); ++i) {
-        showCascading(rules[i], 2, 60,YBEGMENU + 7 + 2*i);      // 2*i -> skipping lines
-    }
-    gotoxy(70, YBEGMENU + 9 + 2*rules.size());          // Skipping lines
-    waitForKey();
-}
 void showCredits(){
     std::vector<std::string> credits{
             "                              Made by:",
@@ -289,7 +354,6 @@ void showOptions() {
     command = stringToLower(command);
 
     if (command == "p" || command == "play")                newGame();
-    else if (command == "i" || command == "instructions")   showInst();
     else if (command == "r" || command == "rules")          showRules();
     else if (command == "c" || command == "credits")        showCredits();
     else if (command == "s" || command == "scoreboard")     showScores();

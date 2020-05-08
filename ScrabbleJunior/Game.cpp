@@ -7,12 +7,12 @@ const int XSPACING = 2;
 const int YSPACING = 1;
 
 
-Game::Game(unsigned short int numPlayers, Board *boardPtr){
+Game::Game(unsigned short int numPlayers, std::vector<std::string> playerNames, Board *boardPtr){
     this -> numPlayers = numPlayers;
     this -> boardPtr = boardPtr;
     initPot();
     limit = pot.size();
-    initPlayers(numPlayers);
+    initPlayers(numPlayers, playerNames);
     std::cout << std::endl << std::endl;
 
     gameManager();
@@ -74,16 +74,11 @@ void Game::checkWinner(){
 }
 
 
-void Game::initPlayers(unsigned short numPlayers) {
+void Game::initPlayers(unsigned short numPlayers, std::vector<std::string> playerNames) {
     players.reserve(numPlayers);
     Player player;
-    string name;
     for (int i = 0; i < numPlayers; ++i) {
-        printMessage("Please insert player's name: ", "");
-        while (!checkInput(name)){
-            printMessage("Invalid, re-enter: ", "");
-        }
-        player = Player(pot, name);
+        player = Player(pot, playerNames[i]);
         players.push_back(player);
     }
 }

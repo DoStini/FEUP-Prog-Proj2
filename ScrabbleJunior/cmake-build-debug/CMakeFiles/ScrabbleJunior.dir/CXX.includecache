@@ -6,6 +6,38 @@
 
 #IncludeRegexTransform: 
 
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
+iostream
+-
+Player.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
+Word.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
+IO.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
+Color.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
+
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
+vector
+-
+string
+-
+
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.h
+iostream
+-
+algorithm
+-
+IO.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
+Board.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
+Player.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
+Color.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
+
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
 iostream
 -
@@ -19,8 +51,6 @@ string
 -
 
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.cpp
-IO.h
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
 Menu.h
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.h
 mmsystem.h
@@ -32,6 +62,8 @@ string
 sstream
 -
 vector
+-
+fstream
 -
 
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.h
@@ -45,4 +77,24 @@ cstdlib
 -
 IO.h
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
+Player.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
+Game.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.h
+Board.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
+
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
+iostream
+-
+string
+-
+vector
+-
+
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
+iostream
+-
+vector
+-
 

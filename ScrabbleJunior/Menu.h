@@ -10,6 +10,9 @@
 #include <string>
 #include <cstdlib>
 #include "IO.h"
+#include "Player.h"
+#include "Game.h"
+#include "Board.h"
 
 #define YBEGMENU 13
 
