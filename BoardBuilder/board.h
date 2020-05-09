@@ -29,6 +29,7 @@ public:
 	std::pair<unsigned short, unsigned short> getWidthLimits() { return widthLimits; }
 	std::pair<unsigned short, unsigned short> getSize() { return size; }
 	int getMinLetters() { return minLetters; }
+	int getMinSquares() { return minSquares; }
 private:
 	bool checkFit(Word word, unsigned short max);
 	bool checkLegalDelete(std::pair<unsigned short, unsigned short> limits, unsigned position, bool vertical);

@@ -9,8 +9,8 @@
 #include <cassert>
 
 Board::Board() {
-	heightLimits = std::make_pair(4, 20);
-	widthLimits = std::make_pair(4, 20);
+	heightLimits = std::make_pair(3, 20);
+	widthLimits = std::make_pair(3, 20);
 	size = std::make_pair(0, 0);
 	minLetters = 14;
 	minSquares = 20;
