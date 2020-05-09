@@ -24,7 +24,6 @@ void Player::showTiles() {
     for (int i = 0; i < tiles.size(); ++i) {
         std::cout << tiles[i] << ' ';
     }
-    std::cout << std::endl;
 }
 
 short int Player::checkTiles(char letter){
@@ -62,4 +61,17 @@ std::string Player::getName() {
 }
 void Player::setName(std::string name) {
     this->name = name;
+}
+
+int Player::getX(){
+    return pos.first;
+}
+int Player::getY(){
+    return pos.second;
+}
+void Player::setX(int val){
+    pos.first = val;
+}
+void Player::setY(int val){
+    pos.second = val;
 }

@@ -160,6 +160,15 @@ void showCascading(std::string s, time_t t, unsigned short int xStart, unsigned 
 
 
 void startGame(unsigned short int numPlayers, std::vector<std::string> playerNames, std::string fileName){
+
+    clearScreen(0, YBEGMENU);
+
+    showCascading("\n"
+                  "  ___    __    __  __  ____ \n"
+                  " / __)  /__\\  (  \\/  )( ___)\n"
+                  "( (_-. /(__)\\  )    (  )__) \n"
+                  " \\___/(__)(__)(_/\\/\\_)(____)", 1, XBEGMENU, YBEGMENU);
+
     Board board(fileName);
     Game game(numPlayers, playerNames, &board);
 }
@@ -183,10 +192,10 @@ void newGame(){
                   " _  _  ____  _    _     ___    __    __  __  ____ \n"
                   "( \\( )( ___)( \\/\\/ )   / __)  /__\\  (  \\/  )( ___)\n"
                   " )  (  )__)  )    (   ( (_-. /(__)\\  )    (  )__) \n"
-                  "(_)\\_)(____)(__/\\__)   \\___/(__)(__)(_/\\/\\_)(____)", 1, 60, YBEGMENU);
+                  "(_)\\_)(____)(__/\\__)   \\___/(__)(__)(_/\\/\\_)(____)", 1, XBEGMENU-10, YBEGMENU);
 
     for (int i = 0; i < 3; ++i) {
-        showCascading(phrases[i], 2, 60,YBEGMENU + 7 + i);
+        showCascading(phrases[i], 2, XBEGMENU-10,YBEGMENU + 7 + i);
     }
 
     unsigned short int numPlayers;
@@ -194,7 +203,7 @@ void newGame(){
     while (1){
         std::cin >> numPlayers;   // If a string is give breaks program
         if (numPlayers < 2 || numPlayers > 4){
-            clearScreen(70,YBEGMENU + 9); //(7+i=2);
+            clearScreen(XBEGMENU,YBEGMENU + 9); //(7+i=2);
             std::cout << "Invalid, re-enter: ";
         }
         else{
@@ -205,7 +214,7 @@ void newGame(){
     std::vector<std::string> playerNames;
     std::string name;
     for (int k = 0; k < numPlayers; ++k) {
-        gotoxy(70, YBEGMENU + 10 + k);
+        gotoxy(XBEGMENU, YBEGMENU + 10 + k);
         std::cout << "Player " << k + 1 << "'s name: ";
         std::cin >> name;
         playerNames.push_back(name);
@@ -222,11 +231,11 @@ void newGame(){
             std::ifstream ff;
             ff.open(file);
             if (!ff.is_open()){
-                gotoxy(70, YBEGMENU + 12 + numPlayers);
+                gotoxy(XBEGMENU, YBEGMENU + 12 + numPlayers);
                 std::cerr << "File does not exist!";
-                gotoxy(70, YBEGMENU + 13 + numPlayers);
+                gotoxy(XBEGMENU, YBEGMENU + 13 + numPlayers);
                 waitForKey();
-                clearScreen(70, YBEGMENU + 11 + numPlayers);
+                clearScreen(XBEGMENU, YBEGMENU + 11 + numPlayers);
                 std::cout << "Re-enter: ";
             }
             else{
@@ -268,12 +277,12 @@ void showRules(){
                   " ____  __  __  __    ____  ___ \n"
                   "(  _ \\(  )(  )(  )  ( ___)/ __)\n"
                   " )   / )(__)(  )(__  )__) \\__ \\\n"
-                  "(_)\\_)(______)(____)(____)(___/", 1, 70, YBEGMENU);
+                  "(_)\\_)(______)(____)(____)(___/", 1, XBEGMENU, YBEGMENU);
 
     for (int i = 0; i < rules.size(); ++i) {
         showCascading(rules[i], 2, 60,YBEGMENU + 7 + 2*i);      // 2*i -> skipping lines
     }
-    gotoxy(70, YBEGMENU + 9 + 2*rules.size());          // Skipping lines
+    gotoxy(XBEGMENU, YBEGMENU + 9 + 2*rules.size());          // Skipping lines
     waitForKey();
 }
 
@@ -295,12 +304,12 @@ void showCredits(){
                   "  ___  ____  ____  ____  ____  ____  ___ \n"
                   " / __)(  _ \\( ___)(  _ \\(_  _)(_  _)/ __)\n"
                   "( (__  )   / )__)  )(_) )_)(_   )(  \\__ \\\n"
-                  " \\___)(_)\\_)(____)(____/(____) (__) (___/", 1, 63, YBEGMENU);
+                  " \\___)(_)\\_)(____)(____/(____) (__) (___/", 1, XBEGMENU - 7, YBEGMENU);
 
     for (int i = 0; i < credits.size(); ++i) {
-        showCascading(credits[i], 2, 50,YBEGMENU + 7 + i);
+        showCascading(credits[i], 2, XBEGMENU - 20,YBEGMENU + 7 + i);
     }
-    gotoxy(70, YBEGMENU + 9 + credits.size());
+    gotoxy(XBEGMENU, YBEGMENU + 9 + credits.size());
     waitForKey();
 }
 void showScores(){
@@ -312,12 +321,12 @@ void closeGame(){
                   " ____  _   _  ____    ____  _  _  ____  \n"
                   "(_  _)( )_( )( ___)  ( ___)( \\( )(  _ \\ \n"
                   "  )(   ) _ (  )__)    )__)  )  (  )(_) )\n"
-                  " (__) (_) (_)(____)  (____)(_)\\_)(____/ ", 1, 65, YBEGMENU);
-    showCascading("Thanks for playing!",10,75, YBEGMENU + 7);
+                  " (__) (_) (_)(____)  (____)(_)\\_)(____/ ", 1, XBEGMENU-5, YBEGMENU);
+    showCascading("Thanks for playing!",10,XBEGMENU+5, YBEGMENU + 7);
     Sleep(1000);
-    showCascading("We hope you enjoyed your stay...",10,70, YBEGMENU + 9);
+    showCascading("We hope you enjoyed your stay...",10,XBEGMENU, YBEGMENU + 9);
     Sleep(1000);
-    gotoxy(70, YBEGMENU + 11);
+    gotoxy(XBEGMENU, YBEGMENU + 11);
     waitForKey();
     exit(1);
 }
@@ -329,7 +338,7 @@ void showOptions() {
 		" __  __  ____  _  _  __  __ \n"
 		"(  \\/  )( ___)( \\( )(  )(  )\n"
 		" )    (  )__)  )  (  )(__)( \n"
-		"(_/\\/\\_)(____)(_)\\_)(______)", 1, 70, YBEGMENU);
+		"(_/\\/\\_)(____)(_)\\_)(______)", 1, XBEGMENU, YBEGMENU);
 
 	std::vector<std::string> options{
             "Play (p)",
@@ -342,10 +351,10 @@ void showOptions() {
 	};
 
 
-	showCascading("You have several commands:",1,71, YBEGMENU + 7);
+	showCascading("You have several commands:",1,XBEGMENU, YBEGMENU + 7);
 
     for (int i = 0; i < options.size(); ++i) {
-        showCascading(options[i], 1, 75,YBEGMENU + 8 + i);
+        showCascading(options[i], 1, XBEGMENU + 5,YBEGMENU + 8 + i);
     }
 
     std::string command;

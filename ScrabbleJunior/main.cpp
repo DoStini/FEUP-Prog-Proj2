@@ -1,4 +1,7 @@
 #pragma comment(lib, "winmm.lib")
+
+#define _WIN32_WINNT 0x0500
+
 #include <iostream>
 #include <vector>
 #include <time.h>
@@ -20,26 +23,18 @@ int main() {
     RECT r;
     GetWindowRect(console, &r); //stores the console's current dimensions
 
-    MoveWindow(console, r.left, r.top, 1400, 900, TRUE);
+    MoveWindow(console, r.left, r.top, 1400, 1100, TRUE);       // Setting window Size
+
+    SetWindowLong(console, GWL_STYLE, GetWindowLong(console, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);   // Making window unresizable
 
 
-    //vector<int> viktor = {1,2,4,4,3};
-    //cout << std::find(viktor.begin(), viktor.end(), 3) - viktor.begin();
-
-/*
-    srand(0);
-    Board board("board2.txt");
-    Game game(1, &board);
-    waitForKey();
-*/
 
 //	PlaySound("Sound/back.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
-    showTitle();
-	Sleep(45);
+    srand(time(NULL));
 
-	while (1){
+    showTitle();
+
+	while (1) {
         showOptions();
     }
-
-	return NO_ERROR;
  }

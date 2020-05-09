@@ -19,7 +19,12 @@ public:
     unsigned short int getScore();
     std::string getName();
     void setName(std::string name);
+    int getX();
+    int getY();
+    void setX(int val);
+    void setY(int val);
 private:
+    std::pair<int, int> pos;
     std::vector<char> tiles;
     unsigned short int score = 0;
     std::string name = "";

@@ -8,7 +8,7 @@ using std::stringstream;
 
 Board::Board() = default;
 
-Board::Board(string fileName){
+Board::Board(std::string fileName){
     readBoard(fileName);
     showBoard();
 }
@@ -21,7 +21,7 @@ Board::~Board() {
 }
 
 
-void Board::readBoard(string fileName) {
+void Board::readBoard(std::string fileName) {
     ifstream f_in;
     f_in.open(fileName);
 
@@ -32,7 +32,7 @@ void Board::readBoard(string fileName) {
 
     char sep;
     char position[2];
-    string word;
+    std::string word;
 
     f_in >> vSize >> sep >> hSize;
 
@@ -60,6 +60,7 @@ void Board::readBoard(string fileName) {
         }
         f_in.get();
     }
+    f_in.close();
 }
 
 Word *Board::findWord(unsigned short int index, unsigned short int charPos, bool vertical){
@@ -83,18 +84,26 @@ Word *Board::findWord(unsigned short int index, unsigned short int charPos, bool
 
 void Board::showBoard() {
 
-    std::cout << "  ";
+    unsigned short int center = XBEGMENU + 13;
+    this->start = center - (hSize * XSPACING) / 2;
+
+    clearScreen(start, YBEG);
+
+    for(int space = 0; space < XSPACING; space++) std::cout << ' ';
+
     for (unsigned short c = 0; c < hSize; c++) {
-        std::cout << (char)(c + 'a') << ' ';
+        std::cout << (char)(c + 'a');
+        for(int space = 0; space < XSPACING-1; space++) std::cout << ' ';
     }
-    std::cout << std::endl;
+
 
     for (int i = 0; i < vSize; ++i) {
-        std::cout << (char)(i + 'A') << " ";
+        gotoxy(start, YBEG + YSPACING *(i + 1));
+        std::cout << (char)(i + 'A');
         for (int j = 0; j < hSize; ++j) {
-            std::cout << letters[i][j] << ' ';
+            for(int space = 0; space < XSPACING-1; space++) std::cout << ' ';
+            std::cout << letters[i][j];
         }
-        std::cout << std::endl;
     }
 }
 
@@ -111,7 +120,7 @@ void Board::initArray() {
     }
 }
 
-void Board::writeOnArray(string word, bool vertical, unsigned short int vIdx, unsigned short int hIdx){
+void Board::writeOnArray(std::string word, bool vertical, unsigned short int vIdx, unsigned short int hIdx){
     for (int i = 0; i < word.length(); ++i) {
         letters[vIdx + i*vertical][hIdx + i*!vertical] = word[i];                         // If vertical, changes vIdx, otherwise changes hIdx
     }
@@ -119,11 +128,11 @@ void Board::writeOnArray(string word, bool vertical, unsigned short int vIdx, un
 
 void Board::initWordVectors() {
     for (int i = 0; i < vSize; ++i) {
-        vector<Word> vec = {};
+        std::vector<Word> vec = {};
         vWords.push_back(vec);
     }
     for (int j = 0; j < hSize; ++j) {
-        vector<Word> vec = {};
+        std::vector<Word> vec = {};
         hWords.push_back(vec);
     }
 }
@@ -162,4 +171,8 @@ bool Board::analyseMoves(Player &player){
         }
     }
     return false;
+}
+
+unsigned short int Board::getStart(){
+    return start;
 }

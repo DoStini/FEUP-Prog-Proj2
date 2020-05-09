@@ -22,12 +22,16 @@ public:
     void changeTile(Player &player);
     void checkWinner();
 
+    // Graphical stuff
+
+
 private:
-    vector<char> pot; // The bag of tiles
+    std::vector<char> pot; // The bag of tiles
+    std::vector<std::vector<int>> playerPositions;
     unsigned short int limit;
     unsigned short int numTiles = 0;
     unsigned short int numPlayers;
-    vector<Player> players;
+    std::vector<Player> players;
     Board *boardPtr;
 };
 

@@ -4,6 +4,15 @@
 #include <iostream>
 #include <windows.h>
 #include<string>
+#include "Player.h"
+
+
+#define YBEG 25
+#define XSPACING 2  // For calculations use this value
+#define YSPACING 1    // For showBoard use each - 1
+#define XBEGMENU 70
+#define YBEGMENU 13
+
 
 template <typename T>
 bool checkInput(T& input, char delimiter = '\n') {
@@ -63,3 +72,5 @@ void setColor(unsigned int color);
 void setColor(unsigned int color, unsigned int background_color);
 void gotoxy(int x, int y);
 void replaceVisualChar(int x, int y, char letter, unsigned int fgColor, unsigned int bgColor);
+void cleanLine(int x, int y, int nChar);
+void placePlayer(Player &player);

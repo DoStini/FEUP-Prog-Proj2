@@ -1,8 +1,6 @@
-5x5
-Aa H WORD
-Dc H HAT
-Aa V WEEK
-Ad V DREAM
+2x2
+Aa H WO
+Ba H PE
 ########
   a b c d e 
 A W O R D   

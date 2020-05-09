@@ -14,12 +14,11 @@
 #include "Game.h"
 #include "Board.h"
 
-#define YBEGMENU 13
+
 
 
 void showTitle();
 void showCascading(std::string s, time_t t, unsigned short int xStart, unsigned short int yStart);
 void showOptions();
-
-
+void startGame(unsigned short int numPlayers, std::vector<std::string> playerNames, std::string fileName);
 #endif //SCRABBLEJUNIOR_MENU_H

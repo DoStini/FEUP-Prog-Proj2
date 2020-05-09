@@ -1,15 +1,16 @@
 #include <iostream>
 #include "Game.h"
 
-const int XBEG = 2;
-const int YBEG = 1;
-const int XSPACING = 2;
-const int YSPACING = 1;
-
 
 Game::Game(unsigned short int numPlayers, std::vector<std::string> playerNames, Board *boardPtr){
     this -> numPlayers = numPlayers;
     this -> boardPtr = boardPtr;
+    playerPositions = {
+            {XBEGMENU, YBEG - 4},
+            {XBEGMENU, YBEG + 5 + boardPtr->getVSize() * YSPACING},
+            {boardPtr->getStart() - 40, YBEG + (boardPtr->getVSize() * YSPACING)/2},
+            {boardPtr->getStart() + boardPtr->getHSize() * XSPACING + 10, YBEG + (boardPtr->getVSize() * YSPACING)/2}
+    };
     initPot();
     limit = pot.size();
     initPlayers(numPlayers, playerNames);
@@ -80,7 +81,12 @@ void Game::initPlayers(unsigned short numPlayers, std::vector<std::string> playe
     for (int i = 0; i < numPlayers; ++i) {
         player = Player(pot, playerNames[i]);
         players.push_back(player);
+        players[i].setX(playerPositions[i][0]);
+        players[i].setY(playerPositions[i][1]);
+        placePlayer(players[i]);
     }
+
+
 }
 
 void Game::initPot() {
@@ -111,12 +117,12 @@ char Game::getRandomTile() {
 //}
 
 bool Game::inputMove(unsigned short int intPosition[2], Player &player){
-    clearScreen(0, YBEG + boardPtr->getVSize() + 2);
-    std::cout << player.getName() << "'s score: " << player.getScore() << std::endl << "This is your board: ";
-    player.showTiles();
-    std::cout << "Enter the position on the boardPtr in the format 'Aa': ";
+    clearScreen(XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 10);
+    std::cout << player.getName() << ", you're up!";
+    gotoxy(XBEGMENU-10, YBEG + boardPtr->getVSize() * YSPACING + 11);
+    std::cout << "Enter the position on the board in the format 'Aa': ";
 
-    string position;
+    std::string position;
     while(1){
         if (checkInput(position, '\n') && position.length() == 2) {
             if (position[0] >= 'A' && position[0] <= ('A' + boardPtr->getVSize() ) &&
@@ -124,8 +130,10 @@ bool Game::inputMove(unsigned short int intPosition[2], Player &player){
                 break;
             }
         }
-        printMessage("Your input was invalid.");
-        printMessage("Re-enter the position on the board in the format 'Aa': ");
+        clearScreen(XBEGMENU, YBEG + boardPtr->getVSize() * YSPACING + 11);
+        std::cout << "Your input was invalid.";
+        gotoxy(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 12);
+        std::cout << "Re-enter the position on the board in the format 'Aa': ";
     }
 
     intPosition[0] = position[0] - 'A';
@@ -133,7 +141,9 @@ bool Game::inputMove(unsigned short int intPosition[2], Player &player){
 
     short int playerTileIndex = player.checkTiles(boardPtr->getTile(intPosition));
     if (playerTileIndex == -1){
-        printMessage("You don't own that tile!");
+        clearScreen(XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 11);
+        std::cout << "You don't own that tile!";
+        gotoxy(XBEGMENU-15, YBEG + boardPtr->getVSize() * YSPACING + 12);
         waitForKey();
         return false;
     }
@@ -181,12 +191,16 @@ void Game::gotValidMove(Player &player, unsigned short int pos[2], char letter, 
 
     player.removeTile(letter);
 
-    replaceVisualChar((XBEG + XSPACING * pos[1]), (YBEG + YSPACING * pos[0]), letter, RED, BROWN);
+    replaceVisualChar(boardPtr->getStart() + XSPACING * (pos[1] + 1), YBEG + YSPACING * (pos[0] + 1), letter, RED, BROWN);
+
 
     if (pot.size() > 0) {
         char newTile = getRandomTile();
         player.addTile(newTile);
     }
+
+    placePlayer(player);
+
 }
 
 void Game::changeTile(Player &player){
@@ -207,4 +221,8 @@ void Game::changeTile(Player &player){
         }
     }
 }
+
+
+
+
 
