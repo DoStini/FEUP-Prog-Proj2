@@ -191,12 +191,21 @@ int main()
 
 	printMessage("Welcome to the Scrabble Junior Board Builder Tool.");
 	printMessage("Creating a Board is easy, don't worry. Just follow the instructions and answer all of the questions.");
+	printMessage("The minimum size of a board is 4x5 or 5x4.", GREEN, BLACK);
 	waitForKey();
 
 	while (true) {
 		clearScreen();
 
 		inputLimits(board);
+		while (!board.hasMinimumOfSquares()) {
+			printMessage("The mininum size of a board is 4x5 or 5x4, please re-enter the size of the board.", RED, BLACK);
+			waitForKey();
+
+			clearScreen();
+
+			inputLimits(board);
+		}
 
 		clearScreen();
 
@@ -215,14 +224,25 @@ int main()
 	
 	printMessage("You will now be asked to input the words into the board.");
 	printMessage("To stop input and save all changes into a file you can do the following:");
+	printMessage("A minimum of 14 letters is required to save the board.", GREEN, BLACK);
 	printMessage("If in Windows, at any point, press CTRL+Z.", GREEN, BLACK);
 	printMessage("If in Linux or Mac OS, at any point, press CTRL+D.", GREEN, BLACK);
 	waitForKey();
 
 	clearScreen();
-	
 	inputWords(board, words);
+	while (!board.hasMinimumOfLetters()) {
+		std::cin.clear();
+
+		ss.str(std::string());
+		ss << "The board does not have the required minimum of " << board.getMinLetters() << " letters.";
+		printMessage(ss.str(), RED, BLACK);
+		printMessage("Please continue building the board until the minimum is reached.", RED, BLACK);
+
+		inputWords(board, words);
+	}
 	std::cin.clear();
+
 
 	clearScreen();
 

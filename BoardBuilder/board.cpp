@@ -9,9 +9,11 @@
 #include <cassert>
 
 Board::Board() {
-	heightLimits = std::make_pair(2, 20);
-	widthLimits = std::make_pair(2, 20);
+	heightLimits = std::make_pair(4, 20);
+	widthLimits = std::make_pair(4, 20);
 	size = std::make_pair(0, 0);
+	minLetters = 14;
+	minSquares = 20;
 }
 
 Board::~Board() {
@@ -61,7 +63,7 @@ std::string Board::showBoard(bool color) {
 }
 
 bool Board::setHeight(unsigned short height) {
-	if (height > this->heightLimits.second || height < heightLimits.first) {
+	if (height > heightLimits.second || height < heightLimits.first) {
 		return false;
 	}
 
@@ -70,7 +72,7 @@ bool Board::setHeight(unsigned short height) {
 }
 
 bool Board::setWidth(unsigned short width) {
-	if (width > this->widthLimits.second || width < widthLimits.first) {
+	if (width > widthLimits.second || width < widthLimits.first) {
 		return false;
 	}
 
@@ -109,21 +111,34 @@ char** Board::copyLetters() {
 	return copy;
 }
 
+int Board::getNumberOfLetters() {
+	int sum = 0;
+
+	for (unsigned short l = 1; l < size.first + 1; l++) {
+		for (unsigned short c = 1; c < size.second + 1; c++) {
+			if (letters[l][c] != ' ') sum++;
+		}
+	}
+
+	return sum;
+}
+
+bool Board::hasMinimumOfLetters() {
+	return getNumberOfLetters() >= minLetters;
+}
+
+bool Board::hasMinimumOfSquares() {
+	return size.first * size.second >= minSquares;
+}
+
 bool Board::checkFit(Word word, unsigned short max) {
 	std::pair<unsigned short, unsigned short> location = word.getLocation();
 
 	return !(location.second >= max || location.first < 0);
 }
 
-WordsIterator Board::checkIntersections(Word word, Coordinate position, bool vertical) {
-	WordsIterator result;
-	std::string text = word.getText();
-	size_t textSize = text.size();
-	int lineStart, lineEnd;
-	int columnStart, columnEnd;
-	
+void Board::checkIntersections(Word word, Coordinate position, bool vertical, WordsIterator &result) {
 	std::vector<Word>* orientationWords = vertical ? &vWords[position.second] : &hWords[position.first];
-	position.first++; position.second++;
 	result.invalid = false;
 
 	for (result.iterator = (*orientationWords).begin(); result.iterator != (*orientationWords).end(); result.iterator++) {
@@ -131,14 +146,20 @@ WordsIterator Board::checkIntersections(Word word, Coordinate position, bool ver
 	}
 
 	if (result.iterator != (*orientationWords).end()) result.invalid = word.intersects(*result.iterator);
-	
-	if (result.invalid) return result;
+}
+
+void Board::checkEdges(Word word, Coordinate position, bool vertical, WordsIterator& result) {
+	std::string text = word.getText();
+	size_t textSize = text.size();
+	int lineStart, lineEnd;
+	int columnStart, columnEnd;
+	position.first++; position.second++;
 
 	if (letters[position.first - vertical][position.second - !vertical] != ' ' ||
-		letters[position.first + (vertical*textSize)][position.second + (!vertical * textSize)] != ' ') {
+		letters[position.first + (vertical * textSize)][position.second + (!vertical * textSize)] != ' ') {
 		result.invalid = true;
 
-		return result;
+		return;
 	}
 
 	for (int i = 0; i < textSize; i++) {
@@ -150,12 +171,21 @@ WordsIterator Board::checkIntersections(Word word, Coordinate position, bool ver
 			if (letters[position.first][position.second] != text[i]) {
 				result.invalid = true;
 
-				return result;
+				return;
 			}
 		}
 
 		position.first += vertical; position.second += !vertical;
 	}
+}
+
+WordsIterator Board::checkIfLegal(Word word, Coordinate position, bool vertical) {
+	WordsIterator result;
+
+	checkIntersections(word, position, vertical, result);
+	if (result.invalid) return result;
+	
+	checkEdges(word, position, vertical, result);
 
 	return result;
 }
@@ -197,7 +227,7 @@ bool Board::addWord(Word word, Coordinate position, bool vertical) {
 	}
 
 	if (checkFit(word, limit)) {
-		result = checkIntersections(word, position, vertical);
+		result = checkIfLegal(word, position, vertical);
 
 		if (!result.invalid) {
 			writeOnArray(word, vertical, location);
