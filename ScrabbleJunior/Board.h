@@ -11,7 +11,7 @@
 #include "Word.h"
 #include "IO.h"
 #include "Color.h"
-
+#include "Graphical.h"
 
 class Board {
 public:
@@ -29,9 +29,10 @@ public:
     unsigned short int getHSize();
     unsigned short int getVSize();
 
+
     bool analyseMoves(Player &player);
 
-    unsigned short int getStart();
+    unsigned short int getStart();          // Graphical function
 private:
     std::vector<std::vector<Word>> hWords;
     std::vector<std::vector<Word>> vWords;

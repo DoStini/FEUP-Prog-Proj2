@@ -170,6 +170,9 @@ void startGame(unsigned short int numPlayers, std::vector<std::string> playerNam
                   " \\___/(__)(__)(_/\\/\\_)(____)", 1, XBEGMENU, YBEGMENU);
 
     Board board(fileName);
+
+
+
     Game game(numPlayers, playerNames, &board);
 }
 
@@ -312,9 +315,8 @@ void showCredits(){
     gotoxy(XBEGMENU, YBEGMENU + 9 + credits.size());
     waitForKey();
 }
-void showScores(){
 
-}
+
 void closeGame(){
     clearScreen(0, YBEGMENU);
     showCascading("\n"
@@ -332,6 +334,48 @@ void closeGame(){
 }
 
 
+
+void showScores(){
+
+    clearScreen(0, YBEGMENU);
+
+    showCascading("\n"
+                  " ____  _____  ____    ___ \n"
+                  "(_  _)(  _  )(  _ \\  | __)\n"
+                  "  )(   )(_)(  )___/  |__ \\\n"
+                  " (__) (_____)(__)    (___/", 1, XBEGMENU + 10, YBEGMENU);
+
+
+    std::vector<Winner> bestPlayers = readScores("scoreboard.win");
+
+    if (bestPlayers[0].score != 0){
+        int idx;
+        gotoxy(XBEGMENU, YBEGMENU + 9);
+        gotoxy(XBEGMENU, YBEGMENU + 10);
+        std::cout << "Congratulations to the best players around here";
+        for (int i = 0; i < 5; ++i) {
+            if (bestPlayers[i].score == 0){
+                idx = i;
+                break;
+            }
+            gotoxy(XBEGMENU + 15, YBEGMENU + 11 + i);
+            std::cout << i + 1 << " - " << bestPlayers[i].name << " - " << bestPlayers[i].score;
+        }
+        gotoxy(XBEGMENU, YBEGMENU + 12 + idx);
+        waitForKey();
+    }
+    else{
+        gotoxy(XBEGMENU + 5, YBEGMENU + 9);
+        std::cout << "There is noone here yet. Go on and play!";
+        gotoxy(XBEGMENU + 5, YBEGMENU + 11);
+        waitForKey();
+    }
+}
+
+
+
+
+
 void showOptions() {
     clearScreen(0, YBEGMENU);
 	showCascading("\n"
@@ -343,7 +387,6 @@ void showOptions() {
 	std::vector<std::string> options{
             "Play (p)",
             "Rules (r)",
-            "Instructions (i)",
             "Credits (c)",
             "Scoreboard (s)",
             "Exit (e)",
@@ -368,6 +411,3 @@ void showOptions() {
     else if (command == "s" || command == "scoreboard")     showScores();
     else if (command == "e" || command == "exit")           closeGame();
 }
-
-
-

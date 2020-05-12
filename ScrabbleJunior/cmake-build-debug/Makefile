@@ -176,6 +176,33 @@ Game.cpp.s:
 	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/Game.cpp.s
 .PHONY : Game.cpp.s
 
+Graphical.obj: Graphical.cpp.obj
+
+.PHONY : Graphical.obj
+
+# target to build an object file
+Graphical.cpp.obj:
+	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.obj
+.PHONY : Graphical.cpp.obj
+
+Graphical.i: Graphical.cpp.i
+
+.PHONY : Graphical.i
+
+# target to preprocess a source file
+Graphical.cpp.i:
+	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.i
+.PHONY : Graphical.cpp.i
+
+Graphical.s: Graphical.cpp.s
+
+.PHONY : Graphical.s
+
+# target to generate assembly for a file
+Graphical.cpp.s:
+	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.s
+.PHONY : Graphical.cpp.s
+
 IO.obj: IO.cpp.obj
 
 .PHONY : IO.obj
@@ -311,6 +338,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+topScores.obj: topScores.cpp.obj
+
+.PHONY : topScores.obj
+
+# target to build an object file
+topScores.cpp.obj:
+	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj
+.PHONY : topScores.cpp.obj
+
+topScores.i: topScores.cpp.i
+
+.PHONY : topScores.i
+
+# target to preprocess a source file
+topScores.cpp.i:
+	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/topScores.cpp.i
+.PHONY : topScores.cpp.i
+
+topScores.s: topScores.cpp.s
+
+.PHONY : topScores.s
+
+# target to generate assembly for a file
+topScores.cpp.s:
+	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/topScores.cpp.s
+.PHONY : topScores.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -326,6 +380,9 @@ help:
 	@echo ... Game.obj
 	@echo ... Game.i
 	@echo ... Game.s
+	@echo ... Graphical.obj
+	@echo ... Graphical.i
+	@echo ... Graphical.s
 	@echo ... IO.obj
 	@echo ... IO.i
 	@echo ... IO.s
@@ -341,6 +398,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... topScores.obj
+	@echo ... topScores.i
+	@echo ... topScores.s
 .PHONY : help
 
 

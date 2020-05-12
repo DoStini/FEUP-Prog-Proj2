@@ -17,6 +17,8 @@ IO.h
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
 Color.h
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
+Graphical.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Graphical.h
 
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
 vector
@@ -37,6 +39,18 @@ Player.h
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
 Color.h
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
+topScores.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/topScores.h
+Graphical.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Graphical.h
+
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Graphical.h
+Player.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
+windows.h
+-
+Color.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
 
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
 iostream
@@ -51,22 +65,8 @@ string
 -
 Player.h
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
-
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.cpp
-Menu.h
-D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.h
-mmsystem.h
--
-iostream
--
-string
--
-sstream
--
-vector
--
-fstream
--
+Graphical.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Graphical.h
 
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.h
 windows.h
@@ -85,6 +85,8 @@ Game.h
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.h
 Board.h
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h
+topScores.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/topScores.h
 
 D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
 iostream
@@ -99,4 +101,40 @@ iostream
 -
 vector
 -
+
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/main.cpp
+iostream
+-
+vector
+-
+time.h
+-
+cstdlib
+-
+algorithm
+-
+windows.h
+-
+mmsystem.h
+-
+fstream
+-
+IO.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
+Color.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
+Game.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.h
+Menu.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.h
+topScores.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/topScores.h
+
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/topScores.h
+iostream
+-
+fstream
+-
+Player.h
+D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
 

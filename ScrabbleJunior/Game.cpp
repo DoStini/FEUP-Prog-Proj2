@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include "Game.h"
 
 
@@ -13,12 +14,19 @@ Game::Game(unsigned short int numPlayers, std::vector<std::string> playerNames, 
     };
     initPot();
     limit = pot.size();
-    initPlayers(numPlayers, playerNames);
-    std::cout << std::endl << std::endl;
 
-    gameManager();
-    checkWinner();
+    if (numPlayers * 7 > limit){
+        clearScreen(XBEGMENU - 15, YBEG - 4);
+        std::cout << "Number of players is excessive over number of tiles in the board.";
+        gotoxy(XBEGMENU, YBEG - 3);
+        waitForKey();
+    }
+    else{
+        initPlayers(numPlayers, playerNames);
 
+        gameManager();
+        checkWinner();
+    }
 }
 
 bool Game::gameManager() {
@@ -45,6 +53,7 @@ bool Game::gameManager() {
 }
 
 void Game::checkWinner(){
+
     std::sort(players.begin(), players.end(), [](Player p1, Player p2){ return p1.getScore() < p2.getScore();});
 
     short int max = players[0].getScore();
@@ -59,6 +68,9 @@ void Game::checkWinner(){
             break;
         }
     }
+
+    clearScreen(XBEGMENU - 20, YBEG - 4);
+
     if (!tie){
         std::cout << "The winner of the game is " << players[0].getName() << " with " << players[0].getScore() << " points!" << std::endl;
     }
@@ -72,8 +84,21 @@ void Game::checkWinner(){
         }
         std::cout << " with " << players[0].getScore() << " points!" << std::endl;
     }
+
+    std::vector<Winner> winners;
+    getNameScore(players, winners);
+
+    checkScores(winners, "scoreboard.win");
 }
 
+void Game::getNameScore(std::vector<Player> &players, std::vector<Winner> &out){
+    for (int i = 0; i < players.size(); ++i) {
+        Winner p;
+        std::strncpy(p.name, players[i].getName().c_str(), sizeof(p.name));
+        p.score = players[i].getScore();
+        out.push_back(p);
+    }
+}
 
 void Game::initPlayers(unsigned short numPlayers, std::vector<std::string> playerNames) {
     players.reserve(numPlayers);
