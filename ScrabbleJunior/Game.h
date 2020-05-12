@@ -20,7 +20,7 @@ public:
     bool playerMove(Player &player);
     void gotValidMove(Player &player, unsigned short int pos[2], char letter, Word *hWordPtr, Word *vWordPtr);
     bool gameManager();
-    void changeTile(Player &player);
+    bool changeTile(Player &player);
     void checkWinner();
     void getNameScore(std::vector<Player> &players, std::vector<Winner> &out);
     // Graphical stuff

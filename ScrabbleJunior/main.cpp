@@ -20,8 +20,8 @@
 using namespace std;
 
 
-int man(){
-    Winner p1; strncpy(p1.name, "Homailot", sizeof(p1.name)); p1.score = 35;
+int main2(){
+    Winner p1; strncpy(p1.name, "Homailot fraco", sizeof(p1.name)); p1.score = 35;
 
     vector<Winner> players = {p1};
     checkScores(players, "scoreboard.win");

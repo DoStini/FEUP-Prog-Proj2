@@ -204,8 +204,7 @@ void newGame(){
     unsigned short int numPlayers;
 
     while (1){
-        std::cin >> numPlayers;   // If a string is give breaks program
-        if (numPlayers < 2 || numPlayers > 4){
+        if (!checkInput(numPlayers) && (numPlayers < 2 || numPlayers > 4)){
             clearScreen(XBEGMENU,YBEGMENU + 9); //(7+i=2);
             std::cout << "Invalid, re-enter: ";
         }
@@ -349,19 +348,17 @@ void showScores(){
     std::vector<Winner> bestPlayers = readScores("scoreboard.win");
 
     if (bestPlayers[0].score != 0){
-        int idx;
         gotoxy(XBEGMENU, YBEGMENU + 9);
         gotoxy(XBEGMENU, YBEGMENU + 10);
         std::cout << "Congratulations to the best players around here";
         for (int i = 0; i < 5; ++i) {
             if (bestPlayers[i].score == 0){
-                idx = i;
                 break;
             }
-            gotoxy(XBEGMENU + 15, YBEGMENU + 11 + i);
+            gotoxy(XBEGMENU + 10, YBEGMENU + 11 + i);
             std::cout << i + 1 << " - " << bestPlayers[i].name << " - " << bestPlayers[i].score;
         }
-        gotoxy(XBEGMENU, YBEGMENU + 12 + idx);
+        gotoxy(XBEGMENU, YBEGMENU + 18);
         waitForKey();
     }
     else{

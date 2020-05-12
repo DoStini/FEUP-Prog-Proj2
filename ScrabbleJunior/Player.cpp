@@ -15,8 +15,8 @@ void Player::initTiles(std::vector<char> &pot){
 
     for (int i = 0; i < 7; ++i) {
         index = rand()%pot.size();
-        tiles.push_back(pot[i]);
-        pot.erase(pot.begin() + i);
+        tiles.push_back(pot[index]);
+        pot.erase(pot.begin() + index);
     }
 }
 
@@ -27,7 +27,7 @@ void Player::showTiles() {
 }
 
 short int Player::checkTiles(char letter){
-    std::vector<char>::iterator it = std::find(tiles.begin(), tiles.end(), letter);
+    auto it = std::find(tiles.begin(), tiles.end(), letter);
     bool temp = it != tiles.end();
     int temp2 = it - tiles.begin();
     return temp ? temp2 : -1;

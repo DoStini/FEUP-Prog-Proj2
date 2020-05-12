@@ -51,7 +51,7 @@ void writeScores(std::vector<Winner> &players, std::string fileName, bool firstT
 
 void checkScores(std::vector<Winner> &winners, std::string fileName){
     std::vector<Winner> bestPlayers = readScores(fileName);
-    short int index = bestPlayers.size() == 5 ? -1 : bestPlayers.size();
+    short int index = -1;
     for (int i = 0; i < bestPlayers.size(); ++i) {
         if (winners[0].score > bestPlayers[i].score){
             index = i;

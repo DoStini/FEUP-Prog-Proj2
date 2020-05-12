@@ -53,7 +53,8 @@ void Board::readBoard(std::string fileName) {
         writeOnArray(word, sep == 'V', verticalIdx, horizontalIdx);
         counter++;
         if (sep == 'V'){
-            vWords[horizontalIdx].push_back(Word(word, verticalIdx));
+            Word temp(word, verticalIdx);
+            vWords[horizontalIdx].push_back(temp);
         }
         else{
             hWords[verticalIdx].push_back(Word(word, horizontalIdx));
@@ -127,11 +128,11 @@ void Board::writeOnArray(std::string word, bool vertical, unsigned short int vId
 }
 
 void Board::initWordVectors() {
-    for (int i = 0; i < vSize; ++i) {
+    for (int i = 0; i < hSize; ++i) {
         std::vector<Word> vec = {};
         vWords.push_back(vec);
     }
-    for (int j = 0; j < hSize; ++j) {
+    for (int j = 0; j < vSize; ++j) {
         std::vector<Word> vec = {};
         hWords.push_back(vec);
     }
@@ -149,7 +150,7 @@ unsigned short int Board::getVSize(){
 }
 
 bool Board::analyseMoves(Player &player){
-    for (int i = 0; i < hSize; ++i) {
+    for (int i = 0; i < vSize; ++i) {
         for (int j = 0; j < hWords[i].size(); ++j) {
             Word cWord = hWords[i][j];
             short int idx = cWord.findPlayable();
@@ -160,7 +161,7 @@ bool Board::analyseMoves(Player &player){
         }
     }
 
-    for (int i = 0; i < vSize; ++i) {
+    for (int i = 0; i < hSize; ++i) {
         for (int j = 0; j < vWords[i].size(); ++j) {
             Word cWord = vWords[i][j];
             short int idx = cWord.findPlayable();
