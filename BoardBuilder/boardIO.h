@@ -2,6 +2,17 @@
 #include<iostream>
 #include<string>
 
+/**
+ * Function that prompts the user for input.
+ * Checks if input is valid, allows only input without spaces and in the correct type.
+ * Doesn't allow for the EOF character to be input, allowing for input to continue.
+ *
+ * @tparam T the type of data to be input
+ * @param[out] input The variable where the input is stored.
+ * @param[in] delimiter The last char must be at the end of the buffer
+ *
+ * @returns a boolean that indicates if a value was input successfully.
+ */
 template <typename T>
 bool checkInput(T& input, char delimiter = '\n') {
 	std::cin >> input;
@@ -25,6 +36,17 @@ bool checkInput(T& input, char delimiter = '\n') {
 	return true;
 }
 
+/**
+ * Function that prompts the user for input.
+ * Checks if input is valid, allows only input without spaces and in the correct type.
+ * Ignores the EOF character, allowing it to be input.
+ *
+ * @tparam T the type of data to be input
+ * @param[out] input The variable where the input is stored.
+ * @param[in] delimiter The last char must be at the end of the buffer
+ *
+ * @returns a boolean that indicates if a value was input successfully.
+ */
 template <typename T>
 bool checkInputOrSTOP(T& input, char delimiter = '\n') {
 	std::cin >> input;

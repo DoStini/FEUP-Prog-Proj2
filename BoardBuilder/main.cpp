@@ -12,6 +12,12 @@
 #include <sstream>
 #include <algorithm>
 
+/**
+ * Function used to ask the user to input the number of lines and columns in the board.
+ * Then, there is an attempt to store the values in the board, if this is not possible then it asks again.
+ *
+ * @param[in, out] board Current board state, passed as reference
+ */
 void inputLimits(Board& board) {
 	std::stringstream ss;
 	unsigned short input;
@@ -48,6 +54,15 @@ void inputLimits(Board& board) {
 	}
 }
 
+/**
+ * Function used to ask the user to input the number of lines and columns in the board.
+ * Then, there is an attempt to store the values in the board, if this is not possible then it asks again.
+ *
+ * @param limit Upper limit of the board (column or row from 'A' to 'Z') that a word can be placed on
+ * @param message Prompt message asked to the player
+ *
+ * @returns the in bounds location that the user inputed
+ */
 char inputLocation(char limit, std::string message) {
 	char location;
 
@@ -65,12 +80,23 @@ char inputLocation(char limit, std::string message) {
 	return location;
 }
 
+/**
+ * Function used to ask the user to input words into the board.
+ * Asks if the user wants to add or delete word.
+ * Then it asks for it's position and orientation.
+ * If the word is valid and is placed in a valid position, the words is added to/deleted from the board.
+ * Repeats this process until an EOF character is input.
+ *
+ * @param[in, out] board Current board state, passed as reference
+ * @param[in] words Vector of strings containing the valid words that can be input
+ */
 void inputWords(Board& board, const std::vector<std::string>& words) {
 	std::stringstream ss;
 	std::string deletePrompt, text;
 	std::pair<unsigned short, unsigned short> size = board.getSize();
 	char line, column, orientation, input;
 	short success;
+	bool vertical;
 
 	while (true) {
 		Word newWord;
@@ -132,8 +158,9 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 		}
 		orientation = toupper(orientation);
 		if (checkStop()) break;
+		vertical = orientation == 'V';
 
-		newWord.setLocation(std::make_pair(line - 'A', column - 'a'), orientation);
+		newWord.setLimits(std::make_pair(line - 'A', column - 'a'), vertical);
 
 		clearScreen();
 
@@ -146,39 +173,45 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 
 		Coordinate position = std::make_pair(line - 'A', column - 'a');
 
-		if (toupper(input) != 'N') {
+		if (toupper(input) == 'N') {
 			clearScreen();
-			if (input == EOF) break;
-
-			if (stringToUpper(deletePrompt) == "DELETE") {
-				success = board.deleteWord(newWord, position, orientation == 'V');
-			}
-			else {
-				success = board.addWord(newWord, position, orientation == 'V');
-			}
-
-			if (success == 1) {
-				printMessage("Success!");
-			}
-			else {
-				if (stringToUpper(deletePrompt) == "DELETE") {
-					if(success == 0) printMessage("Error! That word is not on the board.", RED, BLACK);
-					else {
-						printMessage("Error! Can't delete that word.", RED, BLACK);
-						printMessage("Deleting that word creates an illegal board disposition.", RED, BLACK);
-					}
-				}
-				else printMessage("Error! The word does not fit in the board or intersects with another word.", RED, BLACK);
-			}
-
-			waitForKey();
-			
+			continue;
 		}
 
+		clearScreen();
+		if (input == EOF) break;
+
+		if (stringToUpper(deletePrompt) == "DELETE") {
+			success = board.deleteWord(newWord, position, vertical);
+		}
+		else {
+			success = board.addWord(newWord, position, vertical);
+		}
+
+		if (success == 1) {
+			printMessage("Success!");
+		}
+		else {
+			if (stringToUpper(deletePrompt) == "DELETE") {
+				if(success == 0) printMessage("Error! That word is not on the board.", RED, BLACK);
+				else {
+					printMessage("Error! Can't delete that word.", RED, BLACK);
+					printMessage("Deleting that word creates an illegal board disposition.", RED, BLACK);
+				}
+			}
+			else printMessage("Error! The word does not fit in the board or intersects with another word.", RED, BLACK);
+		}
+
+		waitForKey();
+			
 		clearScreen();
 	}
 }
 
+/**
+ * Main function, asks the user to build a board.
+ * Afterwards, asks for a name used for a file where the board will be saved.
+ */
 int main()
 {
 	std::vector<std::string> words;

@@ -6,6 +6,13 @@ void getString(std::string &string) {
 	std::getline(std::cin, string);
 }
 
+/**
+ * Function that prompts the user for the input of a single char.
+ * Reads only the first char input to the buffer, all else is deleted from the buffer.
+ * Allows the EOF character.
+ *
+ * @param[out] delimiter The last char must be at the end of the buffer
+ */
 void getChar(char& input) {
 	input = getchar();
 	if(input != '\n' && input != EOF) std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');

@@ -26,6 +26,13 @@ Board::~Board() {
 	delete[] hWords;
 }
 
+/**
+ * Displays the Board object in the console output.
+ *
+ * @param color True for displaying with color codes, False for no color codes.
+ *
+ * @returns a string that can be output to the console, displaying the board.
+ */
 std::string Board::showBoard(bool color) {
 	std::stringstream output;
 
@@ -62,6 +69,13 @@ std::string Board::showBoard(bool color) {
 	return output.str();
 }
 
+/**
+ * Sets the height of the board if the value is in the limits defined.
+ *
+ * @param height Value of the height to be stored.
+ *
+ * @returns a boolean that indicates if the value was stored with success.
+ */
 bool Board::setHeight(unsigned short height) {
 	if (height > heightLimits.second || height < heightLimits.first) {
 		return false;
@@ -71,6 +85,14 @@ bool Board::setHeight(unsigned short height) {
 	return true;
 }
 
+
+/**
+ * Sets the width of the board if the value is in the limits defined.
+ *
+ * @param width Value of the width to be stored.
+ *
+ * @returns a boolean that indicates if the value was stored with success.
+ */
 bool Board::setWidth(unsigned short width) {
 	if (width > widthLimits.second || width < widthLimits.first) {
 		return false;
@@ -80,6 +102,12 @@ bool Board::setWidth(unsigned short width) {
 	return true;
 }
 
+
+/**
+ * Initializes the vWords and hWords arrays and the letters matrix if the height and width has been set.
+ *
+ * @returns a boolean that indicates if the board was able to be initialized.
+ */
 bool Board::initializeWords() {
 	if (size.first == 0 || size.second == 0) return false;
 
@@ -97,6 +125,11 @@ bool Board::initializeWords() {
 	return true;
 }
 
+/**
+ * Makes a copy of the letters matrix.
+ *
+ * @returns a copy of the letters matrix.
+ */
 char** Board::copyLetters() {
 	char** copy;
 
@@ -111,6 +144,11 @@ char** Board::copyLetters() {
 	return copy;
 }
 
+/**
+ * Gets the number of letters in the letters matrix.
+ *
+ * @returns the number of letters.
+ */
 int Board::getNumberOfLetters() {
 	int sum = 0;
 
@@ -123,45 +161,97 @@ int Board::getNumberOfLetters() {
 	return sum;
 }
 
+/**
+ * Checks if the board has the minimum number of letters defined.
+ *
+ * @returns a boolean that indicates if the board has the minimum of letters
+ */
 bool Board::hasMinimumOfLetters() {
 	return getNumberOfLetters() >= minLetters;
 }
 
+/**
+ * Checks if the board has the minimum number of squares defined.
+ *
+ * @returns a boolean that indicates if the board has the minimum of squares
+ */
 bool Board::hasMinimumOfSquares() {
 	return size.first * size.second >= minSquares;
 }
 
+/**
+ * Checks if a word can fit in the board.
+ * In other words, it checks if the word does not go out of the board's bounds.
+ *
+ * @param word Word object to add.
+ * @param max The board limit that the word can't break.
+ *		If the word is horizontal, this is the max column.
+ *		If the word is vertical, this is the max line.
+ *
+ * @returns a boolean that indicates if the words fits on the board.
+ */
 bool Board::checkFit(Word word, unsigned short max) {
-	std::pair<unsigned short, unsigned short> location = word.getLocation();
+	std::pair<unsigned short, unsigned short> limits = word.getLimits();
 
-	return !(location.second >= max || location.first < 0);
+	return !(limits.second >= max || limits.first < 0);
 }
 
-void Board::checkIntersections(Word word, Coordinate position, bool vertical, WordsIterator &result) {
-	std::vector<Word>* orientationWords = vertical ? &vWords[position.second] : &hWords[position.first];
+/**
+ * Checks if the word intersects other words on the same row for horizontal words, or on the same column for vertical words.
+ * Also gets an iterator of a vector in vWords or hWords where the word should be inserted so that all words are in order.
+ *
+ * @param word Word object to add.
+ * @param position Starting coordinates of the word.
+ * @param vertical Boolean indicating if the word is vertical.
+ *
+ * @returns a WordsIterator, with invalid True if the word intersects with another and iterator set to where the word should be inserted.
+ */
+WordsIterator Board::checkIntersections(Word word, Coordinate position, bool vertical) {
+	WordsIterator result;
+	// Orientation words stores the pointer to a vector in either vWords or hWords.
+	// position.second is the column of the word, position.first is the line of the word
+	std::vector<Word>* orientationWords = vertical ? &vWords[position.second] : &hWords[position.first]; 
 	result.invalid = false;
 
+	// We iterate through each word in orientation words and check if the word to be added to the board is after them.
+	// The loop breaks when we find a word that is after the word to be added.
+	// As such, result.iterator will always be such that allows the word to be inserted in order.
 	for (result.iterator = (*orientationWords).begin(); result.iterator != (*orientationWords).end(); result.iterator++) {
-		if (!word.isAfter(*result.iterator)) break;
+		if (!(word > (*result.iterator))) break;
 	}
 
 	if (result.iterator != (*orientationWords).end()) result.invalid = word.intersects(*result.iterator);
+
+	return result;
 }
 
-void Board::checkEdges(Word word, Coordinate position, bool vertical, WordsIterator& result) {
+/**
+ * Checks if the sides of the word touch other words.
+ * Also checks if the word intersects correctly with other words.
+ * This is, words can only correctly intersect if the letter where they intersect is equal.
+ *
+ * @param word Word object to add.
+ * @param position Starting coordinates of the word.
+ * @param vertical Boolean indicating if the word is vertical.
+ *
+ * @returns a bool that indicates if the word can be placed.
+ */
+bool Board::checkEdges(Word word, Coordinate position, bool vertical) {
 	std::string text = word.getText();
 	size_t textSize = text.size();
 	int lineStart, lineEnd;
 	int columnStart, columnEnd;
-	position.first++; position.second++;
+	position.first++; position.second++; ///< it is added one to the coordinates because the letter matrix has a border of empty letters
 
+	// Here is checked if the end sides of the word touch the sides of other words.
 	if (letters[position.first - vertical][position.second - !vertical] != ' ' ||
 		letters[position.first + (vertical * textSize)][position.second + (!vertical * textSize)] != ' ') {
-		result.invalid = true;
 
-		return;
+		return false;
 	}
 
+	// For each letter in the word we check if it's sides touch other words.
+	// If it touches another word, if the intersecting letter is different on both words then they intersect incorrectly, returning false.
 	for (int i = 0; i < textSize; i++) {
 		lineStart = position.first - !vertical, lineEnd = position.first + !vertical;
 		columnStart = position.second - vertical, columnEnd = position.second + vertical;
@@ -169,34 +259,57 @@ void Board::checkEdges(Word word, Coordinate position, bool vertical, WordsItera
 		if (letters[lineStart][columnStart] != ' ' ||
 			letters[lineEnd][columnEnd] != ' ') {
 			if (letters[position.first][position.second] != text[i]) {
-				result.invalid = true;
-
-				return;
+				return false;
 			}
 		}
 
 		position.first += vertical; position.second += !vertical;
 	}
+
+	return true;
 }
 
+/**
+ * Checks if the word can be placed in the board
+ *
+ * @param word Word object to add.
+ * @param position Starting coordinates of the word.
+ * @param vertical Boolean indicating if the word is vertical.
+ *
+ * @returns a WordsIterator, with invalid True if the word can't be placed and iterator set to where the word should be inserted.
+ */
 WordsIterator Board::checkIfLegal(Word word, Coordinate position, bool vertical) {
 	WordsIterator result;
+	unsigned short limit = vertical ? size.first : size.second;
 
-	checkIntersections(word, position, vertical, result);
+	result.invalid = !checkFit(word, limit);
+	if (result.invalid) return result;
+
+	result = checkIntersections(word, position, vertical);
 	if (result.invalid) return result;
 	
-	checkEdges(word, position, vertical, result);
+	result.invalid = !checkEdges(word, position, vertical);
 
 	return result;
 }
 
-void Board::writeOnArray(Word word, bool vertical, unsigned short position) {
-	unsigned short first = word.getLocation().first;
-	unsigned short line = first, col = position;
+
+/**
+ * Stores a word's letters in the letters matrix in the board.
+ *
+ * @param word Word object to add.
+ * @param vertical Boolean indicating if the word is vertical.
+ * @param location Row or column where the word is placed.
+ *		Is a column if the word is vertical
+ *		Is a row if the word is horizontal
+ */
+void Board::writeOnArray(Word word, bool vertical, unsigned short location) {
+	unsigned short first = word.getLimits().first;
+	unsigned short line = first, col = location;
 	std::string text = word.getText();
 
 	if(!vertical) {
-		line = position;
+		line = location;
 		col = first;
 	}
 	line++; col++;
@@ -209,12 +322,23 @@ void Board::writeOnArray(Word word, bool vertical, unsigned short position) {
 	}
 }
 
-
+/**
+ * Adds a word to the appropriate array (hWords or vWords) of the Board if it can be placed.
+ *
+ * @param word Word object to add.
+ * @param position Starting coordinates of the word.
+ * @param vertical Boolean indicating if the word is vertical.
+ *
+ * @returns a boolean, set to True if the word was placed successfully.
+ */
 bool Board::addWord(Word word, Coordinate position, bool vertical) {
 	WordsIterator result;
 	std::vector<Word>* words;
-	unsigned short limit, location;
+	unsigned short limit, location; 
 
+	// location is the row/column where the word may be placed.
+	// Is a column if the word is vertical
+	// Is a row if the word is horizontal
 	if (vertical) {
 		limit = size.first;
 		words = vWords;
@@ -226,27 +350,35 @@ bool Board::addWord(Word word, Coordinate position, bool vertical) {
 		location = position.first;
 	}
 
-	if (checkFit(word, limit)) {
-		result = checkIfLegal(word, position, vertical);
+	result = checkIfLegal(word, position, vertical);
 
-		if (!result.invalid) {
-			writeOnArray(word, vertical, location);
-			words[location].insert(result.iterator, word);
+	if (!result.invalid) {
+		writeOnArray(word, vertical, location);
+		words[location].insert(result.iterator, word);
 
-			return true;
-		}
+		return true;
 	}
 
 	return false;
 }
 
-void Board::deleteOnArray(Word word, bool vertical, unsigned short position) {
-	unsigned short first = word.getLocation().first;
-	unsigned short line = first, col = position;
+
+/**
+ * Replaces a word's letters in the letters matrix in the board with spaces.
+ *
+ * @param word Word object to delete.
+ * @param vertical Boolean indicating if the word is vertical.
+ * @param location Row or column where the word is placed.
+ *		Is a column if the word is vertical
+ *		Is a row if the word is horizontal
+ */
+void Board::deleteOnArray(Word word, bool vertical, unsigned short location) {
+	unsigned short first = word.getLimits().first;
+	unsigned short line = first, col = location;
 	std::string text = word.getText();
 
 	if (!vertical) {
-		line = position;
+		line = location;
 		col = first;
 	}
 	line++; col++;
@@ -259,6 +391,15 @@ void Board::deleteOnArray(Word word, bool vertical, unsigned short position) {
 	}
 }
 
+
+/**
+ * Rewrites all words in the letters matrix of the board, within a limit of rows/columns.
+ *
+ * @param vertical Boolean indicating if the words are vertical.
+ * @param limits Pair with the start and end limits where the words will be rewritten.
+ *		Is a Pair of columns if the words are vertical
+ *		Is a Pair of rows if the words are horizontal
+ */
 void Board::rewriteOnArray(bool vertical, std::pair<unsigned short, unsigned short> limits) {
 	std::vector<Word>* words = vWords;
 	unsigned short limit = size.second;
@@ -277,6 +418,15 @@ void Board::rewriteOnArray(bool vertical, std::pair<unsigned short, unsigned sho
 	}
 }
 
+/**
+ * Checks if a word is on the board.
+ *
+ * @param word Word object to add.
+ * @param position Starting coordinates of the word.
+ * @param vertical Boolean indicating if the word is vertical.
+ *
+ * @returns a WordsIterator, with invalid True if the word is not on the board and iterator set to where the word is.
+ */
 WordsIterator Board::checkWordOnBoard(Word word, Coordinate position, bool vertical) {
 	WordsIterator result;
 	std::string text = word.getText();
@@ -285,21 +435,33 @@ WordsIterator Board::checkWordOnBoard(Word word, Coordinate position, bool verti
 	std::vector<Word>* orientationWords = vertical ? &vWords[position.second] : &hWords[position.first];
 	result.invalid = false;
 
-	for (result.iterator = (*orientationWords).begin(); result.iterator != (*orientationWords).end(); result.iterator++) {
-		if (!word.isAfter(*result.iterator)) break;
-	}
+	// A binary search can be used because orientationWords is always ordered.
+	result.iterator = std::lower_bound((*orientationWords).begin(), (*orientationWords).end(), word);
 
-	result.invalid = result.iterator == orientationWords->end() || !(word == (*result.iterator));
+	result.invalid = result.iterator == orientationWords->end() || !(word == *(result.iterator));
 
 	return result;
 }
 
-bool Board::checkLegalDelete(std::pair<unsigned short, unsigned short> limits, unsigned position, bool vertical) {
+/**
+ * Checks if deleting a word makes an impossible board configuration.
+ *
+ * @param limits Start and end positions of the words.
+ *		Are columns if the word is horizontal
+ *		Are rows if the word is vertical
+ * @param location Row or column where the word is placed.
+ *		Is a column if the word is vertical
+ *		Is a row if the word is horizontal
+ * @param vertical Boolean indicating if the word is vertical.
+ *
+ * @returns a boolean indicating if the board configuration is possible.
+ */
+bool Board::checkLegalDelete(std::pair<unsigned short, unsigned short> limits, unsigned location, bool vertical) {
 	unsigned short first = limits.first;
-	unsigned short line = first, col = position;
+	unsigned short line = first, col = location;
 
 	if (!vertical) {
-		line = position;
+		line = location;
 		col = first;
 	}
 	line++; col++;
@@ -314,11 +476,23 @@ bool Board::checkLegalDelete(std::pair<unsigned short, unsigned short> limits, u
 	return true;
 }
 
+/**
+ * Deletes a word from the board if it is possible.
+ *
+ * @param word Word to be deleted
+ * @param position Starting position of the word to be deleted.
+ * @param vertical Boolean indicating if the word is vertical.
+ *
+ * @returns a success value indicating the result of this function
+ *		Is 1 if deletion was successfull
+ *		Is 0 if word is not on board
+ *		Is -1 if deleting the word makes an impossible board configuration
+ */
 short Board::deleteWord(Word word, Coordinate position, bool vertical) {
 	WordsIterator result;
 	std::vector<Word>* words;
 	unsigned short location;
-	std::pair<unsigned short, unsigned short> wordLocation = word.getLocation();
+	std::pair<unsigned short, unsigned short> wordLimits = word.getLimits();
 	char** letterCopy;
 
 	if (vertical) {
@@ -334,12 +508,12 @@ short Board::deleteWord(Word word, Coordinate position, bool vertical) {
 
 	if (result.invalid) return 0;
 
-	letterCopy = copyLetters();
+	letterCopy = copyLetters(); ///< copy the letters to save the current board state.
 
 	deleteOnArray(word, vertical, location);
-	rewriteOnArray(!vertical, wordLocation);
+	rewriteOnArray(!vertical, wordLimits);
 
-	if (checkLegalDelete(word.getLocation(), location, vertical)) {
+	if (checkLegalDelete(word.getLimits(), location, vertical)) {
 		words[location].erase(result.iterator);
 
 		return 1;
@@ -350,6 +524,11 @@ short Board::deleteWord(Word word, Coordinate position, bool vertical) {
 	return -1;
 }
 
+/**
+ * Saves the Board object to a text file.
+ *
+ * @param fileName Name of the file where the board will be saved.
+ */
 void Board::saveBoard(std::string fileName) {
 	std::stringstream path;
 	path.str(std::string());
@@ -362,13 +541,13 @@ void Board::saveBoard(std::string fileName) {
 
 	for (int i = 0; i < size.first; i++) {
 		for (it = hWords[i].begin(); it != hWords[i].end(); it++) {
-			saveFile << (char)(i + 'A') << (char)(it->getLocation().first + 'a') << " H " << it->getText() << std::endl;
+			saveFile << (char)(i + 'A') << (char)(it->getLimits().first + 'a') << " H " << it->getText() << std::endl;
 		}
 	}
 
 	for (int i = 0; i < size.second; i++) {
 		for (it = vWords[i].begin(); it != vWords[i].end(); it++) {
-			saveFile << (char)(it->getLocation().first + 'A') << (char)(i + 'a') << " V " << it->getText() << std::endl;
+			saveFile << (char)(it->getLimits().first + 'A') << (char)(i + 'a') << " V " << it->getText() << std::endl;
 		}
 	}
 

@@ -3,7 +3,11 @@
 #include <iostream>
 #include <fstream>
 
-
+/**
+ * Reads all the words from the WORDS.TXT file
+ *
+ * @param[out] words Vector where all the words will be stored.
+ */
 void readWords(std::vector<std::string> &words) {
 	std::ifstream f_in;
 
