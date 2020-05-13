@@ -16,8 +16,8 @@ CMakeFiles/ScrabbleJunior.dir/Game.cpp.obj: ../Game.h
 CMakeFiles/ScrabbleJunior.dir/Game.cpp.obj: ../Graphical.h
 CMakeFiles/ScrabbleJunior.dir/Game.cpp.obj: ../IO.h
 CMakeFiles/ScrabbleJunior.dir/Game.cpp.obj: ../Player.h
+CMakeFiles/ScrabbleJunior.dir/Game.cpp.obj: ../TopScores.h
 CMakeFiles/ScrabbleJunior.dir/Game.cpp.obj: ../Word.h
-CMakeFiles/ScrabbleJunior.dir/Game.cpp.obj: ../topScores.h
 
 CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.obj: ../Color.h
 CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.obj: ../Graphical.cpp
@@ -38,8 +38,8 @@ CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj: ../IO.h
 CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj: ../Menu.cpp
 CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj: ../Menu.h
 CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj: ../Player.h
+CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj: ../TopScores.h
 CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj: ../Word.h
-CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj: ../topScores.h
 
 CMakeFiles/ScrabbleJunior.dir/Player.cpp.obj: ../Player.cpp
 CMakeFiles/ScrabbleJunior.dir/Player.cpp.obj: ../Player.h
@@ -54,11 +54,11 @@ CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Graphical.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../IO.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Menu.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Player.h
+CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../TopScores.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../Word.h
 CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../main.cpp
-CMakeFiles/ScrabbleJunior.dir/main.cpp.obj: ../topScores.h
 
 CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj: ../Player.h
-CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj: ../topScores.cpp
-CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj: ../topScores.h
+CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj: ../TopScores.cpp
+CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj: ../TopScores.h
 

@@ -2,7 +2,7 @@
 // Created by morei on 5/12/2020.
 //
 
-#include "topScores.h"
+#include "TopScores.h"
 
 
 std::vector<Winner> readScores(std::string fileName){

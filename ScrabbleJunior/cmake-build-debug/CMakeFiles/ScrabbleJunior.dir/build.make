@@ -147,18 +147,18 @@ CMakeFiles/ScrabbleJunior.dir/Menu.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ScrabbleJunior.dir/Menu.cpp.s"
 	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Documents\Faculdade\PROG\FEUP-Prog-Proj2\ScrabbleJunior\Menu.cpp -o CMakeFiles\ScrabbleJunior.dir\Menu.cpp.s
 
-CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj: CMakeFiles/ScrabbleJunior.dir/flags.make
-CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj: ../topScores.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Documents\Faculdade\PROG\FEUP-Prog-Proj2\ScrabbleJunior\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\ScrabbleJunior.dir\topScores.cpp.obj -c D:\Documents\Faculdade\PROG\FEUP-Prog-Proj2\ScrabbleJunior\topScores.cpp
+CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.obj: CMakeFiles/ScrabbleJunior.dir/flags.make
+CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.obj: ../TopScores.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Documents\Faculdade\PROG\FEUP-Prog-Proj2\ScrabbleJunior\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.obj"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\ScrabbleJunior.dir\TopScores.cpp.obj -c D:\Documents\Faculdade\PROG\FEUP-Prog-Proj2\ScrabbleJunior\TopScores.cpp
 
-CMakeFiles/ScrabbleJunior.dir/topScores.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ScrabbleJunior.dir/topScores.cpp.i"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Documents\Faculdade\PROG\FEUP-Prog-Proj2\ScrabbleJunior\topScores.cpp > CMakeFiles\ScrabbleJunior.dir\topScores.cpp.i
+CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.i"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Documents\Faculdade\PROG\FEUP-Prog-Proj2\ScrabbleJunior\TopScores.cpp > CMakeFiles\ScrabbleJunior.dir\TopScores.cpp.i
 
-CMakeFiles/ScrabbleJunior.dir/topScores.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ScrabbleJunior.dir/topScores.cpp.s"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Documents\Faculdade\PROG\FEUP-Prog-Proj2\ScrabbleJunior\topScores.cpp -o CMakeFiles\ScrabbleJunior.dir\topScores.cpp.s
+CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.s"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Documents\Faculdade\PROG\FEUP-Prog-Proj2\ScrabbleJunior\TopScores.cpp -o CMakeFiles\ScrabbleJunior.dir\TopScores.cpp.s
 
 CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.obj: CMakeFiles/ScrabbleJunior.dir/flags.make
 CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.obj: ../Graphical.cpp
@@ -182,7 +182,7 @@ ScrabbleJunior_OBJECTS = \
 "CMakeFiles/ScrabbleJunior.dir/IO.cpp.obj" \
 "CMakeFiles/ScrabbleJunior.dir/Player.cpp.obj" \
 "CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj" \
-"CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj" \
+"CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.obj" \
 "CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.obj"
 
 # External object files for target ScrabbleJunior
@@ -195,7 +195,7 @@ ScrabbleJunior_EXTERNAL_OBJECTS =
 ../ScrabbleJunior.exe: CMakeFiles/ScrabbleJunior.dir/IO.cpp.obj
 ../ScrabbleJunior.exe: CMakeFiles/ScrabbleJunior.dir/Player.cpp.obj
 ../ScrabbleJunior.exe: CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj
-../ScrabbleJunior.exe: CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj
+../ScrabbleJunior.exe: CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.obj
 ../ScrabbleJunior.exe: CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.obj
 ../ScrabbleJunior.exe: CMakeFiles/ScrabbleJunior.dir/build.make
 ../ScrabbleJunior.exe: CMakeFiles/ScrabbleJunior.dir/linklibs.rsp

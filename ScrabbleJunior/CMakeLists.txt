@@ -11,7 +11,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 #        ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
 
-add_executable(ScrabbleJunior main.cpp Player.h Word.h Game.h Board.cpp Board.h Word.cpp Game.cpp Color.h IO.cpp IO.h Player.cpp Menu.cpp Menu.h topScores.cpp topScores.h Graphical.cpp Graphical.h)
+add_executable(ScrabbleJunior main.cpp Player.h Word.h Game.h Board.cpp Board.h Word.cpp Game.cpp Color.h IO.cpp IO.h Player.cpp Menu.cpp Menu.h TopScores.cpp TopScores.h Graphical.cpp Graphical.h)
 add_custom_command(TARGET ${PROJECT_NAME} PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/../Assets/ $<TARGET_FILE_DIR:${PROJECT_NAME}>)

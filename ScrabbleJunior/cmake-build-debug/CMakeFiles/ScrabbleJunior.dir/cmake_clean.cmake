@@ -8,9 +8,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/ScrabbleJunior.dir/IO.cpp.obj"
   "CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj"
   "CMakeFiles/ScrabbleJunior.dir/Player.cpp.obj"
+  "CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.obj"
   "CMakeFiles/ScrabbleJunior.dir/Word.cpp.obj"
   "CMakeFiles/ScrabbleJunior.dir/main.cpp.obj"
-  "CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj"
   "libScrabbleJunior.dll.a"
 )
 

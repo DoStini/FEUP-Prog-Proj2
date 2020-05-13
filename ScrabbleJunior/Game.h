@@ -7,7 +7,7 @@
 #include "Board.h"
 #include "Player.h"
 #include "Color.h"
-#include "topScores.h"
+#include "TopScores.h"
 #include "Graphical.h"
 
 class Game{
@@ -20,7 +20,7 @@ public:
     bool playerMove(Player &player);
     void gotValidMove(Player &player, unsigned short int pos[2], char letter, Word *hWordPtr, Word *vWordPtr);
     bool gameManager();
-    bool changeTile(Player &player);
+    void changeTile(Player &player);
     void checkWinner();
     void getNameScore(std::vector<Player> &players, std::vector<Winner> &out);
     // Graphical stuff

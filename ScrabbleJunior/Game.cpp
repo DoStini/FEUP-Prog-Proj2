@@ -30,15 +30,20 @@ Game::Game(unsigned short int numPlayers, std::vector<std::string> playerNames, 
 }
 
 bool Game::gameManager() {
-    while (1){                                          // If number of players exceed nuber of tiles
-        for (int i = 0; i < numPlayers; ++i) {
-            for (int j = 0; j < 2; ++j) {
+    /**
+     * This function is used to control the game flow
+     */
 
-                if (numTiles == limit) return true;
-                if (boardPtr->analyseMoves(players[i])){
+
+    while (1){
+        for (int i = 0; i < numPlayers; ++i) {
+            for (int j = 0; j < 2; ++j) {                           // Two turns per player
+
+                if (numTiles == limit) return true;                 // Reached the end of the game, every piece has been used
+                if (boardPtr->analyseMoves(players[i])){        // Checks if the player can play anything
                     bool valid = true;
                     while (valid){
-                        valid = !playerMove(players[i]);
+                        valid = !playerMove(players[i]);        // Loop until a valid move has been given
                     }
                 }
                 else{
@@ -52,18 +57,22 @@ bool Game::gameManager() {
 
 void Game::checkWinner(){
 
-    std::sort(players.begin(), players.end(), [](Player p1, Player p2){ return p1.getScore() > p2.getScore();});
+    /**
+     * Function to check who is(are) the winner(s), after the game ends
+     */
 
-    short int max = players[0].getScore();
+    std::sort(players.begin(), players.end(), [](Player p1, Player p2){ return p1.getScore() > p2.getScore();});
+                                                                    // Sorting by score
+    short int max = players[0].getScore();                          // First element will be the best player
     bool tie = false;
 
-    for (int i = 1; i < players.size(); ++i) {
+    for (int i = 1; i < players.size(); ++i) {                      // Loop until you find someone with a lower score
         if (players[i].getScore() == max){
             tie = true;
         }
         else{
-            players.resize((i+1) * sizeof(Player)); // deleting
-            break;
+        players.resize(i+1);                                // Deleting the loser players
+            break;                                                   // New vector will contain only the winner(s)
         }
     }
 
@@ -87,12 +96,20 @@ void Game::checkWinner(){
     waitForKey();
 
     std::vector<Winner> winners;
-    getNameScore(players, winners);
+    getNameScore(players, winners);                         // Converting class player to struct of name and score
 
-    checkScores(winners, "scoreboard.win");
+    checkScores(winners, "scoreboard.win");           // Check if the winner enters the scoreboard
 }
 
 void Game::getNameScore(std::vector<Player> &players, std::vector<Winner> &out){
+
+    /**
+     * Function to convert player objects in structs of name and score
+     *
+     * @param players - the vector containg a(the) player object(s)
+     * @param out - the vector containing clean Winner struct(s) that will receive player.name and player.score
+     */
+
     for (int i = 0; i < players.size(); ++i) {
         Winner p;
         std::strncpy(p.name, players[i].getName().c_str(), sizeof(p.name));
@@ -101,23 +118,38 @@ void Game::getNameScore(std::vector<Player> &players, std::vector<Winner> &out){
     }
 }
 
+
 void Game::initPlayers(unsigned short numPlayers, std::vector<std::string> playerNames) {
+
+    /**
+     * Function to initialize players objects
+     *
+     * @param numPlayers - The number of players
+     * @param playerNames - Vector containing player names
+     */
+
     players.reserve(numPlayers);
     Player player;
     for (int i = 0; i < numPlayers; ++i) {
         player = Player(pot, playerNames[i]);
         players.push_back(player);
-        players[i].setX(playerPositions[i][0]);
+        players[i].setX(playerPositions[i][0]);             // Setting graphical x and y positions on the screen
         players[i].setY(playerPositions[i][1]);
-        placePlayer(players[i]);
+        placePlayer(players[i]);                             // Placing player in the screen
     }
 
 
 }
 
 void Game::initPot() {
+
+    /**
+     * Function to add all the tiles necessary to the game pot
+     * Takes every character from the pre-made board Array and adds to a pot vector
+     */
+
     char temp;
-    int temp2;
+
     unsigned short int pos[2];
     for (int i = 0; i < boardPtr->getVSize(); ++i) {
         pos[0] = i;
@@ -132,32 +164,49 @@ void Game::initPot() {
 }
 
 char Game::getRandomTile() {
+
+    /**
+     * Function to retrieve a random tile (letter) from the game pot
+     *
+     * @return char - The tile chosen randomly
+     */
+
     unsigned short int index = rand()%pot.size();
     char tile = pot[index];
     pot.erase(pot.begin() + index);
     return tile;
 }
 
-//void Game::inputMove(int &intPosition){
 
-//}
 
 bool Game::inputMove(unsigned short int intPosition[2], Player &player){
+
+    /**
+     * Function to read a position from the player
+     *
+     * @param intPosition - The position chosen by the player. Will be return through this
+     * @param player - Current player
+     */
+
+
     clearScreen(XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 10);
     std::cout << player.getName() << ", you're up!";
+
     gotoxy(XBEGMENU-10, YBEG + boardPtr->getVSize() * YSPACING + 11);
     std::cout << "Enter the position on the board in the format 'Aa': ";
 
     std::string position;
     while(1){
-        if (checkInput(position, '\n') && position.length() == 2) {
-            if (position[0] >= 'A' && position[0] <= ('A' + boardPtr->getVSize() ) &&
+        if (checkInput(position, '\n') && position.length() == 2) {                 // Checking if string given contains only 2 letters Aa
+            if (position[0] >= 'A' && position[0] <= ('A' + boardPtr->getVSize() ) &&            // Checks if is inside the board limits ('A' = 0, 'A' + vSize = maxIndex)
                 position[1] >= 'a' && position[1] <= ('a' + boardPtr->getHSize())) {
                 break;
             }
         }
+
         clearScreen(XBEGMENU, YBEG + boardPtr->getVSize() * YSPACING + 12);
         std::cout << "Your input was invalid.";
+
         gotoxy(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 13);
         std::cout << "Re-enter the position on the board in the format 'Aa': ";
     }
@@ -165,10 +214,11 @@ bool Game::inputMove(unsigned short int intPosition[2], Player &player){
     intPosition[0] = position[0] - 'A';
     intPosition[1] = position[1] - 'a';
 
-    short int playerTileIndex = player.checkTiles(boardPtr->getTile(intPosition));
+    short int playerTileIndex = player.checkTiles(boardPtr->getTile(intPosition));        // Checking if player contains chosen tile
     if (playerTileIndex == -1){
         clearScreen(XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 12);
         std::cout << "You don't own that tile!";
+
         gotoxy(XBEGMENU-15, YBEG + boardPtr->getVSize() * YSPACING + 13);
         waitForKey();
         return false;
@@ -178,19 +228,28 @@ bool Game::inputMove(unsigned short int intPosition[2], Player &player){
     }
 }
 
-bool Game::playerMove(Player &player) {                     // Maybe change later to short int (we have array of players)
+bool Game::playerMove(Player &player) {
+
+    /**
+     * Function to control a player move
+     *
+     * @param player - the current player
+     * @return if a valid move was made
+     */
+
     unsigned short int pos[2];
     if (!inputMove(pos, player)){
         return false;
     }
     else{
-        Word *hWordPtr = boardPtr->findWord(pos[0], pos[1], false);
-        Word *vWordPtr = boardPtr->findWord(pos[1], pos[0], true);
-
+        Word *hWordPtr = boardPtr->findWord(pos[0], pos[1], false);         // Finds horizontal word in that position
+        Word *vWordPtr = boardPtr->findWord(pos[1], pos[0], true);          // Finds vertical word in that position
 
         bool valid = false;
 
         valid = (hWordPtr != NULL && hWordPtr->validMove(pos[1])) || (vWordPtr != NULL && vWordPtr->validMove(pos[0]));
+
+        // Evaluates if in one of the horizontal/vertical word the tile chosen by the player represents a valid move
 
         if (valid){
             gotValidMove(player, pos, boardPtr->getTile(pos), hWordPtr, vWordPtr);
@@ -198,6 +257,7 @@ bool Game::playerMove(Player &player) {                     // Maybe change late
         else{
             clearScreen(XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 12);
             std::cout << "That move is illegal!";
+
             gotoxy(XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 13);
             waitForKey();
             return false;
@@ -207,20 +267,20 @@ bool Game::playerMove(Player &player) {                     // Maybe change late
 }
 
 void Game::gotValidMove(Player &player, unsigned short int pos[2], char letter, Word *hWordPtr, Word *vWordPtr){
-    numTiles++;
-    if(hWordPtr != NULL){
+    numTiles++;                                                         // Counter to find the end of the game, used in gameManager
+    if(hWordPtr != NULL){                                               // Counts the number of tiles played
         hWordPtr->coverLetter(pos[1]);
         player.addPoints(hWordPtr->completedWord());
     }
     if(vWordPtr != NULL){
-        vWordPtr->coverLetter(pos[0]);
-        player.addPoints(vWordPtr->completedWord());
-    }
+        vWordPtr->coverLetter(pos[0]);                             // Covers the letter in the vertical/horizontal word
+        player.addPoints(vWordPtr->completedWord());                    // Checks if the vertical/horizontal word has been completed
+    }                                                                   // Using once again true and false as 1/0 to add to the score
 
-    player.removeTile(letter);
+    player.removeTile(letter);                                          // Removing letter from the player's pot
 
-    replaceVisualChar(boardPtr->getStart() + XSPACING * (pos[1] + 1), YBEG + YSPACING * (pos[0] + 1), letter, RED, BROWN);
-
+    replaceVisualChar(boardPtr->getStart() + XSPACING * (pos[1] + 1), YBEG + YSPACING * (pos[0] + 1), letter, ConsoleColors::RedFore, ConsoleColors::SilverBack);
+    // Changing color of the tile chosen
 
     if (pot.size() > 0) {
         char newTile = getRandomTile();
@@ -230,42 +290,47 @@ void Game::gotValidMove(Player &player, unsigned short int pos[2], char letter, 
     placePlayer(player);
 }
 
-bool Game::changeTile(Player &player){
+void Game::changeTile(Player &player){
+
+    /**
+     * When a player has no available moves, this is called to make the player choose a tile to trade for a random one out of the game's pot
+     *
+     * @param player - The current player
+     */
 
     clearScreen(XBEGMENU, YBEG + boardPtr->getVSize() * YSPACING + 12);
     std::cout << "You have no moves left...";
 
-    if (pot.size() == 0){
+    if (pot.size() == 0){                                              // If the pot is clean, no trade can be done
         gotoxy(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 13);
         std::cout << "Skipping player";
+
         gotoxy(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 13);
         waitForKey();
-        return false;
     }
+    else{
+        gotoxy(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 13);
+        std::cout << "Choose one of your tiles to trade: ";
+        player.showTiles();
 
+        while (1){
+            char in;
+            std::cin >> in;
+            if (player.checkTiles(toupper(in)) != -1){              // Checks if the given tile is in the player's possession
+                player.removeTile(toupper(in));                     // Removes tile from the player's deck
+                player.addTile(getRandomTile());              // Adds a new random tile
+                pot.push_back(in);                                  // Returns the player's tile to the game's pot
+                waitForKey();
+                placePlayer(player);                            // Update player's information
 
-    gotoxy(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 13);
-    std::cout << "Choose one of your tiles to trade: ";
-    player.showTiles();
-
-    while (1){
-        char in;
-        std::cin >> in;
-        if (player.checkTiles(toupper(in)) != -1){
-            player.removeTile(toupper(in));
-            player.addTile(getRandomTile());
-            pot.push_back(in);
-            waitForKey();
-            placePlayer(player);
-
-            break;
-        }
-        else{
-            gotoxy(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 14);
-            std::cout << "You don't have that tile, re-enter.";
+                break;
+            }
+            else{
+                gotoxy(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 14);
+                std::cout << "You don't have that tile, re-enter.";
+            }
         }
     }
-    return true;
 }
 
 

@@ -119,6 +119,12 @@
 		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
+		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/TopScores.cpp">
+			<Option target="ScrabbleJunior"/>
+		</Unit>
+		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/TopScores.h">
+			<Option target="ScrabbleJunior"/>
+		</Unit>
 		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.cpp">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
@@ -126,12 +132,6 @@
 			<Option target="ScrabbleJunior"/>
 		</Unit>
 		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/main.cpp">
-			<Option target="ScrabbleJunior"/>
-		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/topScores.cpp">
-			<Option target="ScrabbleJunior"/>
-		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/topScores.h">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
 		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/CMakeLists.txt">

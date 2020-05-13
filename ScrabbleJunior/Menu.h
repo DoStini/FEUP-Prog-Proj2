@@ -13,7 +13,7 @@
 #include "Player.h"
 #include "Game.h"
 #include "Board.h"
-#include "topScores.h"
+#include "TopScores.h"
 
 
 

@@ -17,8 +17,8 @@ CMakeFiles/ScrabbleJunior.dir/Game.cpp.obj
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Graphical.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
+ D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/TopScores.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
- D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/topScores.h
 CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.obj
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Graphical.cpp
@@ -39,8 +39,8 @@ CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.cpp
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
+ D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/TopScores.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
- D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/topScores.h
 CMakeFiles/ScrabbleJunior.dir/Player.cpp.obj
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.cpp
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
@@ -55,10 +55,10 @@ CMakeFiles/ScrabbleJunior.dir/main.cpp.obj
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
+ D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/TopScores.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/main.cpp
- D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/topScores.h
 CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj
  D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h
- D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/topScores.cpp
- D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/topScores.h
+ D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/TopScores.cpp
+ D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/TopScores.h

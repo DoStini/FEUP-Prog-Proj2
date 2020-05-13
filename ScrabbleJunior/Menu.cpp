@@ -205,7 +205,7 @@ void newGame(){
 
     while (1){
         if (!checkInput(numPlayers) && (numPlayers < 2 || numPlayers > 4)){
-            clearScreen(XBEGMENU,YBEGMENU + 9); //(7+i=2);
+            clearScreen(XBEGMENU,YBEGMENU + 9);
             std::cout << "Invalid, re-enter: ";
         }
         else{

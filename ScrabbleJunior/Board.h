@@ -32,7 +32,7 @@ public:
 
     bool analyseMoves(Player &player);
 
-    unsigned short int getStart();          // Graphical function
+    unsigned short int getStart();          // Graphical function«
 private:
     std::vector<std::vector<Word>> hWords;
     std::vector<std::vector<Word>> vWords;

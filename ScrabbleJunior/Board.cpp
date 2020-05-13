@@ -22,6 +22,13 @@ Board::~Board() {
 
 
 void Board::readBoard(std::string fileName) {
+
+    /**
+    * Function to read the board
+    *
+    * @param fileName - Name of file to be read.
+    */
+
     ifstream f_in;
     f_in.open(fileName);
 
@@ -39,18 +46,17 @@ void Board::readBoard(std::string fileName) {
     unsigned short int verticalIdx;
     unsigned short int horizontalIdx;
 
-    initArray();
-    initWordVectors();
+    initArray();                                            // Initializing our board, containing all letters
+    initWordVectors();                                      // Initializing our words containers
+
     int counter = 0;
     while (f_in.peek() != '#'){
-        f_in >> position >> sep >> word;
+        f_in >> position >> sep >> word;                    // Input is given as "Aa"
 
+        verticalIdx = (int) position[0] - (int) 'A';        // vertical index will be A converted to integer, counting 0 as char A
+        horizontalIdx = (int) position[1] - (int) 'a';      // same for horizontal index but with "a"
 
-
-        verticalIdx = (int) position[0] - (int) 'A';
-        horizontalIdx = (int) position[1] - (int) 'a';
-
-        writeOnArray(word, sep == 'V', verticalIdx, horizontalIdx);
+        writeOnArray(word, sep == 'V', verticalIdx, horizontalIdx);         // Writing word on graphical board
         counter++;
         if (sep == 'V'){
             Word temp(word, verticalIdx);
@@ -64,7 +70,34 @@ void Board::readBoard(std::string fileName) {
     f_in.close();
 }
 
+
+    /**
+    * Comment relating to hWords and vWords
+    *
+    * It is a vector (1) of vectors (2) of words (3).
+    *
+    * Each vector (1) contains N vectors (2), N representing the number of columns/rows.
+    * Each vector (2) contains N words, N representing the number of words in that specific column/row.
+    * This way, we can quickly access/find a specified word give a position [v, h]
+    *                               v -> Identifies row / position in column
+    *                              h -> Identifies position in row / column
+    *                Depending on the orientation of the word we're looking for (horizontally / vertically)
+    *
+    * Each word (3) contains valuable information about valid moves.
+    */
+
+
 Word *Board::findWord(unsigned short int index, unsigned short int charPos, bool vertical){
+
+    /**
+    * Function to check and return if a chosen position is within any word
+    *
+    * @param index - The column/row where the word might be located
+    * @param charPos - The position given: related to the position of the character inside index's column/row
+    *
+    * @return Word * - Returns the pointer to the word if found. Otherwise returns a Null pointer
+    */
+
     if (vertical){
         for (int i = 0; i < vWords[index].size(); ++i) {
             if (vWords[index][i].inWord(charPos)){
@@ -84,6 +117,10 @@ Word *Board::findWord(unsigned short int index, unsigned short int charPos, bool
 }
 
 void Board::showBoard() {
+
+    /**
+    * Function to show the board
+    */
 
     unsigned short int center = XBEGMENU + 13;
     this->start = center - (hSize * XSPACING) / 2;
@@ -109,9 +146,12 @@ void Board::showBoard() {
 }
 
 void Board::initArray() {
+
+    /**
+    * Function to initialize our graphical board array
+    */
+
     letters = (char **) malloc(vSize * sizeof(char *));
-
-
 
     for (int v = 0; v < vSize; ++v) {
         letters[v] = (char *) malloc(hSize * sizeof(char));
@@ -122,12 +162,28 @@ void Board::initArray() {
 }
 
 void Board::writeOnArray(std::string word, bool vertical, unsigned short int vIdx, unsigned short int hIdx){
+
+    /**
+    * Function to write a character on graphical board
+    *
+    * @param word - The word to be written on the board
+    * @param vertical - If the word is going to be written vertically or horizontally
+    * @param vIdx - Position to begin writing
+    * @param hIdx - Position to begin writing
+    */
+
     for (int i = 0; i < word.length(); ++i) {
         letters[vIdx + i*vertical][hIdx + i*!vertical] = word[i];                         // If vertical, changes vIdx, otherwise changes hIdx
+                                                                                          // Using boolean as 0 and 1 integers
     }
 }
 
 void Board::initWordVectors() {
+
+    /**
+   * Function to initialize both hWords and vWords with a prefixed size to avoid segmentation errors
+   */
+
     for (int i = 0; i < hSize; ++i) {
         std::vector<Word> vec = {};
         vWords.push_back(vec);
@@ -139,24 +195,52 @@ void Board::initWordVectors() {
 }
 
 char Board::getTile(unsigned short int pos[2]) {
+
+    /**
+   * Function to get a character from the board
+   *
+   * @param word - The word to be written on the board
+   * @return char - The letter of that position
+   */
+
     return letters[pos[0]][pos[1]];
 }
 
 unsigned short int Board::getHSize(){
+
+    /**
+     * @return hSize - Horizontal Size
+     */
+
     return hSize;
 }
 unsigned short int Board::getVSize(){
+
+    /**
+    * @return vSize - Vertical Size
+     */
+
     return vSize;
 }
 
 bool Board::analyseMoves(Player &player){
+
+    /**
+    * A function to analyse if there are any moves available to be played.
+    * Checks every possible word, finds a valid letter to be played and checks if player has it.
+    * Stops iteration as soon as he finds a valid move
+    *
+    * @param player - The player being evaluated
+    * @return bool - The existence of a valid move
+    */
+
     for (int i = 0; i < vSize; ++i) {
         for (int j = 0; j < hWords[i].size(); ++j) {
             Word cWord = hWords[i][j];
-            short int idx = cWord.findPlayable();
+            short int idx = cWord.findPlayable();                   // Returns -1 if there's no possible move in that word
 
             if (idx != -1 && player.checkTiles(cWord.getLetter(idx)) != -1){
-                return true;
+                return true;                                        // Checks if the given valid letter is in player's deck
             }
         }
     }
@@ -175,5 +259,11 @@ bool Board::analyseMoves(Player &player){
 }
 
 unsigned short int Board::getStart(){
+
+    /**
+    * @return start - Graphical variable indicating the initial horizontal position of the board.
+    * Used to center text with board.
+    */
+
     return start;
 }

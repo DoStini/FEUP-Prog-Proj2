@@ -11,6 +11,7 @@
 
 void gotoxy(int x, int y);
 void replaceVisualChar(int x, int y, char letter, unsigned int fgColor, unsigned int bgColor);
+void clearScreen(short xPos = 0, short yPos = 0);
 void cleanLine(int x, int y, int nChar);
 void placePlayer(Player &player);
 void setColor(unsigned int color);

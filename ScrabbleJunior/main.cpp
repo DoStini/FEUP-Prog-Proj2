@@ -15,7 +15,7 @@
 #include "Color.h"
 #include "Game.h"
 #include "Menu.h"
-#include "topScores.h"
+#include "TopScores.h"
 
 using namespace std;
 

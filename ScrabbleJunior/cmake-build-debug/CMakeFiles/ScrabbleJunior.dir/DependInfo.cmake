@@ -10,9 +10,9 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.cpp" "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/CMakeFiles/ScrabbleJunior.dir/IO.cpp.obj"
   "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.cpp" "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/CMakeFiles/ScrabbleJunior.dir/Menu.cpp.obj"
   "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.cpp" "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/CMakeFiles/ScrabbleJunior.dir/Player.cpp.obj"
+  "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/TopScores.cpp" "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.obj"
   "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.cpp" "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/CMakeFiles/ScrabbleJunior.dir/Word.cpp.obj"
   "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/main.cpp" "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/CMakeFiles/ScrabbleJunior.dir/main.cpp.obj"
-  "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/topScores.cpp" "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

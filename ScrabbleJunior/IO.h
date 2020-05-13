@@ -59,12 +59,7 @@ bool checkInputOrSTOP(T& input, char delimiter = '\n') {
     return true;
 }
 
-void getString(std::string& string);
-void getChar(char& input);
-void printMessage(std::string message, std::string end = "\n");
-void printMessage(std::string message, int bgColor, int fgColor, std::string end = "\n");
-bool checkStop();
-void clearScreen(short xPos, short yPos);
+
 void waitForKey();
 std::string stringToLower(std::string str);
 std::string stringToUpper(std::string str);

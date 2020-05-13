@@ -284,6 +284,33 @@ Player.cpp.s:
 	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/Player.cpp.s
 .PHONY : Player.cpp.s
 
+TopScores.obj: TopScores.cpp.obj
+
+.PHONY : TopScores.obj
+
+# target to build an object file
+TopScores.cpp.obj:
+	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.obj
+.PHONY : TopScores.cpp.obj
+
+TopScores.i: TopScores.cpp.i
+
+.PHONY : TopScores.i
+
+# target to preprocess a source file
+TopScores.cpp.i:
+	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.i
+.PHONY : TopScores.cpp.i
+
+TopScores.s: TopScores.cpp.s
+
+.PHONY : TopScores.s
+
+# target to generate assembly for a file
+TopScores.cpp.s:
+	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/TopScores.cpp.s
+.PHONY : TopScores.cpp.s
+
 Word.obj: Word.cpp.obj
 
 .PHONY : Word.obj
@@ -338,33 +365,6 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-topScores.obj: topScores.cpp.obj
-
-.PHONY : topScores.obj
-
-# target to build an object file
-topScores.cpp.obj:
-	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/topScores.cpp.obj
-.PHONY : topScores.cpp.obj
-
-topScores.i: topScores.cpp.i
-
-.PHONY : topScores.i
-
-# target to preprocess a source file
-topScores.cpp.i:
-	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/topScores.cpp.i
-.PHONY : topScores.cpp.i
-
-topScores.s: topScores.cpp.s
-
-.PHONY : topScores.s
-
-# target to generate assembly for a file
-topScores.cpp.s:
-	$(MAKE) -f CMakeFiles\ScrabbleJunior.dir\build.make CMakeFiles/ScrabbleJunior.dir/topScores.cpp.s
-.PHONY : topScores.cpp.s
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -392,15 +392,15 @@ help:
 	@echo ... Player.obj
 	@echo ... Player.i
 	@echo ... Player.s
+	@echo ... TopScores.obj
+	@echo ... TopScores.i
+	@echo ... TopScores.s
 	@echo ... Word.obj
 	@echo ... Word.i
 	@echo ... Word.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
-	@echo ... topScores.obj
-	@echo ... topScores.i
-	@echo ... topScores.s
 .PHONY : help
 
 
