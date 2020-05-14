@@ -108,6 +108,15 @@ const std::vector<std::string> titleE{
 
 const std::vector<std::string> title[8] = { titleS, titleC, titleR, titleA, titleB, titleB, titleL, titleE };
 
+/**
+ * Graphical function to make an ascii art letter slide through the screen until a specified position
+ *
+ * @param letter
+ * @param time
+ * @param num
+ * @param xStart
+ * @param wait
+ */
 void dropLetter(std::vector<std::string> letter, int time, int num, unsigned short int xStart, bool &wait) {
 	size_t distanceFallen, relativeDistanceToBottom;
 	int xPosition = num * 19 + xStart;
@@ -128,6 +137,9 @@ void dropLetter(std::vector<std::string> letter, int time, int num, unsigned sho
 	}
 }
 
+/**
+ * Graphical function to show the title with ascii art word
+ */
 void showTitle() {
 	bool wait = true;
 
@@ -142,6 +154,14 @@ void showTitle() {
 	gotoxy(0, titleA.size() + 2);
 }
 
+/**
+ * Function to show a string one character at a time intervaled by t miliseconds.
+ *
+ * @param s - String to be shown
+ * @param t - Time in milliseconds between each character
+ * @param xStart - x position to start writing
+ * @param yStart - y position to start writing
+ */
 void showCascading(std::string s, time_t t, unsigned short int xStart, unsigned short int yStart) {
 	unsigned short int lineFeed = yStart;
 	gotoxy(xStart, lineFeed);
@@ -158,7 +178,13 @@ void showCascading(std::string s, time_t t, unsigned short int xStart, unsigned 
 }
 
 
-
+/**
+ * Function to start the game, calling board and game
+ *
+ * @param numPlayers - Number of players
+ * @param playerNames - Vector with the player names
+ * @param fileName - File's name where the board is stored
+ */
 void startGame(unsigned short int numPlayers, std::vector<std::string> playerNames, std::string fileName){
 
     clearScreen(0, YBEGMENU);
@@ -171,13 +197,18 @@ void startGame(unsigned short int numPlayers, std::vector<std::string> playerNam
 
     Board board(fileName);
 
-
-
     Game game(numPlayers, playerNames, &board);
 }
 
 
-
+/**
+ * Function to graphicly show the subtitle
+ * Also does:
+ *      - Ask how many players that will play
+ *      - Ask their names
+ *      - Ask the name of the board file
+ *      - Verify that the board file exists, if it doesn't, will ask to re-enter
+ */
 void newGame(){
     std::vector<std::string> phrases{
             "          So you decided to play the game?",
@@ -246,14 +277,14 @@ void newGame(){
             }
         }
     }
-
-
     startGame(numPlayers, playerNames, file);
 }
 
 
 
-
+/**
+ * Graphical function to show the rules of the game
+ */
 void showRules(){
 
     std::vector<std::string> rules{
@@ -288,7 +319,9 @@ void showRules(){
     waitForKey();
 }
 
-
+/**
+ * Graphical function to show credits
+ */
 void showCredits(){
     std::vector<std::string> credits{
             "                              Made by:",
@@ -315,7 +348,9 @@ void showCredits(){
     waitForKey();
 }
 
-
+/**
+ * Function to close the game
+ */
 void closeGame(){
     clearScreen(0, YBEGMENU);
     showCascading("\n"
@@ -333,7 +368,9 @@ void closeGame(){
 }
 
 
-
+/**
+ * Function to show the scoreboard (best 5 players of all time)
+ */
 void showScores(){
 
     clearScreen(0, YBEGMENU);
@@ -370,9 +407,9 @@ void showScores(){
 }
 
 
-
-
-
+/**
+ * The principal function. Shows the menu and deals with the input, calling functions depending on the player's input
+ */
 void showOptions() {
     clearScreen(0, YBEGMENU);
 	showCascading("\n"

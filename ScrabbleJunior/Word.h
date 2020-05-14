@@ -18,10 +18,11 @@ public:
     Word(std::string word, unsigned short int start);
     bool inWord(unsigned short int pos);
     bool validMove(unsigned short int pos);
-    int findPlayable();
+    short int findPlayable();
     char getLetter(unsigned short int pos);
     void coverLetter(unsigned short int pos);
     bool completedWord();
+    bool isFirstLetter(unsigned short int pos);
 
 private:
     std::string word;

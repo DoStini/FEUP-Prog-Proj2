@@ -29,12 +29,11 @@ Game::Game(unsigned short int numPlayers, std::vector<std::string> playerNames, 
     }
 }
 
+
+/**
+ * This function is used to control the game flow
+ */
 bool Game::gameManager() {
-    /**
-     * This function is used to control the game flow
-     */
-
-
     while (1){
         for (int i = 0; i < numPlayers; ++i) {
             for (int j = 0; j < 2; ++j) {                           // Two turns per player
@@ -55,12 +54,10 @@ bool Game::gameManager() {
     }
 }
 
+/**
+ * Function to check who is(are) the winner(s), after the game ends
+ */
 void Game::checkWinner(){
-
-    /**
-     * Function to check who is(are) the winner(s), after the game ends
-     */
-
     std::sort(players.begin(), players.end(), [](Player p1, Player p2){ return p1.getScore() > p2.getScore();});
                                                                     // Sorting by score
     short int max = players[0].getScore();                          // First element will be the best player
@@ -101,15 +98,14 @@ void Game::checkWinner(){
     checkScores(winners, "scoreboard.win");           // Check if the winner enters the scoreboard
 }
 
+
+/**
+ * Function to convert player objects in structs of name and score
+ *
+ * @param players - the vector containg a(the) player object(s)
+ * @param out - the vector containing clean Winner struct(s) that will receive player.name and player.score
+ */
 void Game::getNameScore(std::vector<Player> &players, std::vector<Winner> &out){
-
-    /**
-     * Function to convert player objects in structs of name and score
-     *
-     * @param players - the vector containg a(the) player object(s)
-     * @param out - the vector containing clean Winner struct(s) that will receive player.name and player.score
-     */
-
     for (int i = 0; i < players.size(); ++i) {
         Winner p;
         std::strncpy(p.name, players[i].getName().c_str(), sizeof(p.name));
@@ -119,15 +115,13 @@ void Game::getNameScore(std::vector<Player> &players, std::vector<Winner> &out){
 }
 
 
+/**
+ * Function to initialize players objects
+ *
+ * @param numPlayers - The number of players
+ * @param playerNames - Vector containing player names
+ */
 void Game::initPlayers(unsigned short numPlayers, std::vector<std::string> playerNames) {
-
-    /**
-     * Function to initialize players objects
-     *
-     * @param numPlayers - The number of players
-     * @param playerNames - Vector containing player names
-     */
-
     players.reserve(numPlayers);
     Player player;
     for (int i = 0; i < numPlayers; ++i) {
@@ -141,13 +135,12 @@ void Game::initPlayers(unsigned short numPlayers, std::vector<std::string> playe
 
 }
 
+
+/**
+ * Function to add all the tiles necessary to the game pot
+ * Takes every character from the pre-made board Array and adds to a pot vector
+ */
 void Game::initPot() {
-
-    /**
-     * Function to add all the tiles necessary to the game pot
-     * Takes every character from the pre-made board Array and adds to a pot vector
-     */
-
     char temp;
 
     unsigned short int pos[2];
@@ -163,14 +156,13 @@ void Game::initPot() {
     }
 }
 
+
+/**
+ * Function to retrieve a random tile (letter) from the game pot
+ *
+ * @return char - The tile chosen randomly
+ */
 char Game::getRandomTile() {
-
-    /**
-     * Function to retrieve a random tile (letter) from the game pot
-     *
-     * @return char - The tile chosen randomly
-     */
-
     unsigned short int index = rand()%pot.size();
     char tile = pot[index];
     pot.erase(pot.begin() + index);
@@ -178,17 +170,13 @@ char Game::getRandomTile() {
 }
 
 
-
+/**
+ * Function to read a position from the player
+ *
+ * @param intPosition - The position chosen by the player. Will be return through this
+ * @param player - Current player
+ */
 bool Game::inputMove(unsigned short int intPosition[2], Player &player){
-
-    /**
-     * Function to read a position from the player
-     *
-     * @param intPosition - The position chosen by the player. Will be return through this
-     * @param player - Current player
-     */
-
-
     clearScreen(XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 10);
     std::cout << player.getName() << ", you're up!";
 
@@ -228,15 +216,14 @@ bool Game::inputMove(unsigned short int intPosition[2], Player &player){
     }
 }
 
+
+/**
+ * Function to control a player move
+ *
+ * @param player - the current player
+ * @return if a valid move was made
+ */
 bool Game::playerMove(Player &player) {
-
-    /**
-     * Function to control a player move
-     *
-     * @param player - the current player
-     * @return if a valid move was made
-     */
-
     unsigned short int pos[2];
     if (!inputMove(pos, player)){
         return false;
@@ -266,21 +253,54 @@ bool Game::playerMove(Player &player) {
     return true;
 }
 
+
+/**
+ * Function to perform a series of operations that occur when a valid move is made
+ * Things done:
+ *      - Increasing numTiles (numTiles is the counter of tiles filled)
+ *      - Covering the desired letter in both vertical and horizontal words (if exist)
+ *      - Add points to player
+ *      - Color the tile in the console
+ *      - Adding a tile to the player's pot
+ *
+ * @param player - the current player
+ * @param pos - Position in board chosen by the player
+ * @param letter - tile chosen
+ * @param hWordPtr - Pointer to horizontal word
+ * @param vWordPtr - Pointer to vertical word
+ * @return if a valid move was made
+ */
 void Game::gotValidMove(Player &player, unsigned short int pos[2], char letter, Word *hWordPtr, Word *vWordPtr){
     numTiles++;                                                         // Counter to find the end of the game, used in gameManager
     if(hWordPtr != NULL){                                               // Counts the number of tiles played
         hWordPtr->coverLetter(pos[1]);
         player.addPoints(hWordPtr->completedWord());
+
+        if (!hWordPtr->isFirstLetter(pos[1])){
+            for (int i = 1; i < XSPACING; ++i) {
+                replaceVisualChar(boardPtr->getStart() + XSPACING * (pos[1] + 1) - i, YBEG + YSPACING * (pos[0] + 1), ' ', ConsoleColors::RedFore, ConsoleColors::YellowBack);
+            }
+            // If it's not the first letter, paints the one behind him aswell, painting XPACING - 1 times
+        }
     }
     if(vWordPtr != NULL){
         vWordPtr->coverLetter(pos[0]);                             // Covers the letter in the vertical/horizontal word
         player.addPoints(vWordPtr->completedWord());                    // Checks if the vertical/horizontal word has been completed
+
+        if (!vWordPtr->isFirstLetter(pos[0])){
+            for (int i = 1; i < YSPACING; ++i) {
+                replaceVisualChar(boardPtr->getStart() + XSPACING * (pos[1] + 1), YBEG + YSPACING * (pos[0] + 1) - i, ' ', ConsoleColors::RedFore, ConsoleColors::YellowBack);
+            }
+            // If it's not the first letter, paints the one behind him aswell, painting YPACING - 1 times
+        }
     }                                                                   // Using once again true and false as 1/0 to add to the score
 
     player.removeTile(letter);                                          // Removing letter from the player's pot
 
-    replaceVisualChar(boardPtr->getStart() + XSPACING * (pos[1] + 1), YBEG + YSPACING * (pos[0] + 1), letter, ConsoleColors::RedFore, ConsoleColors::SilverBack);
-    // Changing color of the tile chosen
+    replaceVisualChar(boardPtr->getStart() + XSPACING * (pos[1] + 1), YBEG + YSPACING * (pos[0] + 1), letter, ConsoleColors::RedFore, ConsoleColors::YellowBack);
+    // Changing color of the chosen tile
+
+
 
     if (pot.size() > 0) {
         char newTile = getRandomTile();
@@ -290,14 +310,13 @@ void Game::gotValidMove(Player &player, unsigned short int pos[2], char letter, 
     placePlayer(player);
 }
 
+
+/**
+ * When a player has no available moves, this is called to make the player choose a tile to trade for a random one out of the game's pot
+ *
+ * @param player - The current player
+ */
 void Game::changeTile(Player &player){
-
-    /**
-     * When a player has no available moves, this is called to make the player choose a tile to trade for a random one out of the game's pot
-     *
-     * @param player - The current player
-     */
-
     clearScreen(XBEGMENU, YBEG + boardPtr->getVSize() * YSPACING + 12);
     std::cout << "You have no moves left...";
 

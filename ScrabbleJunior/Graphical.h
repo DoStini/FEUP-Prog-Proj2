@@ -9,6 +9,12 @@
 #include <windows.h>
 #include "Color.h"
 
+#define YBEG 25
+#define XSPACING 2
+#define YSPACING 1
+#define XBEGMENU 70
+#define YBEGMENU 13
+
 void gotoxy(int x, int y);
 void replaceVisualChar(int x, int y, char letter, unsigned int fgColor, unsigned int bgColor);
 void clearScreen(short xPos = 0, short yPos = 0);

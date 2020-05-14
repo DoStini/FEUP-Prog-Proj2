@@ -21,13 +21,12 @@ Board::~Board() {
 }
 
 
+/**
+* Function to read the board
+*
+* @param fileName - Name of file to be read.
+*/
 void Board::readBoard(std::string fileName) {
-
-    /**
-    * Function to read the board
-    *
-    * @param fileName - Name of file to be read.
-    */
 
     ifstream f_in;
     f_in.open(fileName);
@@ -87,16 +86,16 @@ void Board::readBoard(std::string fileName) {
     */
 
 
-Word *Board::findWord(unsigned short int index, unsigned short int charPos, bool vertical){
+/**
+* Function to check and return if a chosen position is within any word
+*
+* @param index - The column/row where the word might be located
+* @param charPos - The position given: related to the position of the character inside index's column/row
+*
+* @return Word * - Returns the pointer to the word if found. Otherwise returns a Null pointer
+*/
 
-    /**
-    * Function to check and return if a chosen position is within any word
-    *
-    * @param index - The column/row where the word might be located
-    * @param charPos - The position given: related to the position of the character inside index's column/row
-    *
-    * @return Word * - Returns the pointer to the word if found. Otherwise returns a Null pointer
-    */
+Word *Board::findWord(unsigned short int index, unsigned short int charPos, bool vertical){
 
     if (vertical){
         for (int i = 0; i < vWords[index].size(); ++i) {
@@ -116,17 +115,17 @@ Word *Board::findWord(unsigned short int index, unsigned short int charPos, bool
     return NULL;
 }
 
+
+/**
+ * Function to show the board
+ */
 void Board::showBoard() {
-
-    /**
-    * Function to show the board
-    */
-
     unsigned short int center = XBEGMENU + 13;
     this->start = center - (hSize * XSPACING) / 2;
 
     clearScreen(start, YBEG);
 
+    setColor(ConsoleColors::BlackFore, ConsoleColors::WhiteBack);
     for(int space = 0; space < XSPACING; space++) std::cout << ' ';
 
     for (unsigned short c = 0; c < hSize; c++) {
@@ -134,10 +133,13 @@ void Board::showBoard() {
         for(int space = 0; space < XSPACING-1; space++) std::cout << ' ';
     }
 
+    setColor(ConsoleColors::WhiteFore, ConsoleColors::BlackBack);
 
     for (int i = 0; i < vSize; ++i) {
-        gotoxy(start, YBEG + YSPACING *(i + 1));
+        gotoxy(start, YBEG + YSPACING * (i + 1));
+        setColor(ConsoleColors::BlackFore, ConsoleColors::WhiteBack);
         std::cout << (char)(i + 'A');
+        setColor(ConsoleColors::WhiteFore, ConsoleColors::BlackBack);
         for (int j = 0; j < hSize; ++j) {
             for(int space = 0; space < XSPACING-1; space++) std::cout << ' ';
             std::cout << letters[i][j];
@@ -145,12 +147,11 @@ void Board::showBoard() {
     }
 }
 
+
+/**
+* Function to initialize our graphical board array
+*/
 void Board::initArray() {
-
-    /**
-    * Function to initialize our graphical board array
-    */
-
     letters = (char **) malloc(vSize * sizeof(char *));
 
     for (int v = 0; v < vSize; ++v) {
@@ -161,9 +162,8 @@ void Board::initArray() {
     }
 }
 
-void Board::writeOnArray(std::string word, bool vertical, unsigned short int vIdx, unsigned short int hIdx){
 
-    /**
+/**
     * Function to write a character on graphical board
     *
     * @param word - The word to be written on the board
@@ -171,19 +171,18 @@ void Board::writeOnArray(std::string word, bool vertical, unsigned short int vId
     * @param vIdx - Position to begin writing
     * @param hIdx - Position to begin writing
     */
-
+void Board::writeOnArray(std::string word, bool vertical, unsigned short int vIdx, unsigned short int hIdx){
     for (int i = 0; i < word.length(); ++i) {
-        letters[vIdx + i*vertical][hIdx + i*!vertical] = word[i];                         // If vertical, changes vIdx, otherwise changes hIdx
-                                                                                          // Using boolean as 0 and 1 integers
+        letters[vIdx + i*vertical][hIdx + i*!vertical] = word[i];                 // If vertical, changes vIdx, otherwise changes hIdx
+                                                                                  // Using boolean as 0 and 1 integers
     }
 }
 
+
+/**
+  * Function to initialize both hWords and vWords with a prefixed size to avoid segmentation errors
+*/
 void Board::initWordVectors() {
-
-    /**
-   * Function to initialize both hWords and vWords with a prefixed size to avoid segmentation errors
-   */
-
     for (int i = 0; i < hSize; ++i) {
         std::vector<Word> vec = {};
         vWords.push_back(vec);
@@ -194,56 +193,56 @@ void Board::initWordVectors() {
     }
 }
 
+
+/**
+* Function to get a character from the board
+*
+* @param word - The word to be written on the board
+* @return char - The letter of that position
+*/
 char Board::getTile(unsigned short int pos[2]) {
-
-    /**
-   * Function to get a character from the board
-   *
-   * @param word - The word to be written on the board
-   * @return char - The letter of that position
-   */
-
     return letters[pos[0]][pos[1]];
 }
 
+
+/**
+ * @return hSize - Horizontal Size
+ */
 unsigned short int Board::getHSize(){
-
-    /**
-     * @return hSize - Horizontal Size
-     */
-
     return hSize;
 }
+
+
+/**
+* @return vSize - Vertical Size
+ */
 unsigned short int Board::getVSize(){
-
-    /**
-    * @return vSize - Vertical Size
-     */
-
     return vSize;
 }
 
+
+/**
+  * A function to analyse if there are any moves available to be played.
+  * Checks every possible word, finds a valid letter to be played and checks if player has it.
+  * Stops iteration as soon as he finds a valid move
+  *
+  * @param player - The player being evaluated
+  * @return bool - The existence of a valid move
+*/
 bool Board::analyseMoves(Player &player){
+    for (int c = 0; c < 2; ++c) {                                            // Runs 2 times
+        for (int i = 0; i < (c == 0 ? vSize : hSize); ++i) {                 // One for finding vertical word (c = 0) and another for finding horizontal word (c = 1)
+            for (int j = 0; j < (c == 0 ? hWords[i].size() : vWords[i].size()); ++j) {
+                Word *cWord = (c == 0 ? &hWords[i][j] : &vWords[i][j]);      // If c == 1, selects according to the correspending type of word
+                short int idx = cWord->findPlayable();                       // Returns -1 if there's no possible move in that word
 
-    /**
-    * A function to analyse if there are any moves available to be played.
-    * Checks every possible word, finds a valid letter to be played and checks if player has it.
-    * Stops iteration as soon as he finds a valid move
-    *
-    * @param player - The player being evaluated
-    * @return bool - The existence of a valid move
-    */
-
-    for (int i = 0; i < vSize; ++i) {
-        for (int j = 0; j < hWords[i].size(); ++j) {
-            Word cWord = hWords[i][j];
-            short int idx = cWord.findPlayable();                   // Returns -1 if there's no possible move in that word
-
-            if (idx != -1 && player.checkTiles(cWord.getLetter(idx)) != -1){
-                return true;                                        // Checks if the given valid letter is in player's deck
+                if (idx != -1 && player.checkTiles(cWord->getLetter(idx)) != -1){
+                    return true;                                             // Checks if the given valid letter is in player's deck
+                }
             }
         }
     }
+    /*
 
     for (int i = 0; i < hSize; ++i) {
         for (int j = 0; j < vWords[i].size(); ++j) {
@@ -255,15 +254,16 @@ bool Board::analyseMoves(Player &player){
             }
         }
     }
+
+     */
+
     return false;
 }
 
+/**
+* @return start - Graphical variable indicating the initial horizontal position of the board.
+* Used to center text with board.
+*/
 unsigned short int Board::getStart(){
-
-    /**
-    * @return start - Graphical variable indicating the initial horizontal position of the board.
-    * Used to center text with board.
-    */
-
     return start;
 }

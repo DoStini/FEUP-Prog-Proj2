@@ -69,6 +69,10 @@ int main() {
 
     showTitle();
 
+    Board board("board.txt");
+    std::vector<std::string> a = {"a", "b"};
+    Game game(2, a, &board);
+
 	while (1) {
         showOptions();
     }
