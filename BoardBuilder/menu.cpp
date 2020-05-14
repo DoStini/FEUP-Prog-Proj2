@@ -107,15 +107,27 @@ const std::vector<std::string> titleE{
 
 const std::vector<std::string> title[8] = { titleS, titleC, titleR, titleA, titleB, titleB, titleL, titleE };
 
-void dropLetter(std::vector<std::string> letter, int time, int num, unsigned short int xStart, bool& wait) {
+/**
+ * Animates the drop of an individual letter from the title in the console.
+ * Allows to skip the animation by pressing "ENTER"/"RETURN"
+ *
+ * @param[in] letter The vector of strings representing the letter
+ * @param[in] time The time waited between frames of the animation
+ * @param[in] num The order of the letter that is falling (letter 1, letter 2, ...)
+ * @param[in] xStart The starting horizontal position of the title in the console. Allows to adjust and center the position of the title
+ * @param[in, out] wait A boolean indicating if the key "ENTER"/"RETURN" has been pressed, allowing to skip the animation
+ */
+void dropLetter(const std::vector<std::string> &letter, int time, int num, unsigned short int xStart, bool& wait) {
 	size_t distanceFallen, relativeDistanceToBottom;
 	int xPosition = num * 19 + xStart;
 
+	// Each frame (iteration of this loop) "drops" the letter by one line.
 	for (int i = letter.size() - 1; i >= 0; i--) {
 		distanceFallen = letter.size() - i;
 
-		for (std::vector<std::string>::const_reverse_iterator it = letter.crbegin(); it != letter.crend() - i; it++) {
-			if (GetKeyState(VK_RETURN) & 0x8000) {
+		// Redraws the part of the letter that can be seen and "drops" it by one line.
+		for (auto it = letter.crbegin(); it != letter.crend() - i; it++) {
+			if (GetKeyState(VK_RETURN) & 0x8000) { ///< Checks if the "ENTER" key has been pressed.
 				wait = false;
 			}
 			relativeDistanceToBottom = it - letter.crbegin();
@@ -127,13 +139,16 @@ void dropLetter(std::vector<std::string> letter, int time, int num, unsigned sho
 	}
 }
 
+/**
+ * Animates showing the title, "dropping" one letter at a time.
+ */
 void showTitle() {
 	bool wait = true;
 
 	for (int letter = 0; letter < 8; letter++) {
 		dropLetter(title[letter], 44, letter, 8, wait);
 	}
-	if (!wait) {
+	if (!wait) { ///< If wait is false, this means that the "ENTER" key was pressed, therefore the input buffer needs to be cleared.
 		std::cin.clear();
 		std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 	}

@@ -12,7 +12,7 @@ void getString(std::string &string) {
  * Reads only the first char input to the buffer, all else is deleted from the buffer.
  * Allows the EOF character.
  *
- * @param[out] delimiter The last char must be at the end of the buffer
+ * @param[out] input The variable where the input is stored.
  */
 void getChar(char& input) {
 	input = getchar();
@@ -30,10 +30,6 @@ void printMessage(std::string message, int bgColor, int fgColor, std::string end
 bool checkStop() {
 	return std::cin.eof();
 }
-
-//void clearScreen() {
-//	std::cout << "\033[2J\033[1;1H";
-//}
 
 void waitForKey() {
 	printMessage("Press any key to continue...", WHITE, BLACK, "");
@@ -62,6 +58,12 @@ std::string stringToUpper(std::string str) {
 	return newCopy;
 }
 
+/**
+ * Function to put the console cursor in a specified position
+ *
+ * @param x X position
+ * @param y Y position
+ */
 void gotoxy(int x, int y)
 {
 	COORD coord;
@@ -70,6 +72,11 @@ void gotoxy(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
+/**
+ * Clears the screen from a specified position.
+ *
+ * @param xPos, yPos Coordinates for the upper left corner.
+ */
 void clearScreen(short xPos, short yPos) {
 	COORD coordScreen = { xPos, yPos }; // upper left corner
 	DWORD cCharsWritten;
