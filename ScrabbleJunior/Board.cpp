@@ -50,7 +50,7 @@ void Board::readBoard(std::string fileName) {
 
     int counter = 0;
     while (f_in.peek() != '#'){
-        f_in >> position >> sep >> word;                    // Input is given as "Aa"
+        f_in >> position[0] >> position[1] >> sep >> word;                    // Input is given as "Aa"
 
         verticalIdx = (int) position[0] - (int) 'A';        // vertical index will be A converted to integer, counting 0 as char A
         horizontalIdx = (int) position[1] - (int) 'a';      // same for horizontal index but with "a"

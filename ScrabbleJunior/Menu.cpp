@@ -235,7 +235,7 @@ void newGame(){
     unsigned short int numPlayers;
 
     while (1){
-        if (!checkInput(numPlayers) && (numPlayers < 2 || numPlayers > 4)){
+        if (!checkInput(numPlayers) || (numPlayers < 2 || numPlayers > 4)){
             clearScreen(XBEGMENU,YBEGMENU + 9);
             std::cout << "Invalid, re-enter: ";
         }
@@ -259,10 +259,14 @@ void newGame(){
 
 
     std::string file;
+	std::stringstream ss;
     while (1){
+		ss.str(std::string());
         if (checkInput(file)){
             std::ifstream ff;
-            ff.open(file);
+
+			ss << "../Assets/" << file;
+            ff.open(ss.str());
             if (!ff.is_open()){
                 gotoxy(XBEGMENU, YBEGMENU + 12 + numPlayers);
                 std::cerr << "File does not exist!";
@@ -277,7 +281,7 @@ void newGame(){
             }
         }
     }
-    startGame(numPlayers, playerNames, file);
+    startGame(numPlayers, playerNames, ss.str());
 }
 
 
