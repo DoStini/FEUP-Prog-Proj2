@@ -1,0 +1,53 @@
+[33mcommit 1cc45b74775713b64f1020acb29c0be7d65bf6b0[m[33m ([m[1;36mHEAD -> [m[1;32mscrabble-master[m[33m, [m[1;31morigin/scrabble-master[m[33m, [m[1;32mscrabble-bug-fix[m[33m)[m
+Author: DoStini <moreiradev@hotmail.com>
+Date:   Mon May 4 10:07:04 2020 +0100
+
+    Commit before bug fixing
+
+[33mcommit 29f09d9ddadd2543dce576c002accdfba6f5efe7[m
+Author: DoStini <moreiradev@hotmail.com>
+Date:   Sat May 2 21:59:27 2020 +0100
+
+    Solved bad inputs problem when choosing where to play. Visual part is working. changed Player::checkTiles from unsigned short int to short int because sometimes it returns -1. ISSUE: Happened that Ak didnt work with letter E in player's pot
+
+[33mcommit c9f7e774b0574204d4b40562d8df282b320b36ef[m
+Author: DoStini <moreiradev@hotmail.com>
+Date:   Thu Apr 30 18:54:56 2020 +0100
+
+    Made playerMove more clean
+
+[33mcommit 2cd17b01c16f23de66a7ef5ace6849edf4d9ae78[m
+Author: DoStini <moreiradev@hotmail.com>
+Date:   Thu Apr 30 15:59:58 2020 +0100
+
+    Created new function when a valid move is played. Added functions to remove the tile from the player's bag and get him a new one
+
+[33mcommit c6aeb7e1e796c1e2f7f7efdbb41504c8a21ee79a[m
+Author: DoStini <moreiradev@hotmail.com>
+Date:   Tue Apr 28 12:31:05 2020 +0100
+
+    TODO: Change copy of objects to other objects. Replace by pointers. \nDONE: Changed type of board in game to a board pointer;\nTested and fixed word functions to see if a move is valid or not.
+
+[33mcommit 71955726debb0b95e38a28ff9ecc09d89cb1250c[m
+Author: DoStini <moreiradev@hotmail.com>
+Date:   Mon Apr 27 18:15:45 2020 +0100
+
+    Tested game, board and player classes elementary functions. Everything seems to be working so far.
+
+[33mcommit cfccc25710987830c37d5134f7fc440394722adf[m[33m ([m[1;32mmaster[m[33m)[m
+Author: DoStini <moreiradev@hotmail.com>
+Date:   Mon Apr 27 11:44:50 2020 +0100
+
+    Made some essential functions.
+
+[33mcommit 48c3a19cfd761389669492d4df3b2efabc2d1ab8[m
+Author: DoStini <moreiradev@hotmail.com>
+Date:   Sun Apr 26 18:03:35 2020 +0100
+
+    Added some classes and basic functions
+
+[33mcommit 5c07aa09e7257fb64859b26227509f3d4f4d68c8[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: André Moreira <moreiradev@hotmail.com>
+Date:   Sat Apr 25 17:06:12 2020 +0100
+
+    Initial commit

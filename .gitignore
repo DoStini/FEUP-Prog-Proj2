@@ -1,5 +1,11 @@
 # Prerequisites
 *.d
+out
+.idea/
+cmake-build-debug/
+.vs/
+*.txt
+
 
 out
 .idea/
