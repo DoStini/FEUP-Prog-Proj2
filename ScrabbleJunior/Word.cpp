@@ -37,9 +37,9 @@ bool Word::validMove(unsigned short int position){
     if (covered[position - start]){                         // Position is refering to the tile in the whole vertical axis
         return false;                                       // Is the position already occupied?
     }
-
+	std::cout << "deededededede";
     // Checks if there is no uncovered letter before the current tile
-    return std::find(covered.begin(), covered.begin() + position - start, false) == covered.begin() + position - start;
+    return std::find(covered.begin(), covered.begin() + (position - start), false) == covered.begin() + (position - start);
 }
 
 /**
