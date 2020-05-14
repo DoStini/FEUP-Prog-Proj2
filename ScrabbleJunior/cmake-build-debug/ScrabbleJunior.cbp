@@ -8,28 +8,28 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug"/>
+				<Option working_dir="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug"/>
+				<Option working_dir="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="ScrabbleJunior">
-				<Option output="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/ScrabbleJunior.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior"/>
+				<Option output="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/ScrabbleJunior.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -42,15 +42,15 @@
 					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 ScrabbleJunior"/>
-					<CompileFile command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 ScrabbleJunior"/>
+					<CompileFile command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="ScrabbleJunior/fast">
-				<Option output="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/ScrabbleJunior.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior"/>
+				<Option output="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/ScrabbleJunior.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -63,78 +63,78 @@
 					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 ScrabbleJunior/fast"/>
-					<CompileFile command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 ScrabbleJunior/fast"/>
+					<CompileFile command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug"/>
+				<Option working_dir="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/MINGW-~1/X86_64~1.0-P/mingw64/bin/mingw32-make.exe -f &quot;D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.cpp">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/Board.cpp">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Board.h">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/Board.h">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Color.h">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/Color.h">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.cpp">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/Game.cpp">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Game.h">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/Game.h">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Graphical.cpp">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/Graphical.cpp">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Graphical.h">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/Graphical.h">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.cpp">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/IO.cpp">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/IO.h">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/IO.h">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.cpp">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/Menu.cpp">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Menu.h">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/Menu.h">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.cpp">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/Player.cpp">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Player.h">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/Player.h">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/TopScores.cpp">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/TopScores.cpp">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/TopScores.h">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/TopScores.h">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.cpp">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/Word.cpp">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/Word.h">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/Word.h">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/main.cpp">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/main.cpp">
 			<Option target="ScrabbleJunior"/>
 		</Unit>
-		<Unit filename="D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/CMakeLists.txt">
+		<Unit filename="D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

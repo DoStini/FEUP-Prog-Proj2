@@ -19,40 +19,6 @@
 
 using namespace std;
 
-
-int main2(){
-    Winner p1; strncpy(p1.name, "Homailot fraco", sizeof(p1.name)); p1.score = 35;
-
-    vector<Winner> players = {p1};
-    checkScores(players, "scoreboard.win");
-    players = readScores("scoreboard.win");
-
-    for (int i = 0; i < players.size(); ++i) {
-        cout << i << " " << players[i].name << " " << players[i].score << endl;
-    }
-    return 0;
-}
-
-int mai3n(){
-
-
-    Winner p1; strncpy(p1.name, "Andre", sizeof(p1.name)); p1.score = 20;
-    Winner p2; strncpy(p2.name, "Nunio", sizeof(p2.name)); p1.score = 10;
-    Winner p3; strncpy(p3.name, "LOOOL", sizeof(p3.name)); p1.score = 5;
-
-    vector<Winner> players = {p1,p2,p3};
-    players = readScores("whatever.win");
-    checkScores(players, "whatever.win");
-    //players = readScores("whatever.win");
-
-    for (int i = 0; i < players.size(); ++i) {
-        cout << i << " " << players[i].name << " " << players[i].score << endl;
-    }
-
-    return 0;
-}
-
-
 int main() {
     HWND console = GetConsoleWindow();
     RECT r;
@@ -69,9 +35,6 @@ int main() {
 
     showTitle();
 
-    Board board("board.txt");
-    std::vector<std::string> a = {"a", "b"};
-    Game game(2, a, &board);
 
 	while (1) {
         showOptions();

@@ -1,4 +1,4 @@
-# Install script for directory: D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior
+# Install script for directory: D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/Documents/Faculdade/PROG/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
