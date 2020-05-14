@@ -109,13 +109,14 @@ const std::vector<std::string> titleE{
 const std::vector<std::string> title[8] = { titleS, titleC, titleR, titleA, titleB, titleB, titleL, titleE };
 
 /**
- * Graphical function to make an ascii art letter slide through the screen until a specified position
+ * Animates the drop of an individual letter from the title in the console.
+ * Allows to skip the animation by pressing "ENTER"/"RETURN"
  *
- * @param letter
- * @param time
- * @param num
- * @param xStart
- * @param wait
+ * @param[in] letter The vector of strings representing the letter
+ * @param[in] time The time waited between frames of the animation
+ * @param[in] num The order of the letter that is falling (letter 1, letter 2, ...)
+ * @param[in] xStart The starting horizontal position of the title in the console. Allows to adjust and center the position of the title
+ * @param[in, out] wait A boolean indicating if the key "ENTER"/"RETURN" has been pressed, allowing to skip the animation
  */
 void dropLetter(std::vector<std::string> letter, int time, int num, unsigned short int xStart, bool &wait) {
 	size_t distanceFallen, relativeDistanceToBottom;
