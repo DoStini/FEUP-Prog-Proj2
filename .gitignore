@@ -1,5 +1,12 @@
 # Prerequisites
 *.d
+
+out
+.idea/
+cmake-build-debug/
+.vs/
+*.txt
+
 .vs/
 build/
 BOARD.TXT
@@ -9,6 +16,10 @@ BOARD.TXT
 *.lo
 *.o
 *.obj
+*.ilk
+*.pdb
+*.db
+*.sqlite
 
 # Precompiled Headers
 *.gch
@@ -35,3 +46,7 @@ BOARD.TXT
 *.exe
 *.out
 *.app
+
+#Cmake
+
+cmake-build-debug
