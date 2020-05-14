@@ -25,6 +25,7 @@ public:
 	~Board();
 
 	std::string showBoard(bool color = true);
+	void showCenteredBoard();
 	bool setHeight(unsigned short height);
 	bool setWidth(unsigned short width);
 	bool hasMinimumOfSquares();

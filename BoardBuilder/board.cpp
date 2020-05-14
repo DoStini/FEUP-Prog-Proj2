@@ -70,6 +70,48 @@ std::string Board::showBoard(bool color) {
 }
 
 /**
+ * Displays the Board object in the console output centered.
+ */
+void Board::showCenteredBoard() {
+	unsigned short int center = XBEGMENU + 14;
+	unsigned short start = center - (size.second) * 2;
+
+	gotoxy(start, YBEGMENU);
+	std::cout << "   ";
+	for (unsigned short c = 0; c < size.second; c++) {
+		std::cout << (char)(c + 'a');
+		if (c != size.second - 1) std::cout << "   ";
+	}
+	std::cout << std::endl;
+
+	for (unsigned short l = 1; l <= size.first; l++) {
+		gotoxy(start, YBEGMENU + (l*2));
+		std::cout << (char)((l - 1) + 'A') << " ";
+		std::cout << "\033[47;30m";
+		std::cout << " ";
+		for (unsigned short c = 1; c <= size.second; c++) {
+			std::cout << letters[l][c] << " ";
+			if (c != size.second) std::cout << "| ";
+		}
+
+		gotoxy(start, YBEGMENU + (l * 2)+1);
+		if (l != size.first) {
+			std::cout << "\033[0m";
+			std::cout << "  ";
+			std::cout << "\033[47;30m";
+			std::cout << "---";
+			for (unsigned short c = 1; c < size.second; c++) {
+				std::cout << "+---";
+			}
+		}
+
+		std::cout << "\033[0m";
+	}
+
+	gotoxy(0, YBEGMENU + ((size.first + 1) * 2));
+}
+
+/**
  * Sets the height of the board if the value is in the limits defined.
  *
  * @param height Value of the height to be stored.
@@ -185,8 +227,8 @@ bool Board::hasMinimumOfSquares() {
  *
  * @param word Word object to add.
  * @param max The board limit that the word can't break.
- *		If the word is horizontal, this is the max column.
- *		If the word is vertical, this is the max line.
+ *		This is the max column if the word is horizontal.
+ *		This is the max row if the word is vertical.
  *
  * @returns a boolean that indicates if the words fits on the board.
  */
@@ -433,7 +475,6 @@ WordsIterator Board::checkWordOnBoard(Word word, Coordinate position, bool verti
 	size_t textSize = text.size();
 
 	std::vector<Word>* orientationWords = vertical ? &vWords[position.second] : &hWords[position.first];
-	result.invalid = false;
 
 	// A binary search can be used because orientationWords is always ordered.
 	result.iterator = std::lower_bound((*orientationWords).begin(), (*orientationWords).end(), word);

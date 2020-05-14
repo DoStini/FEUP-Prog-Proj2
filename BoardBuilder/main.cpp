@@ -7,6 +7,7 @@
 #include "boardIO.h"
 #include "word.h"
 #include "board.h"
+#include "menu.h"
 #include <vector>
 #include <string>
 #include <sstream>
@@ -27,7 +28,7 @@ void inputLimits(Board& board) {
 	ss << "What are the number of lines on the board? [" << heightLowerLimit << ", " << heightUpperLimit << "]";
 	printMessage(ss.str(), Color::WHITE, Color::BLACK);
 	while (!checkInput(input) || !board.setHeight(input)) {
-		clearScreen();
+		clearScreen(0, YBEGMENU);
 
 		printMessage("Input was invalid, please try again.", RED, BLACK);
 
@@ -36,7 +37,7 @@ void inputLimits(Board& board) {
 		printMessage(ss.str(), Color::WHITE, Color::BLACK);
 	}
 
-	clearScreen();
+	clearScreen(0, YBEGMENU);
 
 	unsigned short widthLowerLimit = board.getWidthLimits().first;
 	unsigned short widthUpperLimit = board.getWidthLimits().second;
@@ -44,7 +45,7 @@ void inputLimits(Board& board) {
 	ss << "What are the number of columns on the board? [" << widthLowerLimit << ", " << widthUpperLimit << "]";
 	printMessage(ss.str(), Color::WHITE, Color::BLACK);
 	while (!checkInput(input) || !board.setWidth(input)) {
-		clearScreen();
+		clearScreen(0, YBEGMENU);
 
 		printMessage("Input was invalid, please try again.", RED, BLACK);
 
@@ -60,16 +61,17 @@ void inputLimits(Board& board) {
  *
  * @param limit Upper limit of the board (column or row from 'A' to 'Z') that a word can be placed on
  * @param message Prompt message asked to the player
+ * @param yStart Where to clean the screen
  *
  * @returns the in bounds location that the user inputed
  */
-char inputLocation(char limit, std::string message) {
+char inputLocation(char limit, std::string message, unsigned short yStart) {
 	char location;
 
 	printMessage(message, Color::WHITE, Color::BLACK);
 
 	while (!checkInputOrSTOP(location) || toupper(location) < 'A' || toupper(location) > toupper(limit)) {
-		clearScreen();
+		clearScreen(0, yStart);
 		if (checkStop()) break;
 
 		printMessage("Input was invalid, please try again.", RED, BLACK);
@@ -96,24 +98,25 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 	std::pair<unsigned short, unsigned short> size = board.getSize();
 	char line, column, orientation, input;
 	short success;
+	unsigned short hSize = ((board.getSize()).first * 2) + 2 + YBEGMENU;
 	bool vertical;
 
 	while (true) {
 		Word newWord;
-		printMessage(board.showBoard());
+		clearScreen(0, YBEGMENU);
+		board.showCenteredBoard();
 
 		printMessage("Add or delete? (write 'delete' to delete, anything else to continue)", WHITE, BLACK);
 		getString(deletePrompt);
 
-		clearScreen();
+		clearScreen(0, hSize);
 		if (checkStop()) break;
 
-		printMessage(board.showBoard());
+		board.showCenteredBoard();
 		printMessage("What is the word?", WHITE, BLACK);
 		while (!checkInputOrSTOP(text) || !newWord.setText(words, text)) {
-			clearScreen();
+			clearScreen(0, hSize);
 			if (checkStop()) break;
-			printMessage(board.showBoard());
 
 			printMessage("Input was invalid or word is not real, please try again.", RED, BLACK);
 
@@ -121,36 +124,31 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 		}
 		if (checkStop()) break;
 
-		clearScreen();
-
-		printMessage(board.showBoard());
+		clearScreen(0, hSize);
 		char upperLineLimit = (size.first - 1 + 'A');
 		ss.str(std::string());
 		ss << "Line of word? [A, " << upperLineLimit << "]";
-		line = inputLocation(upperLineLimit, ss.str());
+		line = inputLocation(upperLineLimit, ss.str(), hSize);
 		
 		if (checkStop()) break;
 		line = toupper(line);
 
-		clearScreen();
+		clearScreen(0, hSize);
 
-		printMessage(board.showBoard());
 		char upperColumnLimit = (size.second - 1 + 'a');
 		ss.str(std::string());
 		ss << "Column of word? [a, " << upperColumnLimit << "]";
-		column = inputLocation(upperColumnLimit, ss.str());
+		column = inputLocation(upperColumnLimit, ss.str(), hSize);
 
 		if (checkStop()) break;
 		column = tolower(column);
 
-		clearScreen();
+		clearScreen(0, hSize);
 
-		printMessage(board.showBoard());
 		printMessage("Is the word horizontal or vertical? (H, V)", WHITE, BLACK);
 		while (!checkInputOrSTOP(orientation) || (toupper(orientation) != 'H' && toupper(orientation) != 'V')) {
-			clearScreen();
+			clearScreen(0, hSize);
 			if (checkStop()) break;
-			printMessage(board.showBoard());
 
 			printMessage("Input was invalid, please try again.", RED, BLACK);
 
@@ -162,9 +160,8 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 
 		newWord.setLimits(std::make_pair(line - 'A', column - 'a'), vertical);
 
-		clearScreen();
+		clearScreen(0, hSize);
 
-		printMessage(board.showBoard());
 		ss.str(std::string());
 		ss << "So the word is '" << text << "', it's orientation is " << orientation << ", and is in line " << (char)line << " and column " << (char)column << ".";
 		printMessage(ss.str());
@@ -174,11 +171,11 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 		Coordinate position = std::make_pair(line - 'A', column - 'a');
 
 		if (toupper(input) == 'N') {
-			clearScreen();
+			clearScreen(0, hSize);
 			continue;
 		}
 
-		clearScreen();
+		clearScreen(0, hSize);
 		if (input == EOF) break;
 
 		if (stringToUpper(deletePrompt) == "DELETE") {
@@ -204,7 +201,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 
 		waitForKey();
 			
-		clearScreen();
+		clearScreen(0, hSize);
 	}
 }
 
@@ -214,6 +211,15 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
  */
 int main()
 {
+	HWND console = GetConsoleWindow();
+	RECT r;
+	GetWindowRect(console, &r); //stores the console's current dimensions
+
+	MoveWindow(console, r.left, r.top, 1400, 1100, TRUE);       // Setting window Size
+
+	SetWindowLong(console, GWL_STYLE, GetWindowLong(console, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);   // Making window unresizable
+
+
 	std::vector<std::string> words;
 	std::string fileName;
 	std::stringstream ss;
@@ -221,6 +227,9 @@ int main()
 	char input;
 	Board board;
 	readWords(words);
+
+	showTitle();
+	gotoxy(0, YBEGMENU);
 
 	printMessage("Welcome to the Scrabble Junior Board Builder Tool.");
 	printMessage("Creating a Board is easy, don't worry. Just follow the instructions and answer all of the questions.");
@@ -231,7 +240,7 @@ int main()
 	waitForKey();
 
 	while (true) {
-		clearScreen();
+		clearScreen(0, YBEGMENU);
 
 		inputLimits(board);
 		while (!board.hasMinimumOfSquares()) {
@@ -241,12 +250,12 @@ int main()
 			printMessage(ss.str(), RED, BLACK);
 			waitForKey();
 
-			clearScreen();
+			clearScreen(0, YBEGMENU);
 
 			inputLimits(board);
 		}
 
-		clearScreen();
+		clearScreen(0, YBEGMENU);
 
 		size = board.getSize();
 		ss.str(std::string());
@@ -258,7 +267,7 @@ int main()
 		if (toupper(input) != 'N') break;
 	}
 
-	clearScreen();
+	clearScreen(0, YBEGMENU);
 	board.initializeWords();
 	
 	printMessage("You will now be asked to input the words into the board.");
@@ -268,7 +277,7 @@ int main()
 	printMessage("If in Linux or Mac OS, at any point, press CTRL+D.", GREEN, BLACK);
 	waitForKey();
 
-	clearScreen();
+	clearScreen(0, YBEGMENU);
 	inputWords(board, words);
 	while (!board.hasMinimumOfLetters()) {
 		std::cin.clear();
@@ -278,16 +287,18 @@ int main()
 		printMessage(ss.str(), RED, BLACK);
 		printMessage("Please continue building the board until the minimum is reached.", RED, BLACK);
 
+		waitForKey();
+
 		inputWords(board, words);
 	}
 	std::cin.clear();
 
 
-	clearScreen();
+	clearScreen(0, YBEGMENU);
 
 	printMessage("Insert the name of the file where the board will be saved.", WHITE, BLACK);
 	while (!checkInput(fileName)) {
-		clearScreen();
+		clearScreen(0, YBEGMENU);
 
 		printMessage("Input was invalid, please try again.", RED, BLACK);
 		printMessage("Insert the name of the file where the board will be saved.", WHITE, BLACK);

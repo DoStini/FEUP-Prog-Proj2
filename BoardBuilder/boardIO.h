@@ -1,6 +1,11 @@
 #pragma once
 #include<iostream>
+#include <windows.h>
 #include<string>
+
+#define XBEGMENU 70
+#define YBEGMENU 15
+#define YSPACING 4
 
 /**
  * Function that prompts the user for input.
@@ -74,8 +79,9 @@ void getChar(char& input);
 void printMessage(std::string message, std::string end = "\n");
 void printMessage(std::string message, int bgColor, int fgColor, std::string end = "\n");
 bool checkStop();
-void clearScreen();
+//void clearScreen();
 void waitForKey();
 std::string stringToLower(std::string str);
 std::string stringToUpper(std::string str);
 void gotoxy(int x, int y);
+void clearScreen(short xPos = 0, short yPos = 0);

@@ -1,4 +1,5 @@
 #include "color.h"
+#include "boardIO.h"
 #include <iostream>
 #include <string>
 
@@ -30,9 +31,9 @@ bool checkStop() {
 	return std::cin.eof();
 }
 
-void clearScreen() {
-	std::cout << "\033[2J\033[1;1H";
-}
+//void clearScreen() {
+//	std::cout << "\033[2J\033[1;1H";
+//}
 
 void waitForKey() {
 	printMessage("Press any key to continue...", WHITE, BLACK, "");
@@ -61,6 +62,26 @@ std::string stringToUpper(std::string str) {
 	return newCopy;
 }
 
-void gotoxy(int x, int y) {
-	std::cout << "\033[" << y << ";" << x << "f";
+void gotoxy(int x, int y)
+{
+	COORD coord;
+	coord.X = x;
+	coord.Y = y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void clearScreen(short xPos, short yPos) {
+	COORD coordScreen = { xPos, yPos }; // upper left corner
+	DWORD cCharsWritten;
+	DWORD dwConSize;
+	HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(hCon, &csbi);
+	dwConSize = (csbi.dwSize.X - xPos) * (csbi.dwSize.Y - yPos);
+	// fill with spaces
+	FillConsoleOutputCharacter(hCon, TEXT(' '), dwConSize, coordScreen, &cCharsWritten);
+	GetConsoleScreenBufferInfo(hCon, &csbi);
+	FillConsoleOutputAttribute(hCon, csbi.wAttributes, dwConSize, coordScreen, &cCharsWritten);
+	// cursor to upper left corner
+	SetConsoleCursorPosition(hCon, coordScreen);
 }
