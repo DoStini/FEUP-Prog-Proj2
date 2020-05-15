@@ -104,7 +104,10 @@ void clearScreen(short xPos, short yPos) {
 void placePlayer(Player &player){
     cleanLine(player.getX(), player.getY(), 40);
     gotoxy(player.getX(), player.getY());
-    std::cout << player.getName() << "'s score: " << player.getScore();
+    setColor(player.getColor());
+    std::cout << player.getName() << "'s ";
+    setColor(ConsoleColors::WhiteFore, ConsoleColors::BlackFore);
+    std::cout << "score: " << player.getScore();
     cleanLine(player.getX(), player.getY() + 1, 40);
     gotoxy(player.getX(), player.getY() + 1);
     std::cout << "This is your board: ";

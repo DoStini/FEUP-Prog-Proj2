@@ -17,7 +17,6 @@
 #include "Menu.h"
 #include "TopScores.h"
 
-using namespace std;
 
 int main() {
     HWND console = GetConsoleWindow();

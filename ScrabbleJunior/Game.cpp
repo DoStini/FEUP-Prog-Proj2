@@ -12,6 +12,12 @@ Game::Game(unsigned short int numPlayers, std::vector<std::string> playerNames, 
             {boardPtr->getStart() - 40, YBEG + (boardPtr->getVSize() * YSPACING)/2},
             {boardPtr->getStart() + boardPtr->getHSize() * XSPACING + 10, YBEG + (boardPtr->getVSize() * YSPACING)/2}
     };
+    playerNameColors = {
+            ConsoleColors::RedFore,
+            ConsoleColors::YellowFore,
+            ConsoleColors::BlueFore,
+            ConsoleColors::GreenFore
+    };
     initPot();
     limit = pot.size();
 
@@ -125,11 +131,9 @@ void Game::initPlayers(unsigned short numPlayers, std::vector<std::string> playe
     players.reserve(numPlayers);
     Player player;
     for (int i = 0; i < numPlayers; ++i) {
-        player = Player(pot, playerNames[i]);
+        player = Player(pot, playerNames[i], playerPositions[i], playerNameColors[i]);
         players.push_back(player);
-        players[i].setX(playerPositions[i][0]);             // Setting graphical x and y positions on the screen
-        players[i].setY(playerPositions[i][1]);
-        placePlayer(players[i]);                             // Placing player in the screen
+        placePlayer(player);                             // Placing player in the screen
     }
 
 

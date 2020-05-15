@@ -2,6 +2,7 @@
 #include<iostream>
 #include <windows.h>
 #include<string>
+#include <limits>
 
 #define XBEGMENU 70
 #define YBEGMENU 15

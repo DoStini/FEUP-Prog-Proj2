@@ -5,9 +5,12 @@
 
 Player::Player() = default;
 
-Player::Player(std::vector<char> &pot, std::string name){
+Player::Player(std::vector<char> &pot, std::string name, std::vector<int> pos, ConsoleColors color){
     initTiles(pot);
     setName(name);
+    setX(pos[0]);
+    setY(pos[1]);
+    setColor(color);
 }
 
 
@@ -118,4 +121,19 @@ void Player::setX(int val){
 */
 void Player::setY(int val){
     pos.second = val;
+}
+
+/**
+ * Set graphical name's color of player
+ *
+ * @param color
+ */
+void Player::setColor(ConsoleColors color) {
+    this->color = color;
+}
+/**
+ * Get graphical name's color of player
+ */
+ConsoleColors Player::getColor() {
+    return color;
 }

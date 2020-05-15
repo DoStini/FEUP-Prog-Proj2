@@ -29,6 +29,7 @@ public:
 private:
     std::vector<char> pot; // The bag of tiles
     std::vector<std::vector<int>> playerPositions;
+    std::vector<ConsoleColors> playerNameColors;
     unsigned short int limit;
     unsigned short int numTiles = 0;
     unsigned short int numPlayers;
