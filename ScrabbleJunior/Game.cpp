@@ -22,10 +22,8 @@ Game::Game(unsigned short int numPlayers, std::vector<std::string> playerNames, 
     limit = pot.size();
 
     if (numPlayers * 7 > limit){
-        clearScreen(XBEGMENU - 15, YBEG - 4);
-        std::cout << "Number of players is excessive over number of tiles in the board.";
-        gotoxy(XBEGMENU, YBEG - 3);
-        waitForKey();
+        clearAndPrint("Number of players is excessive over number of tiles in the board.", XBEGMENU - 15, YBEG - 4);
+        waitForKey(XBEGMENU, YBEG - 3);
     }
     else{
         initPlayers(numPlayers, playerNames);
@@ -95,8 +93,7 @@ void Game::checkWinner(){
         std::cout << " with " << players[0].getScore() << " points!";
     }
 
-    gotoxy(XBEGMENU - 20, YBEG - 3);
-    waitForKey();
+    waitForKey(XBEGMENU - 20, YBEG - 3);
 
     std::vector<Winner> winners;
     getNameScore(players, winners);                         // Converting class player to struct of name and score
@@ -135,8 +132,6 @@ void Game::initPlayers(unsigned short numPlayers, std::vector<std::string> playe
         players.push_back(player);
         placePlayer(player);                             // Placing player in the screen
     }
-
-
 }
 
 
@@ -181,11 +176,9 @@ char Game::getRandomTile() {
  * @param player - Current player
  */
 bool Game::inputMove(unsigned short int intPosition[2], Player &player){
-    clearScreen(XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 10);
-    std::cout << player.getName() << ", you're up!";
+    clearAndPrint(player.getName() + ", you're up!", XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 10);
 
-    gotoxy(XBEGMENU-10, YBEG + boardPtr->getVSize() * YSPACING + 11);
-    std::cout << "Enter the position on the board in the format 'Aa': ";
+    printMsg("Enter the position on the board in the format 'Aa': ", XBEGMENU-10, YBEG + boardPtr->getVSize() * YSPACING + 11);
 
     std::string position;
     while(1){
@@ -196,11 +189,9 @@ bool Game::inputMove(unsigned short int intPosition[2], Player &player){
             }
         }
 
-        clearScreen(XBEGMENU, YBEG + boardPtr->getVSize() * YSPACING + 12);
-        std::cout << "Your input was invalid.";
-
-        gotoxy(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 13);
-        std::cout << "Re-enter the position on the board in the format 'Aa': ";
+        clearScreen(0, YBEG + boardPtr->getVSize() * YSPACING + 12);
+        errorMsg("Your input was invalid.", XBEGMENU, YBEG + boardPtr->getVSize() * YSPACING + 12);
+        errorMsg("Re-enter the position on the board in the format 'Aa': ",XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 13);
     }
 
     intPosition[0] = position[0] - 'A';
@@ -208,11 +199,10 @@ bool Game::inputMove(unsigned short int intPosition[2], Player &player){
 
     short int playerTileIndex = player.checkTiles(boardPtr->getTile(intPosition));        // Checking if player contains chosen tile
     if (playerTileIndex == -1){
-        clearScreen(XBEGMENU + 3, YBEG + boardPtr->getVSize() * YSPACING + 12);
-        std::cout << "You don't own that tile!";
+        clearScreen(0, YBEG + boardPtr->getVSize() * YSPACING + 12);
+        errorMsg("You don't own that tile!", XBEGMENU + 3, YBEG + boardPtr->getVSize() * YSPACING + 12);
 
-        gotoxy(XBEGMENU, YBEG + boardPtr->getVSize() * YSPACING + 13);
-        waitForKey();
+        waitForKey(XBEGMENU, YBEG + boardPtr->getVSize() * YSPACING + 13);
         return false;
     }
     else{
@@ -246,11 +236,10 @@ bool Game::playerMove(Player &player) {
             gotValidMove(player, pos, boardPtr->getTile(pos), hWordPtr, vWordPtr);
         }
         else{
-            clearScreen(XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 12);
-            std::cout << "That move is illegal!";
+            clearScreen(0, YBEG + boardPtr->getVSize() * YSPACING + 12);
+            errorMsg("That move is illegal!", XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 12);
 
-            gotoxy(XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 13);
-            waitForKey();
+            waitForKey(XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 13);
             return false;
         }
     }
@@ -321,19 +310,16 @@ void Game::gotValidMove(Player &player, unsigned short int pos[2], char letter, 
  * @param player - The current player
  */
 void Game::changeTile(Player &player){
-    clearScreen(XBEGMENU, YBEG + boardPtr->getVSize() * YSPACING + 12);
-    std::cout << "You have no moves left...";
+    clearScreen(0, YBEG + boardPtr->getVSize() * YSPACING + 12);
+    errorMsg("You have no moves left...", XBEGMENU, YBEG + boardPtr->getVSize() * YSPACING + 12);
 
     if (pot.size() == 0){                                              // If the pot is clean, no trade can be done
-        gotoxy(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 13);
-        std::cout << "Skipping player";
+        errorMsg("Skipping player", XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 13);
 
-        gotoxy(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 13);
-        waitForKey();
+        waitForKey(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 13);
     }
     else{
-        gotoxy(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 13);
-        std::cout << "Choose one of your tiles to trade: ";
+        printMsg("Choose one of your tiles to trade: ", XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 13);
         player.showTiles();
 
         while (1){
@@ -349,14 +335,8 @@ void Game::changeTile(Player &player){
                 break;
             }
             else{
-                gotoxy(XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 14);
-                std::cout << "You don't have that tile, re-enter.";
+                errorMsg("You don't have that tile, re-enter.", XBEGMENU - 15, YBEG + boardPtr->getVSize() * YSPACING + 14);
             }
         }
     }
 }
-
-
-
-
-

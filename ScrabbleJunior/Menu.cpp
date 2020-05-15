@@ -151,8 +151,6 @@ void showTitle() {
 		std::cin.clear();
 		std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 	}
-	
-	gotoxy(0, titleA.size() + 2);
 }
 
 /**
@@ -237,8 +235,8 @@ void newGame(){
 
     while (1){
         if (!checkInput(numPlayers) || (numPlayers < 2 || numPlayers > 4)){
-            clearScreen(XBEGMENU,YBEGMENU + 9);
-            std::cout << "Invalid, re-enter: ";
+            clearScreen(0,YBEGMENU + 9);
+            errorMsg("Invalid, re-enter: ", XBEGMENU,YBEGMENU + 9);
         }
         else{
             break;
@@ -248,8 +246,7 @@ void newGame(){
     std::vector<std::string> playerNames;
     std::string name;
     for (int k = 0; k < numPlayers; ++k) {
-        gotoxy(XBEGMENU, YBEGMENU + 10 + k);
-        std::cout << "Player " << k + 1 << "'s name: ";
+        printMsg("Player " + std::to_string(k+1) + "'s name: ", XBEGMENU, YBEGMENU + 10 + k);
         std::cin >> name;
         playerNames.push_back(name);
     }
@@ -269,12 +266,9 @@ void newGame(){
 			ss << "../Assets/" << file;
             ff.open(ss.str());
             if (!ff.is_open()){
-                gotoxy(XBEGMENU, YBEGMENU + 12 + numPlayers);
-                std::cerr << "File does not exist!";
-                gotoxy(XBEGMENU, YBEGMENU + 13 + numPlayers);
-                waitForKey();
-                clearScreen(XBEGMENU, YBEGMENU + 11 + numPlayers);
-                std::cout << "Re-enter: ";
+                errorMsg("File does not exist!", XBEGMENU, YBEGMENU + 12 + numPlayers);
+                waitForKey(XBEGMENU, YBEGMENU + 13 + numPlayers);
+                clearAndPrint("Re-enter: ", XBEGMENU, YBEGMENU + 11 + numPlayers);
             }
             else{
                 ff.close();
@@ -320,8 +314,8 @@ void showRules(){
     for (int i = 0; i < rules.size(); ++i) {
         showCascading(rules[i], 2, 60,YBEGMENU + 7 + 2*i);      // 2*i -> skipping lines
     }
-    gotoxy(XBEGMENU, YBEGMENU + 9 + 2*rules.size());          // Skipping lines
-    waitForKey();
+
+    waitForKey(XBEGMENU, YBEGMENU + 9 + 2*rules.size());                     // Skipping lines
 }
 
 /**
@@ -349,8 +343,7 @@ void showCredits(){
     for (int i = 0; i < credits.size(); ++i) {
         showCascading(credits[i], 2, XBEGMENU - 20,YBEGMENU + 7 + i);
     }
-    gotoxy(XBEGMENU, YBEGMENU + 9 + credits.size());
-    waitForKey();
+    waitForKey(XBEGMENU, YBEGMENU + 9 + credits.size());
 }
 
 /**
@@ -367,8 +360,7 @@ void closeGame(){
     Sleep(1000);
     showCascading("We hope you enjoyed your stay...",10,XBEGMENU, YBEGMENU + 9);
     Sleep(1000);
-    gotoxy(XBEGMENU, YBEGMENU + 11);
-    waitForKey();
+    waitForKey(XBEGMENU, YBEGMENU + 11);
     exit(1);
 }
 
@@ -388,26 +380,25 @@ void showScores(){
 
 
     std::vector<Winner> bestPlayers = readScores("scoreboard.win");
+    std::vector<ConsoleColors> medals = {ConsoleColors::OliveBack, ConsoleColors::SilverBack, ConsoleColors::YellowBack, ConsoleColors::WhiteBack, ConsoleColors::WhiteBack};
+    std::vector<ConsoleColors> textColor = {ConsoleColors::OliveFore, ConsoleColors::SilverFore, ConsoleColors::YellowFore, ConsoleColors::WhiteFore, ConsoleColors::WhiteFore};
 
     if (bestPlayers[0].score != 0){
-        gotoxy(XBEGMENU, YBEGMENU + 9);
-        gotoxy(XBEGMENU, YBEGMENU + 10);
-        std::cout << "Congratulations to the best players around here";
+        showCascading("Congratulations to the best players around here", 1, XBEGMENU, YBEGMENU + 10);
         for (int i = 0; i < 5; ++i) {
             if (bestPlayers[i].score == 0){
                 break;
             }
-            gotoxy(XBEGMENU + 10, YBEGMENU + 11 + i);
-            std::cout << i + 1 << " - " << bestPlayers[i].name << " - " << bestPlayers[i].score;
+            printMsg(std::to_string(i+1), XBEGMENU + 10, YBEGMENU + 11 + i, ConsoleColors::BlackFore, medals[i]);
+            printMsg(" " + std::string(bestPlayers[i].name), textColor[i]);
+            printMsg(" - ");
+            printMsg(std::to_string(bestPlayers[i].score), textColor[i]);
         }
-        gotoxy(XBEGMENU, YBEGMENU + 18);
-        waitForKey();
+        waitForKey(XBEGMENU, YBEGMENU + 18);
     }
     else{
-        gotoxy(XBEGMENU + 5, YBEGMENU + 9);
-        std::cout << "There is noone here yet. Go on and play!";
-        gotoxy(XBEGMENU + 5, YBEGMENU + 11);
-        waitForKey();
+        printMsg("There is noone here yet. Go on and play!", XBEGMENU + 5, YBEGMENU + 9);
+        waitForKey(XBEGMENU + 5, YBEGMENU + 11);
     }
 }
 

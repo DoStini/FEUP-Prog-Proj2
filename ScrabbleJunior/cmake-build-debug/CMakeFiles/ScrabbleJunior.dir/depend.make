@@ -22,6 +22,7 @@ CMakeFiles/ScrabbleJunior.dir/Game.cpp.obj: ../Word.h
 CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.obj: ../Color.h
 CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.obj: ../Graphical.cpp
 CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.obj: ../Graphical.h
+CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.obj: ../IO.h
 CMakeFiles/ScrabbleJunior.dir/Graphical.cpp.obj: ../Player.h
 
 CMakeFiles/ScrabbleJunior.dir/IO.cpp.obj: ../Color.h

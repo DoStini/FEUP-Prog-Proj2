@@ -8,6 +8,7 @@
 #include "Player.h"
 #include <windows.h>
 #include "Color.h"
+#include "IO.h"
 
 #define YBEG 25
 #define XSPACING 2

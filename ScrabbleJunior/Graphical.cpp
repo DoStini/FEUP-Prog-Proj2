@@ -4,6 +4,7 @@
 
 #include "Graphical.h"
 
+
 /**
  * Function to put console cursor in a specified position
  *
@@ -103,13 +104,13 @@ void clearScreen(short xPos, short yPos) {
  */
 void placePlayer(Player &player){
     cleanLine(player.getX(), player.getY(), 40);
-    gotoxy(player.getX(), player.getY());
-    setColor(player.getColor());
-    std::cout << player.getName() << "'s ";
-    setColor(ConsoleColors::WhiteFore, ConsoleColors::BlackFore);
-    std::cout << "score: " << player.getScore();
+    printMsg(player.getName() + "'s ", player.getX(), player.getY(), player.getColor());
+    printMsg("score: " + std::to_string(player.getScore()));
+
     cleanLine(player.getX(), player.getY() + 1, 40);
-    gotoxy(player.getX(), player.getY() + 1);
-    std::cout << "This is your board: ";
+    printMsg("This is your board: ", player.getX(), player.getY() + 1);
+
+    setColor(ConsoleColors::OliveFore);
     player.showTiles();
+    setColor(ConsoleColors::WhiteFore);
 }

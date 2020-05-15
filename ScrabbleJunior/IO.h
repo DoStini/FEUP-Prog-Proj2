@@ -37,8 +37,11 @@ bool checkInput(T& input, char delimiter = '\n') {
 
 
 void waitForKey();
+void waitForKey(short int x, short int y);
 std::string stringToLower(std::string str);
 void errorMsg(std::string text, short int x, short int y);
+void clearAndPrint(std::string text, short int x, short int y);
+void printMsg(std::string text);
 void printMsg(std::string text, short int x, short int y);
 void printMsg(std::string text, ConsoleColors color);
 void printMsg(std::string text, short int x, short int y, ConsoleColors color);

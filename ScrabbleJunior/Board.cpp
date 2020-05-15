@@ -118,6 +118,7 @@ Word *Board::findWord(unsigned short int index, unsigned short int charPos, bool
 
 /**
  * Function to show the board
+ * Still using std::cout instead of printMsg to avoid extra instructions inside the loops
  */
 void Board::showBoard() {
     unsigned short int center = XBEGMENU + 13;
