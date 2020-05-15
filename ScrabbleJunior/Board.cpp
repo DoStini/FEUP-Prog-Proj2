@@ -45,17 +45,17 @@ void Board::readBoard(std::string fileName) {
     unsigned short int verticalIdx;
     unsigned short int horizontalIdx;
 
-    initArray();                                            // Initializing our board, containing all letters
-    initWordVectors();                                      // Initializing our words containers
+    initArray();                                                                // Initializing our board, containing all letters
+initWordVectors();                                                              // Initializing our words containers
 
     int counter = 0;
     while (f_in.peek() != '#'){
-        f_in >> position[0] >> position[1] >> sep >> word;                    // Input is given as "Aa"
+        f_in >> position[0] >> position[1] >> sep >> word;                      // Input is given as "Aa"
 
-        verticalIdx = (int) position[0] - (int) 'A';        // vertical index will be A converted to integer, counting 0 as char A
-        horizontalIdx = (int) position[1] - (int) 'a';      // same for horizontal index but with "a"
+        verticalIdx = (int) position[0] - (int) 'A';                            // vertical index will be A converted to integer, counting 0 as char A
+        horizontalIdx = (int) position[1] - (int) 'a';                          // same for horizontal index but with "a"
 
-        writeOnArray(word, sep == 'V', verticalIdx, horizontalIdx);         // Writing word on graphical board
+        writeOnArray(word, sep == 'V', verticalIdx, horizontalIdx);     // Writing word on graphical board
         counter++;
         if (sep == 'V'){
             Word temp(word, verticalIdx);
@@ -133,18 +133,24 @@ void Board::showBoard() {
         for(int space = 0; space < XSPACING-1; space++) std::cout << ' ';
     }
 
-    setColor(ConsoleColors::WhiteFore, ConsoleColors::BlackBack);
-
     for (int i = 0; i < vSize; ++i) {
         gotoxy(start, YBEG + YSPACING * (i + 1));
-        setColor(ConsoleColors::BlackFore, ConsoleColors::WhiteBack);
         std::cout << (char)(i + 'A');
         setColor(ConsoleColors::WhiteFore, ConsoleColors::BlackBack);
         for (int j = 0; j < hSize; ++j) {
             for(int space = 0; space < XSPACING-1; space++) std::cout << ' ';
             std::cout << letters[i][j];
         }
+        setColor(ConsoleColors::BlackFore, ConsoleColors::WhiteBack);
+        std::cout << (char)(i + 'A');
     }
+    gotoxy(start, YBEG + YSPACING * (vSize + 1));
+    for(int space = 0; space < XSPACING; space++) std::cout << ' ';
+    for (unsigned short c = 0; c < hSize; c++) {
+        std::cout << (char)(c + 'a');
+        for(int space = 0; space < XSPACING-1; space++) std::cout << ' ';
+    }
+    setColor(ConsoleColors::WhiteFore, ConsoleColors::BlackBack);       // Normalizing color
 }
 
 

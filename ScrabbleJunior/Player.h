@@ -20,6 +20,7 @@ public:
     unsigned short int getScore();
     std::string getName();
     void setName(std::string name);
+    ///Graphical functions
     int getX();
     int getY();
     void setX(int val);

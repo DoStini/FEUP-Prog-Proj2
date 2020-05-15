@@ -38,3 +38,9 @@ bool checkInput(T& input, char delimiter = '\n') {
 
 void waitForKey();
 std::string stringToLower(std::string str);
+void errorMsg(std::string text, short int x, short int y);
+void printMsg(std::string text, short int x, short int y);
+void printMsg(std::string text, ConsoleColors color);
+void printMsg(std::string text, short int x, short int y, ConsoleColors color);
+void printMsg(std::string text, ConsoleColors color, ConsoleColors backColor);
+void printMsg(std::string text, short int x, short int y, ConsoleColors color, ConsoleColors backColor);

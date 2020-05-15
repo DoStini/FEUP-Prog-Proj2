@@ -23,7 +23,6 @@ public:
     void changeTile(Player &player);
     void checkWinner();
     void getNameScore(std::vector<Player> &players, std::vector<Winner> &out);
-    // Graphical stuff
 
 
 private:

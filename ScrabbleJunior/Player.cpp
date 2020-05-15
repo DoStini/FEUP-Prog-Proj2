@@ -8,9 +8,9 @@ Player::Player() = default;
 Player::Player(std::vector<char> &pot, std::string name, std::vector<int> pos, ConsoleColors color){
     initTiles(pot);
     setName(name);
-    setX(pos[0]);
+    setX(pos[0]);               // Graphical position in console
     setY(pos[1]);
-    setColor(color);
+    setColor(color);                // Graphical color
 }
 
 

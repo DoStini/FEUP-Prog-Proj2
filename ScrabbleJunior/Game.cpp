@@ -208,10 +208,10 @@ bool Game::inputMove(unsigned short int intPosition[2], Player &player){
 
     short int playerTileIndex = player.checkTiles(boardPtr->getTile(intPosition));        // Checking if player contains chosen tile
     if (playerTileIndex == -1){
-        clearScreen(XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 12);
+        clearScreen(XBEGMENU + 3, YBEG + boardPtr->getVSize() * YSPACING + 12);
         std::cout << "You don't own that tile!";
 
-        gotoxy(XBEGMENU-15, YBEG + boardPtr->getVSize() * YSPACING + 13);
+        gotoxy(XBEGMENU, YBEG + boardPtr->getVSize() * YSPACING + 13);
         waitForKey();
         return false;
     }

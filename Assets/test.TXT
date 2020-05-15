@@ -1,4 +1,4 @@
-10x10
+20x20
 Aa H WORD
 Ed H MASTER
 Ad V DREAM
