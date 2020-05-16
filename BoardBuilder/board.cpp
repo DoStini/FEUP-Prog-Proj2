@@ -573,7 +573,7 @@ short Board::deleteWord(Word word, Coordinate position, bool vertical) {
 void Board::saveBoard(std::string fileName) {
 	std::stringstream path;
 	path.str(std::string());
-	path << "../Assets/" << fileName << ".TXT";
+	path << fileName << ".TXT";
 
 	std::ofstream saveFile(path.str());
 	std::vector<Word>::iterator it;

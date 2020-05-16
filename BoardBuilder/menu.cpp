@@ -140,6 +140,29 @@ void dropLetter(const std::vector<std::string> &letter, int time, int num, unsig
 }
 
 /**
+ * Function to show a string one character at a time intervaled by t miliseconds.
+ *
+ * @param s String to be shown
+ * @param t Time in milliseconds between each character
+ * @param xStart x position to start writing
+ * @param yStart y position to start writing
+ */
+void showCascading(std::string s, time_t t, unsigned short int xStart, unsigned short int yStart) {
+	unsigned short int lineFeed = yStart;
+	gotoxy(xStart, lineFeed);
+	for (int i = 0; i < s.length(); ++i) {
+		if (s[i] == '\n') {
+			lineFeed++;
+			gotoxy(xStart, lineFeed);
+			continue;
+		}
+		std::cout << s[i];
+		Sleep(t);
+	}
+
+}
+
+/**
  * Animates showing the title, "dropping" one letter at a time.
  */
 void showTitle() {
@@ -153,5 +176,11 @@ void showTitle() {
 		std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
 	}
 
-	gotoxy(0, titleA.size() + 2);
+	showCascading(
+		" ____                      _   ____        _ _     _\n"
+		"|  _ \\                    | | |  _ \\      (_) |   | |\n"
+		"| |_) | ___   __ _ _ __ __| | | |_) |_   _ _| | __| | ___ _ __\n"
+		"|  _ < / _ \\ / _` | '__/ _` | |  _ <| | | | | |/ _` |/ _ \\ '__|\n"
+		"| |_) | (_) | (_| | | | (_| | | |_) | |_| | | | (_| |  __/ |\n"
+		"|____/ \\___/ \\__,_|_|  \\__,_| |____/ \\__,_|_|_|\\__,_|\\___|_| \n", 1, XBEGMENU-15, YBEGTITLE);
 }

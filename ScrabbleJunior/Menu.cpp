@@ -266,7 +266,7 @@ void newGame(){
         if (checkInput(file)){
             std::ifstream ff;
 
-			ss << "../Assets/" << file;
+			ss << file;
             ff.open(ss.str());
             if (!ff.is_open()){
                 errorMsg("File does not exist!", XBEGMENU, YBEGMENU + 12 + numPlayers);

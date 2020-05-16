@@ -2,6 +2,7 @@
 #include "boardIO.h"
 #include <iostream>
 #include <string>
+#include <sstream>
 
 void getString(std::string &string) {
 	std::getline(std::cin, string);
@@ -56,6 +57,13 @@ std::string stringToUpper(std::string str) {
 	}
 
 	return newCopy;
+}
+
+std::string stringWithColor(std::string str, int bgColor, int fgColor) {
+	std::stringstream ss;
+	ss << "\033[" << COLOR[bgColor].first << ";" << COLOR[fgColor].second << "m" << str << "\033[0m";
+
+	return ss.str();
 }
 
 /**

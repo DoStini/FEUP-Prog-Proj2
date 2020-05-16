@@ -5,7 +5,8 @@
 #include <limits>
 
 #define XBEGMENU 70
-#define YBEGMENU 15
+#define YBEGTITLE 13
+#define YBEGMENU 22
 #define YSPACING 4
 
 /**
@@ -84,5 +85,6 @@ bool checkStop();
 void waitForKey();
 std::string stringToLower(std::string str);
 std::string stringToUpper(std::string str);
+std::string stringWithColor(std::string str, int bgColor, int fgColor);
 void gotoxy(int x, int y);
 void clearScreen(short xPos = 0, short yPos = 0);

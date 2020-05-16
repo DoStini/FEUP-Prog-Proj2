@@ -305,10 +305,17 @@ int main()
 	};
 
 	board.saveBoard(fileName);
+	clearScreen(0, YBEGMENU);
 	
 
 	ss.str(std::string());
-	ss << "Your board has been saved into the '" << fileName << ".TXT' file in the Assets folder.";
+	ss << "Your board has been saved into the '" << fileName << ".TXT' file.";
+	
+	printMessage(ss.str());
+
+	ss.str(std::string());
+	ss << "To use this board in Scrabble Junior, please transfer the file to the " << stringWithColor("Scrabble Junior folder", GREEN, BLACK);
+
 	printMessage(ss.str());
 	waitForKey();
 	return 0;
