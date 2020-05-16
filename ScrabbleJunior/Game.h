@@ -26,6 +26,8 @@ public:
 
 
 private:
+    enum state {Playing, End};
+    state currState;
     std::vector<char> pot; // The bag of tiles
     std::vector<std::vector<int>> playerPositions;
     std::vector<ConsoleColors> playerNameColors;
