@@ -129,7 +129,7 @@ void Game::getNameScore(std::vector<Player> &players, std::vector<Winner> &out){
  * @param numPlayers - The number of players
  * @param playerNames - Vector containing player names
  */
-void Game::initPlayers(unsigned short numPlayers, std::vector<std::string> playerNames) {
+void Game::initPlayers(unsigned short int numPlayers, std::vector<std::string> playerNames) {
     players.reserve(numPlayers);
     Player player;
     for (int i = 0; i < numPlayers; ++i) {
@@ -180,7 +180,7 @@ char Game::getRandomTile() {
  * @param intPosition - The position chosen by the player. Will be return through this
  * @param player - Current player
  */
-bool Game::inputMove(unsigned short int intPosition[2], Player &player){
+int Game::inputMove(unsigned short int intPosition[2], Player &player){
     clearAndPrint(player.getName() + ", you're up!", XBEGMENU + 5, YBEG + boardPtr->getVSize() * YSPACING + 10);
 
     printMsg("Enter the position on the board in the format 'Aa': ", XBEGMENU-10, YBEG + boardPtr->getVSize() * YSPACING + 11);
@@ -203,9 +203,9 @@ bool Game::inputMove(unsigned short int intPosition[2], Player &player){
 
             if (tolower(confirm) == 'y'){
                 currState = End;
-                return true;
+                return 2;
             } else{
-                return false;
+                return 0;
             }
         }
 
@@ -223,10 +223,10 @@ bool Game::inputMove(unsigned short int intPosition[2], Player &player){
         errorMsg("You don't own that tile!", XBEGMENU + 3, YBEG + boardPtr->getVSize() * YSPACING + 12);
 
         waitForKey(XBEGMENU, YBEG + boardPtr->getVSize() * YSPACING + 13);
-        return false;
+        return 0;
     }
     else{
-        return true;
+        return 1;
     }
 }
 
@@ -239,10 +239,15 @@ bool Game::inputMove(unsigned short int intPosition[2], Player &player){
  */
 bool Game::playerMove(Player &player) {
     unsigned short int pos[2];
-    if (!inputMove(pos, player)){
+	int result = inputMove(pos, player);
+
+    if (result == 0){
         return false;
     }
-    else{
+	else if (result == 2) {
+		return true;
+	}
+	else {
         Word *hWordPtr = boardPtr->findWord(pos[0], pos[1], false);         // Finds horizontal word in that position
         Word *vWordPtr = boardPtr->findWord(pos[1], pos[0], true);          // Finds vertical word in that position
 

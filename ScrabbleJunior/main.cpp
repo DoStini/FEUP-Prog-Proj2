@@ -18,26 +18,6 @@
 #include "TopScores.h"
 
 
-int testColors(){
-    for (int col = BlackBack; col != WhiteBack; col ++) {
-        setColor(ConsoleColors::WhiteFore, col);
-        std::cout << col << std::endl;
-    }
-}
-
-int main2(){
-
-        Winner p1; strncpy(p1.name, "Jogador 4", sizeof(p1.name)); p1.score = 9;
-
-        std::vector<Winner> players = {p1};
-        checkScores(players, "scoreboard.win");
-
-
-        return 0;
-
-}
-
-
 int main() {
     HWND console = GetConsoleWindow();
     RECT r;

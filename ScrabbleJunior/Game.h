@@ -16,7 +16,7 @@ public:
     void initPlayers(unsigned short int numPlayers, std::vector<std::string> playerNames);
     void initPot();
     char getRandomTile();
-    bool inputMove(unsigned short int intPosition[2], Player &player);
+    int inputMove(unsigned short int intPosition[2], Player &player);
     bool playerMove(Player &player);
     void gotValidMove(Player &player, unsigned short int pos[2], char letter, Word *hWordPtr, Word *vWordPtr);
     bool gameManager();
