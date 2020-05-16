@@ -5,6 +5,10 @@ out
 cmake-build-debug/
 .vs/
 *.txt
+.suo
+ScrabbleJunior/.vs/
+Assets/
+*.TXT
 
 
 out
