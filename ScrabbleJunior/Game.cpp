@@ -28,6 +28,8 @@ Game::Game(unsigned short int numPlayers, std::vector<std::string> playerNames, 
     else{
         initPlayers(numPlayers, playerNames);
 
+        currState = Playing;
+
         gameManager();
         checkWinner();
     }
@@ -36,14 +38,17 @@ Game::Game(unsigned short int numPlayers, std::vector<std::string> playerNames, 
 
 /**
  * This function is used to control the game flow
+ *
+ * @return bool - To end the game and leave the function. No significant meaning
  */
 bool Game::gameManager() {
     while (1){
         for (int i = 0; i < numPlayers; ++i) {
             for (int j = 0; j < 2; ++j) {                           // Two turns per player
-
-                if (numTiles == limit) return true;                 // Reached the end of the game, every piece has been used
-                if (boardPtr->analyseMoves(players[i])){        // Checks if the player can play anything
+                if (currState == End){                              // Reached the end of the game, every piece has been used
+                    return true;
+                }
+                else if (boardPtr->analyseMoves(players[i])){   // Checks if the player can play anything
                     bool valid = true;
                     while (valid){
                         valid = !playerMove(players[i]);        // Loop until a valid move has been given
@@ -182,10 +187,25 @@ bool Game::inputMove(unsigned short int intPosition[2], Player &player){
 
     std::string position;
     while(1){
-        if (checkInput(position, '\n') && position.length() == 2) {                 // Checking if string given contains only 2 letters Aa
+        unsigned short int valid = checkInputOrSTOP(position, '\n');
+        if (valid == 1 && position.length() == 2) {                 // Checking if string given contains only 2 letters Aa
             if (position[0] >= 'A' && position[0] <= ('A' + boardPtr->getVSize() ) &&            // Checks if is inside the board limits ('A' = 0, 'A' + vSize = maxIndex)
                 position[1] >= 'a' && position[1] <= ('a' + boardPtr->getHSize())) {
                 break;
+            }
+        }
+        else if (valid == 2){
+            char confirm;
+            while (!checkInput(confirm)){
+                clearScreen(0, YBEG + boardPtr->getVSize() * YSPACING + 12);
+                errorMsg("Are you sure you want to end the game? (y/n)", XBEGMENU, YBEG + boardPtr->getVSize() * YSPACING + 12);
+            }
+
+            if (tolower(confirm) == 'y'){
+                currState = End;
+                return true;
+            } else{
+                return false;
             }
         }
 
@@ -301,6 +321,8 @@ void Game::gotValidMove(Player &player, unsigned short int pos[2], char letter, 
     }
 
     placePlayer(player);
+
+    if (numTiles == limit) currState = End;                             // Checking if the game has come to and end
 }
 
 
