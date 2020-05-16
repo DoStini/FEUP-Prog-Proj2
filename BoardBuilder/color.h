@@ -1,17 +1,18 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <Windows.h>
 
 enum Color {BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE};
 
 // Pair of codes stand for BG and FG respectively
 const std::vector<std::pair<int, int>> COLOR = {
-	std::make_pair(40, 30),
-	std::make_pair(41, 31),
-	std::make_pair(42, 32),
-	std::make_pair(43, 33),
-	std::make_pair(44, 34),
-	std::make_pair(45, 35),
-	std::make_pair(46, 36),
-	std::make_pair(47, 37),
+	std::make_pair(0, 0),
+	std::make_pair(BACKGROUND_RED, FOREGROUND_RED),
+	std::make_pair(BACKGROUND_GREEN, FOREGROUND_GREEN),
+	std::make_pair(BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN),
+	std::make_pair(BACKGROUND_INTENSITY | BACKGROUND_BLUE, FOREGROUND_INTENSITY | FOREGROUND_BLUE),
+	std::make_pair(BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_BLUE, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_BLUE),
+	std::make_pair(BACKGROUND_GREEN | BACKGROUND_BLUE, FOREGROUND_GREEN | FOREGROUND_BLUE),
+	std::make_pair(BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE),
 };

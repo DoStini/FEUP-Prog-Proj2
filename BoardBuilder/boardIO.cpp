@@ -4,6 +4,21 @@
 #include <string>
 #include <sstream>
 
+
+/**
+ * Set color and background color to be used with cout
+ *
+ * @param color
+ * @param background_color
+ */
+void setColor(unsigned int color, unsigned int background_color)
+{
+	color = COLOR[color].second;
+	background_color = COLOR[background_color].first;
+	HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hCon, color | background_color);
+}
+
 void getString(std::string &string) {
 	std::getline(std::cin, string);
 }
@@ -25,7 +40,9 @@ void printMessage(std::string message, std::string end) {
 }
 
 void printMessage(std::string message, int bgColor, int fgColor, std::string end) {
-	std::cout << "\033[" << COLOR[bgColor].first << ";" << COLOR[fgColor].second << "m" << message << "\033[0m" << end;
+	setColor(fgColor, bgColor);
+	std::cout << message << end;
+	setColor(WHITE, BLACK);
 }
 
 bool checkStop() {
@@ -57,13 +74,6 @@ std::string stringToUpper(std::string str) {
 	}
 
 	return newCopy;
-}
-
-std::string stringWithColor(std::string str, int bgColor, int fgColor) {
-	std::stringstream ss;
-	ss << "\033[" << COLOR[bgColor].first << ";" << COLOR[fgColor].second << "m" << str << "\033[0m";
-
-	return ss.str();
 }
 
 /**
@@ -100,3 +110,4 @@ void clearScreen(short xPos, short yPos) {
 	// cursor to upper left corner
 	SetConsoleCursorPosition(hCon, coordScreen);
 }
+

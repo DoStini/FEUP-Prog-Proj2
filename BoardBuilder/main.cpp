@@ -314,9 +314,11 @@ int main()
 	printMessage(ss.str());
 
 	ss.str(std::string());
-	ss << "To use this board in Scrabble Junior, please transfer the file to the " << stringWithColor("Scrabble Junior folder", GREEN, BLACK);
+	ss << "To use this board in Scrabble Junior, please transfer the file to the ";
 
-	printMessage(ss.str());
+	printMessage(ss.str(), "");
+
+	printMessage("Scrabble Junior folder", GREEN, BLACK);
 	waitForKey();
 	return 0;
 }
