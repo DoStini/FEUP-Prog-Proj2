@@ -246,8 +246,11 @@ void newGame(){
     std::vector<std::string> playerNames;
     std::string name;
     for (int k = 0; k < numPlayers; ++k) {
-        printMsg("Player " + std::to_string(k+1) + "'s name: ", XBEGMENU, YBEGMENU + 10 + k);
-        std::cin >> name;
+        while (1){
+            printMsg("Player " + std::to_string(k+1) + "'s name: ", XBEGMENU, YBEGMENU + 10 + k);
+            if(checkInput(name)) break;
+        }
+
         playerNames.push_back(name);
     }
 
@@ -431,13 +434,12 @@ void showOptions() {
     }
 
     std::string command;
-    std::cin >> command;
-    std::cin.ignore(100, '\n');
-    command = stringToLower(command);
-
-    if (command == "p" || command == "play")                newGame();
-    else if (command == "r" || command == "rules")          showRules();
-    else if (command == "c" || command == "credits")        showCredits();
-    else if (command == "s" || command == "scoreboard")     showScores();
-    else if (command == "e" || command == "exit")           closeGame();
+    if (checkInput(command)){
+        command = stringToLower(command);
+        if (command == "p" || command == "play")                newGame();
+        else if (command == "r" || command == "rules")          showRules();
+        else if (command == "c" || command == "credits")        showCredits();
+        else if (command == "s" || command == "scoreboard")     showScores();
+        else if (command == "e" || command == "exit")           closeGame();
+    }
 }

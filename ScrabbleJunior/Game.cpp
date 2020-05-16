@@ -324,8 +324,8 @@ void Game::changeTile(Player &player){
 
         while (1){
             char in;
-            std::cin >> in;
-            if (player.checkTiles(toupper(in)) != -1){              // Checks if the given tile is in the player's possession
+            bool valid = checkInput(in);
+            if (valid && player.checkTiles(toupper(in)) != -1){              // Checks if the given tile is in the player's possession
                 player.removeTile(toupper(in));                     // Removes tile from the player's deck
                 player.addTile(getRandomTile());              // Adds a new random tile
                 pot.push_back(in);                                  // Returns the player's tile to the game's pot
