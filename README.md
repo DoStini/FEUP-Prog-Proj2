@@ -19,6 +19,10 @@ BOARD BUILDER:
     Players can select any word present in the words.txt file and its position and orientation on the board.
     Every rule was followed in terms of placing words:
     * Word must exist in the WORDS.TXT file.
+    * Word can't be placed out of bounds.
+    * Word can't touch/intersect with other words in the same column/row.
+    * Word can't touch edges with other words.
+    * Word can't intersect with another word with a different orientation, unless the letter that intersects is the same on both words.
     The file is saved on the Board Builder folder and needs to be later moved by the user to the Scrabble Junior folder to be able to be played with.
     One possible solution for this was to have an Assets folder, alongside with Scrabble Junior and Board builder folder, being saved there, and use relative pathing to save and load from that folder.
     The file version where the board is shown at the end of the file was implemented, separating data and visual parts by one line of ####.
