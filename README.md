@@ -14,11 +14,11 @@ Accomplishments:
 
 BOARD BUILDER:
 
-    Player can select the size of the board. The minimum board size allowed by our program is xXx to allow at least 2 players to play it (14 tiles).
-    Words.txt was used by initially reading the file and storing it in memory to make a faster execution.
-    Players can select any word present in the words.txt file being prompted vertical position, horizontal position, word and orientation.
+    Player can select the size of the board. The minimum board size allowed by our program is 20 squares (a 3*3 board has 9 squares while a 3*10 board has 30 squares) to allow at least 2 players to play it (14 tiles).
+    Words.txt was used by initially reading the file and storing it in memory to make for a faster execution.
+    Players can select any word present in the words.txt file and its position and orientation on the board.
     Every rule was followed in terms of placing words:
-    Insert rules
+    * Word must exist in the WORDS.TXT file.
     The file is saved on the Board Builder folder and needs to be later moved by the user to the Scrabble Junior folder to be able to be played with.
     One possible solution for this was to have an Assets folder, alongside with Scrabble Junior and Board builder folder, being saved there, and use relative pathing to save and load from that folder.
     The file version where the board is shown at the end of the file was implemented, separating data and visual parts by one line of ####.
