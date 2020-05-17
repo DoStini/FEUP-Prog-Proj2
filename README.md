@@ -1,5 +1,7 @@
 Scrabble junior and Board builder is a project made for Curricular Unit "Programação", 1st year, 2nd semester.
+
 This program only works for Windows, as it uses Windows.h library to accomodate our needs to improve visual environment.
+
 Developed by André Moreira and Nuno Alves
 
 Accomplishments:
@@ -10,26 +12,29 @@ Accomplishments:
 	The board is centered automatically according to its horizontal size.
 	An attempt of adding sound was made, but issues relating to compatibility forced us to not implement it. 	
 
-BOARD BUILDER
-	Player can select the size of the board. The minimum board size allowed by our program is xXx to allow at least 2 players to play it (14 tiles).
-	Words.txt was used by initially reading the file and storing it in memory to make a faster execution.
-	Players can select any word present in the words.txt file being prompted vertical position, horizontal position, word and orientation.
-	Every rule was followed in terms of placing words:
-		Insert rules
-	The file is saved on the Board Builder folder and needs to be later moved by the user to the Scrabble Junior folder to be able to be played with.
-		One possible solution for this was to have an Assets folder, alongside with Scrabble Junior and Board builder folder, being saved there, and use relative pathing to save and load from that folder.
-		The file version where the board is shown at the end of the file was implemented, separating data and visual parts by one line of ####.
+BOARD BUILDER:
 
-SCRABBLE JUNIOR
-	Players need to select between 2 and 4 players.
-	If an excessive amount of players over the number of tiles of the board (tiles < 7 * players), the game will prompt a message forbidding that game, returning to the main menu.
-	The program structure was separated adequately in different files, according to their objectives.
-	There are several menus like rules, credits, scoreboard and the game itself.
-	The game board was drawn dynamically, allowing to change the parameters defined in graphical.h like vertical spacing and menu start to allow the programmer to change easily the aspect of the board.	The board also has an outline with the position identifiers (A or a).
-	Placing players in the console is also partially automatic according to values defined in graphical.h.
-	The input during the game will be of type Aa or Bb, and will detect any bad inputs like integers. If ctrl-z is pressed, the user will be prompted to confirm that he wants to end the game.
+    Player can select the size of the board. The minimum board size allowed by our program is xXx to allow at least 2 players to play it (14 tiles).
+    Words.txt was used by initially reading the file and storing it in memory to make a faster execution.
+    Players can select any word present in the words.txt file being prompted vertical position, horizontal position, word and orientation.
+    Every rule was followed in terms of placing words:
+    Insert rules
+    The file is saved on the Board Builder folder and needs to be later moved by the user to the Scrabble Junior folder to be able to be played with.
+    One possible solution for this was to have an Assets folder, alongside with Scrabble Junior and Board builder folder, being saved there, and use relative pathing to save and load from that folder.
+    The file version where the board is shown at the end of the file was implemented, separating data and visual parts by one line of ####.
+
+SCRABBLE JUNIOR:
+
+    Players need to select between 2 and 4 players.
+    If an excessive amount of players over the number of tiles of the board (tiles < 7 * players), the game will prompt a message forbidding that game, returning to the main menu.
+    The program structure was separated adequately in different files, according to their objectives.
+    There are several menus like rules, credits, scoreboard and the game itself.
+    The game board was drawn dynamically, allowing to change the parameters defined in graphical.h like vertical spacing and menu start to allow the programmer to change easily the aspect of the board.	The board also has an outline with the position identifiers (A or a).
+    Placing players in the console is also partially automatic according to values defined in graphical.h.
+    The input during the game will be of type Aa or Bb, and will detect any bad inputs like integers. If ctrl-z is pressed, the user will be prompted to confirm that he wants to end the game.
 	
-	About our algorithm:
+About our algorithm:
+
 		In terms of checking possible valid moves and completed words, we thought a good way of doing this was to have a 2d vector of objects Word.
 		Every element of the first vector would contain vectors of words according to the vertical/horizontal position that the vertical/horizontal word occupied.
 		This way, having the input of the player, the row/column of that position can be quickly accessed to find possible words.
