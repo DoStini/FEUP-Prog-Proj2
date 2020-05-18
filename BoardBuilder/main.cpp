@@ -12,6 +12,7 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include <map>
 
 /**
  * Function used to ask the user to input the number of lines and columns in the board.
@@ -93,29 +94,39 @@ char inputLocation(char limit, std::string message, unsigned short yStart) {
  * @param[in] words Vector of strings containing the valid words that can be input
  */
 void inputWords(Board& board, const std::vector<std::string>& words) {
+	const std::map<char, std::string> orientationToString = {
+		{'H', "horizontal"},
+		{'V', "vertical"}
+	};
 	std::stringstream ss;
 	std::string deletePrompt, text;
 	std::pair<unsigned short, unsigned short> size = board.getSize();
 	char line, column, orientation, input;
 	short success;
-	unsigned short hSize = ((board.getSize()).first * 2) + 2 + YBEGMENU;
+	unsigned short hSize = ((board.getSize()).first * 2) + 2 + YBEGMENU, promptPosition;
 	bool vertical;
 
 	while (true) {
 		Word newWord;
+		promptPosition = hSize;
+
 		clearScreen(0, YBEGMENU);
-		board.showCenteredBoard();
+		board.showCenteredBoard(XBEGMENU, YBEGMENU);
 
 		printMessage("Add or delete? (write 'delete' to delete, anything else to continue)", WHITE, BLACK);
 		getString(deletePrompt);
+		deletePrompt = stringToUpper(deletePrompt);
 
 		clearScreen(0, hSize);
 		if (checkStop()) break;
 
-		board.showCenteredBoard();
+		if (deletePrompt == "DELETE") {
+			printMessage("Deleting...", RED, BLACK);
+			promptPosition++;
+		}
 		printMessage("What is the word?", WHITE, BLACK);
 		while (!checkInputOrSTOP(text) || !newWord.setText(words, text)) {
-			clearScreen(0, hSize);
+			clearScreen(0, promptPosition);
 			if (checkStop()) break;
 
 			printMessage("Input was invalid or word is not real, please try again.", RED, BLACK);
@@ -124,30 +135,30 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 		}
 		if (checkStop()) break;
 
-		clearScreen(0, hSize);
+		clearScreen(0, promptPosition);
 		char upperLineLimit = (size.first - 1 + 'A');
 		ss.str(std::string());
 		ss << "Line of word? [A, " << upperLineLimit << "]";
-		line = inputLocation(upperLineLimit, ss.str(), hSize);
+		line = inputLocation(upperLineLimit, ss.str(), promptPosition);
 		
 		if (checkStop()) break;
 		line = toupper(line);
 
-		clearScreen(0, hSize);
+		clearScreen(0, promptPosition);
 
 		char upperColumnLimit = (size.second - 1 + 'a');
 		ss.str(std::string());
 		ss << "Column of word? [a, " << upperColumnLimit << "]";
-		column = inputLocation(upperColumnLimit, ss.str(), hSize);
+		column = inputLocation(upperColumnLimit, ss.str(), promptPosition);
 
 		if (checkStop()) break;
 		column = tolower(column);
 
-		clearScreen(0, hSize);
+		clearScreen(0, promptPosition);
 
 		printMessage("Is the word horizontal or vertical? (H, V)", WHITE, BLACK);
 		while (!checkInputOrSTOP(orientation) || (toupper(orientation) != 'H' && toupper(orientation) != 'V')) {
-			clearScreen(0, hSize);
+			clearScreen(0, promptPosition);
 			if (checkStop()) break;
 
 			printMessage("Input was invalid, please try again.", RED, BLACK);
@@ -160,10 +171,10 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 
 		newWord.setLimits(std::make_pair(line - 'A', column - 'a'), vertical);
 
-		clearScreen(0, hSize);
+		clearScreen(0, promptPosition);
 
 		ss.str(std::string());
-		ss << "So the word is '" << text << "', it's orientation is " << orientation << ", and is in line " << (char)line << " and column " << (char)column << ".";
+		ss << "So the word is '" << text << "', it's orientation is " << orientationToString.at(orientation) << ", and is in line " << (char)line << " and column " << (char)column << ".";
 		printMessage(ss.str());
 		printMessage("Is this correct? (N to retry)", Color::WHITE, Color::BLACK);
 		getChar(input);
@@ -171,11 +182,11 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 		Coordinate position = std::make_pair(line - 'A', column - 'a');
 
 		if (toupper(input) == 'N') {
-			clearScreen(0, hSize);
+			clearScreen(0, promptPosition);
 			continue;
 		}
 
-		clearScreen(0, hSize);
+		clearScreen(0, promptPosition);
 		if (input == EOF) break;
 
 		if (stringToUpper(deletePrompt) == "DELETE") {
@@ -189,7 +200,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 			printMessage("Success!");
 		}
 		else {
-			if (stringToUpper(deletePrompt) == "DELETE") {
+			if (deletePrompt == "DELETE") {
 				if(success == 0) printMessage("Error! That word is not on the board.", RED, BLACK);
 				else {
 					printMessage("Error! Can't delete that word.", RED, BLACK);
@@ -201,7 +212,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 
 		waitForKey();
 			
-		clearScreen(0, hSize);
+		clearScreen(0, promptPosition);
 	}
 }
 

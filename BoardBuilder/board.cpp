@@ -71,12 +71,14 @@ std::string Board::showBoard(bool color) {
 
 /**
  * Displays the Board object in the console output centered.
+ *
+ * @param xStart, yStart Starting coordinates.
  */
-void Board::showCenteredBoard() {
-	unsigned short int center = XBEGMENU + 14;
+void Board::showCenteredBoard(unsigned short xStart, unsigned short yStart) {
+	unsigned short int center = xStart + 14;
 	unsigned short start = center - (size.second) * 2;
 
-	gotoxy(start, YBEGMENU);
+	gotoxy(start, yStart);
 	std::cout << "   ";
 	for (unsigned short c = 0; c < size.second; c++) {
 		std::cout << (char)(c + 'a');
@@ -85,7 +87,7 @@ void Board::showCenteredBoard() {
 	std::cout << std::endl;
 
 	for (unsigned short l = 1; l <= size.first; l++) {
-		gotoxy(start, YBEGMENU + (l*2));
+		gotoxy(start, yStart + (l*2));
 		std::cout << (char)((l - 1) + 'A') << " ";
 		std::cout << "\033[47;30m";
 		std::cout << " ";
@@ -94,7 +96,7 @@ void Board::showCenteredBoard() {
 			if (c != size.second) std::cout << "| ";
 		}
 
-		gotoxy(start, YBEGMENU + (l * 2)+1);
+		gotoxy(start, yStart + (l * 2)+1);
 		if (l != size.first) {
 			std::cout << "\033[0m";
 			std::cout << "  ";
@@ -108,7 +110,7 @@ void Board::showCenteredBoard() {
 		std::cout << "\033[0m";
 	}
 
-	gotoxy(0, YBEGMENU + ((size.first + 1) * 2));
+	gotoxy(0, yStart + ((size.first + 1) * 2));
 }
 
 /**
