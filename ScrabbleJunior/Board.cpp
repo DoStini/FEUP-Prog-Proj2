@@ -87,7 +87,7 @@ initWordVectors();                                                              
 
 
 /**
-* Function to check and return if a chosen position is within any word
+* Function to check and return if a chosen position is within any word in that row/column
 *
 * @param index - The column/row where the word might be located
 * @param charPos - The position given: related to the position of the character inside index's column/row
@@ -97,18 +97,9 @@ initWordVectors();                                                              
 
 Word *Board::findWord(unsigned short int index, unsigned short int charPos, bool vertical){
 
-    if (vertical){
-        for (int i = 0; i < vWords[index].size(); ++i) {
-            if (vWords[index][i].inWord(charPos)){
-                return &vWords[index][i];
-            }
-        }
-    }
-    else{
-        for (int i = 0; i < hWords[index].size(); ++i) {
-            if (hWords[index][i].inWord(charPos)) {
-                return &hWords[index][i];
-            }
+    for (int i = 0; i < (vertical ? vWords[index].size() : hWords[index].size()); ++i) {
+        if ((vertical ? vWords[index][i].inWord(charPos) : hWords[index][i].inWord(charPos))){
+            return (vertical ? &vWords[index][i] : &hWords[index][i]);
         }
     }
 
