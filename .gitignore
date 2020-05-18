@@ -3,9 +3,9 @@
 out
 .idea/
 cmake-build-debug/
-.vs/
+/.vs/
 *.txt
-.suo
+*.suo
 ScrabbleJunior/.vs/
 Assets/
 *.TXT
