@@ -7,7 +7,7 @@
 
 /**
  * Gets variations of a word.
- * Gets splits, deletes, tranposes, inserts and replaces letters in the word
+ * Deletes, tranposes, inserts and replaces letters in the word
  *
  * @param word Base word.
  *
@@ -17,15 +17,6 @@ std::set<std::string> getVariations(std::string word) {
 	std::set<std::string> variations;
 	std::string mutated;
 	mutated = word;
-
-	// Splits
-	for (auto it = word.begin(); it != word.end(); it++) {
-		std::string subs1 = std::string(word.begin(), it);
-		std::string subs2 = std::string(it, word.end());
-
-		variations.insert(subs1);
-		variations.insert(subs2);
-	}
 
 	// Deletes
 	for (auto it = mutated.begin(); it != mutated.end(); it++) {
@@ -56,19 +47,47 @@ std::set<std::string> getVariations(std::string word) {
 	}
 
 	// Inserts
-	for (auto it = mutated.begin(); it != mutated.end(); it++) {
+	auto itm = mutated.begin();
+	for (; itm != mutated.end(); itm++) {
 		for (char alpha = 'a'; alpha <= 'z'; alpha++) {
-			mutated.insert(it, alpha);
+			mutated.insert(itm, alpha);
 
 			variations.insert(mutated);
 			mutated = word;
 		}
 	}
+	for (char alpha = 'a'; alpha <= 'z'; alpha++) {
+		mutated.insert(itm, alpha);
+
+		variations.insert(mutated);
+		mutated = word;
+	}
 
 	return variations;
 }
 
-std::vector<std::string> getSimilarWords(const std::vector<std::string>& dictionary, std::string word);
+
+/**
+ * Gets similar words of another word.
+ *
+ * @param dictionary Vector of words that are valid to use.
+ * @param word Base word.
+ *
+ * @returns A vector of similar words.
+ */
+std::vector<std::string> getSimilarWords(const std::vector<std::string>& dictionary, std::string word) {
+	std::vector<std::string> validWords;
+
+	std::set<std::string> variations = getVariations(stringToLower(word));
+
+	for (auto it = variations.begin(); it != variations.end(); it++) {
+		if (it->size() > 1 && std::binary_search(dictionary.begin(), dictionary.end(), *it)) {
+			validWords.push_back(*it);
+		}
+	}
+
+	return validWords;
+}
 
 /**
  * Checks if word intersects with another word.

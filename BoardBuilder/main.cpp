@@ -83,6 +83,25 @@ char inputLocation(char limit, std::string message, unsigned short yStart) {
 	return location;
 }
 
+void showSimilarWords(const std::vector<std::string> &similarWords) {
+	std::stringstream ss;
+
+	if (similarWords.size() > 0) {
+		printMessage("Did you mean ", RED, BLACK, "");
+		for (auto it = similarWords.begin(); it != similarWords.end(); it++) {
+			ss.str(std::string());
+			ss << *it;
+			if (it + 1 != similarWords.end()) {
+				if (it + 2 == similarWords.end())  ss << " or ";
+				else ss << ", ";
+			}
+			
+			printMessage(ss.str(), RED, BLACK, "");
+		}
+		printMessage("?", RED, BLACK);
+	}
+}
+
 /**
  * Function used to ask the user to input words into the board.
  * Asks if the user wants to add or delete word.
@@ -101,6 +120,7 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 	std::stringstream ss;
 	std::string deletePrompt, text;
 	std::pair<unsigned short, unsigned short> size = board.getSize();
+	std::vector<std::string> similarWords;
 	char line, column, orientation, input;
 	short success;
 	unsigned short hSize = ((board.getSize()).first * 2) + 2 + YBEGMENU, promptPosition;
@@ -130,6 +150,11 @@ void inputWords(Board& board, const std::vector<std::string>& words) {
 			if (checkStop()) break;
 
 			printMessage("Input was invalid or word is not real, please try again.", RED, BLACK);
+
+
+			similarWords = getSimilarWords(words, text);
+			showSimilarWords(similarWords);
+			
 
 			printMessage("What is the word?", WHITE, BLACK);
 		}
