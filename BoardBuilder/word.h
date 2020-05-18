@@ -4,6 +4,7 @@
 #include<vector>
 
 typedef std::pair<unsigned short, unsigned short> Coordinate;
+std::vector<std::string> getSimilarWords(const std::vector<std::string>& dictionary, std::string word);
 
 
 /**
