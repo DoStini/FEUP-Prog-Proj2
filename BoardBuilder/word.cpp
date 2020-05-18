@@ -3,6 +3,72 @@
 #include <algorithm>
 #include<string>
 #include<vector>
+#include<set>
+
+/**
+ * Gets variations of a word.
+ * Gets splits, deletes, tranposes, inserts and replaces letters in the word
+ *
+ * @param word Base word.
+ *
+ * @returns A set of strings with all unique variations of the word.
+ */
+std::set<std::string> getVariations(std::string word) {
+	std::set<std::string> variations;
+	std::string mutated;
+	mutated = word;
+
+	// Splits
+	for (auto it = word.begin(); it != word.end(); it++) {
+		std::string subs1 = std::string(word.begin(), it);
+		std::string subs2 = std::string(it, word.end());
+
+		variations.insert(subs1);
+		variations.insert(subs2);
+	}
+
+	// Deletes
+	for (auto it = mutated.begin(); it != mutated.end(); it++) {
+		mutated.erase(it);
+
+		variations.insert(mutated);
+		mutated = word;
+	}
+
+	// Transposes
+	for (size_t i = 0; i < word.size(); i++) {
+		for (size_t j = 0; j < word.size(); j++) {
+			std::string transposed = word;
+			std::swap(transposed[i], transposed[j]);
+
+			variations.insert(transposed);
+		}
+	}
+
+	// Replaces
+	for (auto it = mutated.begin(); it != mutated.end(); it++) {
+		for (char alpha = 'a'; alpha <= 'z'; alpha++) {
+			(*it) = alpha;
+
+			variations.insert(mutated);
+			mutated = word;
+		}
+	}
+
+	// Inserts
+	for (auto it = mutated.begin(); it != mutated.end(); it++) {
+		for (char alpha = 'a'; alpha <= 'z'; alpha++) {
+			mutated.insert(it, alpha);
+
+			variations.insert(mutated);
+			mutated = word;
+		}
+	}
+
+	return variations;
+}
+
+std::vector<std::string> getSimilarWords(const std::vector<std::string>& dictionary, std::string word);
 
 /**
  * Checks if word intersects with another word.
