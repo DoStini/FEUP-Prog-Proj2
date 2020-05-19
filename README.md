@@ -10,7 +10,8 @@ Accomplishments:
 	The title of the game drops its tiles at the startup of the program (can be skipped by pressing enter).
 	The text was centered manually with help from values defined in graphical.h
 	The board is centered automatically according to its horizontal size.
-	An attempt of adding sound was made, but issues relating to compatibility forced us to not implement it. 	
+	An attempt of adding sound was made, but issues relating to compatibility forced us to not implement it.
+	Important note: If you're having trouble compiling and running BoardBuilder, in clion it can be compiled and after that, move 3 dll files to the .exe's folder to run. Those files are libgcc_s_seh-1.dll, libstdc++-6.dll, libwinpthread-1.dll. 
 
 BOARD BUILDER:
 
