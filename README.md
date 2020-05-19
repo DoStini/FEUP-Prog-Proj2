@@ -2,7 +2,7 @@ Scrabble junior and Board builder is a project made for Curricular Unit "Program
 
 This program only works for Windows, as it uses Windows.h library to accomodate our needs to improve visual environment.
 
-Developed by André Moreira and Nuno Alves
+Developed by André Moreira(50%) and Nuno Alves(50%)
 
 Accomplishments:
 
@@ -14,18 +14,20 @@ Accomplishments:
 
 BOARD BUILDER:
 
-    Player can select the size of the board. The minimum board size allowed by our program is 20 squares (a 3*3 board has 9 squares while a 3*10 board has 30 squares) to allow at least 2 players to play it (14 tiles).
-    Words.txt was used by initially reading the file and storing it in memory to make for a faster execution.
-    Players can select any word present in the words.txt file and its position and orientation on the board.
+    The user can select the size of the board. The minimum board size allowed by our program is 20 squares (a 3*3 board has 9 squares while a 3*10 board has 30 squares) to allow at least 2 players to play it (14 tiles).
+    WORDS.TXT was used by initially reading the file and storing it in memory to make for a faster execution.
+    Players can select any word present in the WORDS.TXT file and its position and orientation on the board.
     Every rule was followed in terms of placing words:
     * Word must exist in the WORDS.TXT file.
     * Word can't be placed out of bounds.
     * Word can't touch/intersect with other words in the same column/row.
     * Word can't touch edges with other words.
     * Word can't intersect with another word with a different orientation, unless the letter that intersects is the same on both words.
-    The file is saved on the Board Builder folder and needs to be later moved by the user to the Scrabble Junior folder to be able to be played with.
+    If a player inputs a word that isn't in the provided dictionary in WORDS.TXT the program suggests similar words.
+    It is also possible to delete words on the board.
+    The resulting file is saved on the Board Builder folder, with a name prompted by the user, and needs to be later moved by the user to the Scrabble Junior folder to be able to be played with.
     One possible solution for this was to have an Assets folder, alongside with Scrabble Junior and Board builder folder, being saved there, and use relative pathing to save and load from that folder.
-    The file version where the board is shown at the end of the file was implemented, separating data and visual parts by one line of ####.
+    The file version where the board is shown at the end of the file was implemented, separating data and visual parts by one line of '####'.
 
 SCRABBLE JUNIOR:
 
@@ -55,7 +57,7 @@ About our algorithm:
 			Has a start and end positions variable. Given a certain input, we can check if the tile in question belongs to the word (start <= input <= end : tile is within word).
 			A vector of char containing the tiles.
 			A vector of bool, corresponding each tile to a boolean, indicating if it's covered or not.
-		We think we should've used a single vector instead of two different ones (hWords and vWords) to prevent code repetition in some cases, although this way is more readable.
+		We think we should've used a single vector instead of two different ones (hWords and vWords) to prevent code repetition in some cases, although this way is more readable. Also, later on, we managed to not have code repetition using ternary operators to specify loop ranges and which one of the vectors should be selected.
 	
 	All inputs prevent bad entries and sometimes prompts the user to re-enter in a red warning message.
 	The board is only written once in the board. When a valid move is made, the program replaces graphicly the tile played by a colored one (automatically done with graphical variables defined in graphical.h)
