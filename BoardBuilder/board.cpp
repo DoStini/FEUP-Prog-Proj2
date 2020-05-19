@@ -11,19 +11,10 @@
 Board::Board() {
 	heightLimits = std::make_pair(3, 20);
 	widthLimits = std::make_pair(3, 20);
-	size = std::make_pair(0, 0);
+	size = std::make_pair(3, 3);
 	minLetters = 14;
 	minSquares = 20;
-}
-
-Board::Board(std::string fileName) {
-	heightLimits = std::make_pair(3, 20);
-	widthLimits = std::make_pair(3, 20);
-	size = std::make_pair(0, 0);
-	minLetters = 14;
-	minSquares = 20;
-
-	readBoard(fileName);
+	initializeWords();
 }
 
 Board::~Board() {
@@ -43,12 +34,15 @@ Board::~Board() {
 *
 * @returns A boolean indicating if the file was found
 */
-bool Board::readBoard(std::string fileName) {
+bool Board::readBoard(std::string fileName, const std::vector<std::string>& dictionary) {
 	std::ifstream f_in;
-	f_in.open(fileName);
+	std::stringstream file;
+
+	file << fileName << ".txt";
+	f_in.open(file.str());
 
 	if (!f_in.is_open()) {
-		printMessage("File was not found!", RED, BLACK);
+		//f_in.close();
 		return false;
 	}
 
@@ -69,7 +63,6 @@ bool Board::readBoard(std::string fileName) {
 
 	initializeWords();
 
-	int counter = 0;
 	while (f_in.peek() != '#') {
 		Word word;
 		Coordinate positionCoord;
@@ -82,6 +75,7 @@ bool Board::readBoard(std::string fileName) {
 
 		positionCoord.first = verticalIdx;
 		positionCoord.second = horizontalIdx;
+		word.setText(dictionary, text);
 		word.setLimits(positionCoord, vertical);
 
 		if (vertical) {
@@ -223,8 +217,6 @@ bool Board::setWidth(unsigned short width) {
  * @returns a boolean that indicates if the board was able to be initialized.
  */
 bool Board::initializeWords() {
-	if (size.first == 0 || size.second == 0) return false;
-
 	vWords = new std::vector<Word>[size.second];
 	hWords = new std::vector<Word>[size.first];
 
