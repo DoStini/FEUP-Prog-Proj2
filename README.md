@@ -2,7 +2,7 @@ Scrabble junior and Board builder is a project made for Curricular Unit "Program
 
 This program only works for Windows, as it uses Windows.h library to accomodate our needs to improve visual environment.
 
-Developed by André Moreira and Nuno Alves
+Developed by André Moreira(50%) and Nuno Alves(50%)
 
 Accomplishments:
 
@@ -57,7 +57,7 @@ About our algorithm:
 			Has a start and end positions variable. Given a certain input, we can check if the tile in question belongs to the word (start <= input <= end : tile is within word).
 			A vector of char containing the tiles.
 			A vector of bool, corresponding each tile to a boolean, indicating if it's covered or not.
-		We think we should've used a single vector instead of two different ones (hWords and vWords) to prevent code repetition in some cases, although this way is more readable.
+		We think we should've used a single vector instead of two different ones (hWords and vWords) to prevent code repetition in some cases, although this way is more readable. Also, later on, we managed to not have code repetition using ternary operators to specify loop ranges and which one of the vectors should be selected.
 	
 	All inputs prevent bad entries and sometimes prompts the user to re-enter in a red warning message.
 	The board is only written once in the board. When a valid move is made, the program replaces graphicly the tile played by a colored one (automatically done with graphical variables defined in graphical.h)
