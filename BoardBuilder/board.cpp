@@ -16,6 +16,16 @@ Board::Board() {
 	minSquares = 20;
 }
 
+Board::Board(std::string fileName) {
+	heightLimits = std::make_pair(3, 20);
+	widthLimits = std::make_pair(3, 20);
+	size = std::make_pair(0, 0);
+	minLetters = 14;
+	minSquares = 20;
+
+	readBoard(fileName);
+}
+
 Board::~Board() {
 	for (int l = 0; l < size.first + 2; l++) {
 		delete letters[l];
@@ -24,6 +34,73 @@ Board::~Board() {
 
 	delete[] vWords;
 	delete[] hWords;
+}
+
+/**
+* Function to read the board
+*
+* @param fileName - Name of file to be read.
+*
+* @returns A boolean indicating if the file was found
+*/
+bool Board::readBoard(std::string fileName) {
+	std::ifstream f_in;
+	f_in.open(fileName);
+
+	if (!f_in.is_open()) {
+		printMessage("File was not found!", RED, BLACK);
+		return false;
+	}
+
+	char sep;
+	char position[2];
+	bool vertical;
+	std::vector<Word>* words;
+	unsigned short location;
+	unsigned short vSize, hSize;
+	std::string text;
+
+	f_in >> vSize >> sep >> hSize;
+	setWidth(hSize);
+	setHeight(vSize);
+
+	unsigned short int verticalIdx;
+	unsigned short int horizontalIdx;
+
+	initializeWords();
+
+	int counter = 0;
+	while (f_in.peek() != '#') {
+		Word word;
+		Coordinate positionCoord;
+
+		f_in >> position[0] >> position[1] >> sep >> text;                      // Input is given as "Aa"
+
+		verticalIdx = (int)position[0] - (int)'A';                            // vertical index will be A converted to integer, counting 0 as char A
+		horizontalIdx = (int)position[1] - (int)'a';                          // same for horizontal index but with "a"
+		vertical = sep == 'V';
+
+		positionCoord.first = verticalIdx;
+		positionCoord.second = horizontalIdx;
+		word.setLimits(positionCoord, vertical);
+
+		if (vertical) {
+			words = vWords;
+			location = positionCoord.second;
+		}
+		else {
+			words = hWords;
+			location = positionCoord.first;
+		}
+
+		writeOnArray(word, vertical, location);     // Writing word on graphical board
+		words[location].push_back(word);
+
+		f_in.get();
+	}
+	f_in.close();
+
+	return true;
 }
 
 /**
@@ -80,7 +157,7 @@ void Board::showCenteredBoard(unsigned short xStart, unsigned short yStart) {
 	std::cout << std::endl;
 
 	for (unsigned short l = 1; l <= size.first; l++) {
-		gotoxy(start, yStart + (l*2));
+		gotoxy(start, yStart + (l * 2));
 		std::cout << (char)((l - 1) + 'A') << " ";
 		setColor(BLACK, WHITE);
 		std::cout << " ";
@@ -89,7 +166,7 @@ void Board::showCenteredBoard(unsigned short xStart, unsigned short yStart) {
 			if (c != size.second) std::cout << "| ";
 		}
 
-		gotoxy(start, yStart + (l * 2)+1);
+		gotoxy(start, yStart + (l * 2) + 1);
 		if (l != size.first) {
 			setColor(WHITE, BLACK);
 			std::cout << "  ";
@@ -151,10 +228,10 @@ bool Board::initializeWords() {
 	vWords = new std::vector<Word>[size.second];
 	hWords = new std::vector<Word>[size.first];
 
-	letters = new char*[(size_t)size.first+2];
-	for (unsigned short l = 0; l < size.first+2; l++) {
-		letters[l] = new char[(size_t)size.second+2];
-		for (unsigned short c = 0; c < size.second+2; c++) {
+	letters = new char* [(size_t)size.first + 2];
+	for (unsigned short l = 0; l < size.first + 2; l++) {
+		letters[l] = new char[(size_t)size.second + 2];
+		for (unsigned short c = 0; c < size.second + 2; c++) {
 			letters[l][c] = ' ';
 		}
 	}
@@ -170,7 +247,7 @@ bool Board::initializeWords() {
 char** Board::copyLetters() {
 	char** copy;
 
-	copy = new char*[(size_t)size.first + 2];
+	copy = new char* [(size_t)size.first + 2];
 	for (unsigned short l = 0; l < size.first + 2; l++) {
 		copy[l] = new char[(size_t)size.second + 2];
 		for (unsigned short c = 0; c < size.second + 2; c++) {
@@ -247,7 +324,7 @@ WordsIterator Board::checkIntersections(Word word, Coordinate position, bool ver
 	WordsIterator result;
 	// Orientation words stores the pointer to a vector in either vWords or hWords.
 	// position.second is the column of the word, position.first is the line of the word
-	std::vector<Word>* orientationWords = vertical ? &vWords[position.second] : &hWords[position.first]; 
+	std::vector<Word>* orientationWords = vertical ? &vWords[position.second] : &hWords[position.first];
 	result.invalid = false;
 
 	// We iterate through each word in orientation words and check if the word to be added to the board is after them.
@@ -324,7 +401,7 @@ WordsIterator Board::checkIfLegal(Word word, Coordinate position, bool vertical)
 
 	result = checkIntersections(word, position, vertical);
 	if (result.invalid) return result;
-	
+
 	result.invalid = !checkEdges(word, position, vertical);
 
 	return result;
@@ -345,7 +422,7 @@ void Board::writeOnArray(Word word, bool vertical, unsigned short location) {
 	unsigned short line = first, col = location;
 	std::string text = word.getText();
 
-	if(!vertical) {
+	if (!vertical) {
 		line = location;
 		col = first;
 	}
@@ -371,18 +448,16 @@ void Board::writeOnArray(Word word, bool vertical, unsigned short location) {
 bool Board::addWord(Word word, Coordinate position, bool vertical) {
 	WordsIterator result;
 	std::vector<Word>* words;
-	unsigned short limit, location; 
+	unsigned short location;
 
 	// location is the row/column where the word may be placed.
 	// Is a column if the word is vertical
 	// Is a row if the word is horizontal
 	if (vertical) {
-		limit = size.first;
 		words = vWords;
 		location = position.second;
 	}
 	else {
-		limit = size.second;
 		words = hWords;
 		location = position.first;
 	}
@@ -446,7 +521,7 @@ void Board::rewriteOnArray(bool vertical, std::pair<unsigned short, unsigned sho
 		limit = size.first;
 	}
 
-	assert((limits.first >= 0 && limits.second < limit));	
+	assert((limits.first >= 0 && limits.second < limit));
 
 	for (unsigned short i = limits.first; i <= limits.second; i++) {
 		for (std::vector<Word>::iterator it = words[i].begin(); it != words[i].end(); it++) {
@@ -556,7 +631,7 @@ short Board::deleteWord(Word word, Coordinate position, bool vertical) {
 	}
 
 	letters = letterCopy;
-	
+
 	return -1;
 }
 

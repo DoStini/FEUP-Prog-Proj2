@@ -22,6 +22,7 @@ typedef struct {
 class Board {
 public:
 	Board();
+	Board(std::string fileName);
 	~Board();
 
 	std::string showBoard();
@@ -52,6 +53,7 @@ private:
 	void deleteOnArray(Word word, bool vertical, unsigned short location);
 	void rewriteOnArray(bool vertical, std::pair<unsigned short, unsigned short> limits);
 	char** copyLetters();
+	bool readBoard(std::string fileName);
 
 	std::pair<unsigned short, unsigned short> heightLimits;
 	std::pair<unsigned short, unsigned short> widthLimits;
