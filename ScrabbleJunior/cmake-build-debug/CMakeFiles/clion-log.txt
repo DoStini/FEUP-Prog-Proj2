@@ -1,4 +1,0 @@
-"D:\Software\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" D:\Documents\Faculdade\PROG\Feup-Prog_Proj2\FEUP-Prog-Proj2\ScrabbleJunior
--- Configuring done
--- Generating done
--- Build files have been written to: D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug
