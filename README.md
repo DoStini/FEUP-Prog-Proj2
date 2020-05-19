@@ -16,6 +16,7 @@ Accomplishments:
 BOARD BUILDER:
 
     The user can select the size of the board. The minimum board size allowed by our program is 20 squares (a 3*3 board has 9 squares while a 3*10 board has 30 squares) to allow at least 2 players to play it (14 tiles).
+    The user can also use/edit an existing board file.
     WORDS.TXT was used by initially reading the file and storing it in memory to make for a faster execution.
     Players can select any word present in the WORDS.TXT file and its position and orientation on the board.
     Every rule was followed in terms of placing words:
