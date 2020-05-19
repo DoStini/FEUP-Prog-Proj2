@@ -29,11 +29,9 @@ Board::~Board() {
 /**
  * Displays the Board object in the console output.
  *
- * @param color True for displaying with color codes, False for no color codes.
- *
  * @returns a string that can be output to the console, displaying the board.
  */
-std::string Board::showBoard(bool color) {
+std::string Board::showBoard() {
 	std::stringstream output;
 
 	output << "   ";
@@ -45,7 +43,6 @@ std::string Board::showBoard(bool color) {
 
 	for (unsigned short l = 1; l <= size.first; l++) {
 		output << (char)((l - 1) + 'A') << " ";
-		if (color) output << "\033[47;30m";
 		output << " ";
 		for (unsigned short c = 1; c <= size.second; c++) {
 			output << letters[l][c] << " ";
@@ -54,17 +51,13 @@ std::string Board::showBoard(bool color) {
 
 		output << std::endl;
 		if (l != size.first) {
-			if (color) output << "\033[0m";
 			output << "  ";
-			if (color) output << "\033[47;30m";
 			output << "---";
 			for (unsigned short c = 1; c < size.second; c++) {
 				output << "+---";
 			}
 			output << std::endl;
 		}
-
-		if (color) output << "\033[0m";
 	}
 	return output.str();
 }
@@ -89,7 +82,7 @@ void Board::showCenteredBoard(unsigned short xStart, unsigned short yStart) {
 	for (unsigned short l = 1; l <= size.first; l++) {
 		gotoxy(start, yStart + (l*2));
 		std::cout << (char)((l - 1) + 'A') << " ";
-		std::cout << "\033[47;30m";
+		setColor(BLACK, WHITE);
 		std::cout << " ";
 		for (unsigned short c = 1; c <= size.second; c++) {
 			std::cout << letters[l][c] << " ";
@@ -98,16 +91,16 @@ void Board::showCenteredBoard(unsigned short xStart, unsigned short yStart) {
 
 		gotoxy(start, yStart + (l * 2)+1);
 		if (l != size.first) {
-			std::cout << "\033[0m";
+			setColor(WHITE, BLACK);
 			std::cout << "  ";
-			std::cout << "\033[47;30m";
+			setColor(BLACK, WHITE);
 			std::cout << "---";
 			for (unsigned short c = 1; c < size.second; c++) {
 				std::cout << "+---";
 			}
 		}
 
-		std::cout << "\033[0m";
+		setColor(WHITE, BLACK);
 	}
 
 	gotoxy(0, yStart + ((size.first + 1) * 2));
@@ -158,7 +151,7 @@ bool Board::initializeWords() {
 	vWords = new std::vector<Word>[size.second];
 	hWords = new std::vector<Word>[size.first];
 
-	letters = new (char(*[(size_t)size.first+2]));
+	letters = new char*[(size_t)size.first+2];
 	for (unsigned short l = 0; l < size.first+2; l++) {
 		letters[l] = new char[(size_t)size.second+2];
 		for (unsigned short c = 0; c < size.second+2; c++) {
@@ -177,7 +170,7 @@ bool Board::initializeWords() {
 char** Board::copyLetters() {
 	char** copy;
 
-	copy = new (char(*[(size_t)size.first + 2]));
+	copy = new char*[(size_t)size.first + 2];
 	for (unsigned short l = 0; l < size.first + 2; l++) {
 		copy[l] = new char[(size_t)size.second + 2];
 		for (unsigned short c = 0; c < size.second + 2; c++) {
@@ -595,7 +588,7 @@ void Board::saveBoard(std::string fileName) {
 	}
 
 	saveFile << "########" << std::endl;
-	saveFile << showBoard(false) << std::endl;
+	saveFile << showBoard() << std::endl;
 
 	saveFile.close();
 }

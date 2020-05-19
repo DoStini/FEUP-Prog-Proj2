@@ -117,12 +117,12 @@ const std::vector<std::string> title[8] = { titleS, titleC, titleR, titleA, titl
  * @param[in] xStart The starting horizontal position of the title in the console. Allows to adjust and center the position of the title
  * @param[in, out] wait A boolean indicating if the key "ENTER"/"RETURN" has been pressed, allowing to skip the animation
  */
-void dropLetter(const std::vector<std::string> &letter, int time, int num, unsigned short int xStart, bool& wait) {
+void dropLetter(const std::vector<std::string> &letter, DWORD time, int num, unsigned short int xStart, bool& wait) {
 	size_t distanceFallen, relativeDistanceToBottom;
 	int xPosition = num * 19 + xStart;
 
 	// Each frame (iteration of this loop) "drops" the letter by one line.
-	for (int i = letter.size() - 1; i >= 0; i--) {
+	for (int i =(int) letter.size() - 1; i >= 0; i--) {
 		distanceFallen = letter.size() - i;
 
 		// Redraws the part of the letter that can be seen and "drops" it by one line.
@@ -132,7 +132,7 @@ void dropLetter(const std::vector<std::string> &letter, int time, int num, unsig
 			}
 			relativeDistanceToBottom = it - letter.crbegin();
 
-			gotoxy(xPosition, distanceFallen - relativeDistanceToBottom);
+			gotoxy(xPosition, (int) (distanceFallen - relativeDistanceToBottom));
 			std::cout << *it;
 		}
 		if (wait) Sleep(time);
@@ -147,7 +147,7 @@ void dropLetter(const std::vector<std::string> &letter, int time, int num, unsig
  * @param xStart x position to start writing
  * @param yStart y position to start writing
  */
-void showCascading(std::string s, time_t t, unsigned short int xStart, unsigned short int yStart) {
+void showCascading(std::string s, DWORD t, unsigned short int xStart, unsigned short int yStart) {
 	unsigned short int lineFeed = yStart;
 	gotoxy(xStart, lineFeed);
 	for (int i = 0; i < s.length(); ++i) {
