@@ -124,6 +124,7 @@ void Board::showBoard() {
         std::cout << (char)(c + 'a');
         for(int space = 0; space < XSPACING-1; space++) std::cout << ' ';
     }
+    for(int space = 0; space < XSPACING-1; space++) std::cout << ' ';
 
     for (int i = 0; i < vSize; ++i) {
         gotoxy(start, YBEG + YSPACING * (i + 1));
@@ -133,6 +134,7 @@ void Board::showBoard() {
             for(int space = 0; space < XSPACING-1; space++) std::cout << ' ';
             std::cout << letters[i][j];
         }
+        for(int space = 0; space < XSPACING-1; space++) std::cout << ' ';
         setColor(ConsoleColors::BlackFore, ConsoleColors::WhiteBack);
         std::cout << (char)(i + 'A');
     }
@@ -142,6 +144,8 @@ void Board::showBoard() {
         std::cout << (char)(c + 'a');
         for(int space = 0; space < XSPACING-1; space++) std::cout << ' ';
     }
+    for(int space = 0; space < XSPACING-1; space++) std::cout << ' ';
+
     setColor(ConsoleColors::WhiteFore, ConsoleColors::BlackBack);       // Normalizing color
 }
 

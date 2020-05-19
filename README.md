@@ -35,7 +35,7 @@ SCRABBLE JUNIOR:
     * If an excessive amount of players over the number of tiles of the board (tiles < 7 * players), the game will prompt a message forbidding that game, returning to the main menu.
     * The program structure was separated adequately in different files, according to their objectives.
     * There are several menus like rules, credits, scoreboard and the game itself.
-    * The game board was drawn dynamically, allowing to change the parameters defined in graphical.h like vertical spacing and menu start to allow the programmer to change easily the aspect of the board.	The board also has an outline with the position identifiers (A or a).
+    * The game board was drawn dynamically, allowing to change the parameters defined in graphical.h like vertical spacing and menu start to allow the programmer to change easily the aspect of the board. The board also has an outline with the position identifiers (A or a).
     * Placing players in the console is also partially automatic according to values defined in graphical.h.
     * The input during the game will be of type Aa or Bb, and will detect any bad inputs like integers. If ctrl-z is pressed, the user will be prompted to confirm that he wants to end the game.
     * Other important rules we deducted:
@@ -44,7 +44,7 @@ SCRABBLE JUNIOR:
 	-> After a move, the player recieves a new tile, allowing him to play the new one at the 2nd move.
 	
 About our algorithm:
-
+		To check if there are any moves available to the player, we iterate through both of the hWords and vWords to find a valid move, stopping the iteration imeadiatly after finding one to avoid unecessary execution time.
 		In terms of checking possible valid moves and completed words, we thought a good way of doing this was to have a 2d vector of objects Word.
 		Every element of the first vector would contain vectors of words according to the vertical/horizontal position that the vertical/horizontal word occupied.
 		This way, having the input of the player, the row/column of that position can be quickly accessed to find possible words.
