@@ -45,6 +45,7 @@ SCRABBLE JUNIOR:
 	-> After a move, the player recieves a new tile, allowing him to play the new one at the 2nd move.
 	
 About our algorithm:
+
 		To check if there are any moves available to the player, we iterate through both of the hWords and vWords to find a valid move, stopping the iteration imeadiatly after finding one to avoid unecessary execution time.
 		In terms of checking possible valid moves and completed words, we thought a good way of doing this was to have a 2d vector of objects Word.
 		Every element of the first vector would contain vectors of words according to the vertical/horizontal position that the vertical/horizontal word occupied.
