@@ -49,7 +49,7 @@ void Board::readBoard(std::string fileName) {
 initWordVectors();                                                              // Initializing our words containers
 
     int counter = 0;
-    while (f_in.peek() != '#'){
+    while (f_in.peek() != '#' && !f_in.eof() && f_in.peek() != 0){
         f_in >> position[0] >> position[1] >> sep >> word;                      // Input is given as "Aa"
 
         verticalIdx = (int) position[0] - (int) 'A';                            // vertical index will be A converted to integer, counting 0 as char A
