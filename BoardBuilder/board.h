@@ -22,6 +22,7 @@ typedef struct {
 class Board {
 public:
 	Board();
+	Board(std::string fileName, const std::vector<std::string>& dictionary);
 	~Board();
 
 	std::string showBoard();
@@ -35,6 +36,7 @@ public:
 	short deleteWord(Word word, Coordinate position, bool vertical);
 	int getNumberOfLetters();
 	void saveBoard(std::string fileName);
+	bool readBoard(std::string fileName, const std::vector<std::string>& dictionary);
 
 	std::pair<unsigned short, unsigned short> getHeightLimits() { return heightLimits; }
 	std::pair<unsigned short, unsigned short> getWidthLimits() { return widthLimits; }

@@ -261,7 +261,7 @@ int main()
 	std::stringstream ss;
 	std::pair<unsigned short, unsigned short> size;
 	char input;
-	Board board;
+	Board board = Board();
 	readWords(words);
 
 	showTitle();
@@ -275,7 +275,33 @@ int main()
 	printMessage(ss.str(), GREEN, BLACK);
 	waitForKey();
 
+	
+	clearScreen(0, YBEGMENU);
 	while (true) {
+		printMessage("To edit an existing board, please insert the board's file name.", WHITE, BLACK);
+		printMessage("If you wish to create a new board, please press the 'ENTER'/'RETURN' key.", WHITE, BLACK);
+		printMessage("WARNING: Loading the wrong or a doctored file may result in unpredictable behaviour", RED, BLACK);
+
+		getString(fileName);
+		if (fileName == "") break;
+
+		bool valid = board.readBoard(fileName, words);
+
+		clearScreen(0, YBEGMENU);
+
+		if (!valid) {
+			printMessage("Input was invalid or file does not exist, please try again.", RED, BLACK);
+		}
+		else {
+			printMessage("Success reading the board!", GREEN, BLACK);
+
+			waitForKey();
+			break;
+		}
+	};
+
+
+	while (fileName == "") {
 		clearScreen(0, YBEGMENU);
 
 		inputLimits(board);
@@ -300,11 +326,14 @@ int main()
 		printMessage("Is this correct? (N to retry)", Color::WHITE, Color::BLACK);
 		getChar(input);
 
-		if (toupper(input) != 'N') break;
+		if (toupper(input) != 'N') {
+			board.initializeWords();
+
+			break;
+		}
 	}
 
 	clearScreen(0, YBEGMENU);
-	board.initializeWords();
 	
 	printMessage("You will now be asked to input the words into the board.");
 	printMessage("To stop input and save all changes into a file you can do the following:");
