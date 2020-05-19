@@ -1,3 +1,0 @@
-D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/CMakeFiles/ScrabbleJunior.dir
-D:/Documents/Faculdade/PROG/Feup-Prog_Proj2/FEUP-Prog-Proj2/ScrabbleJunior/cmake-build-debug/CMakeFiles/rebuild_cache.dir
