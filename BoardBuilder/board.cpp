@@ -63,7 +63,7 @@ bool Board::readBoard(std::string fileName, const std::vector<std::string>& dict
 
 	initializeWords();
 
-	while (f_in.peek() != '#') {
+	while (f_in.peek() != '#' && !f_in.eof() && f_in.peek() != 0) {
 		Word word;
 		Coordinate positionCoord;
 
