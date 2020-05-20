@@ -15,10 +15,10 @@ class Word {
 public:
 	bool setText(const std::vector<std::string> &dictionary, std::string _text);
 	bool setLimits(Coordinate position, bool vertical);
-	bool intersects(Word otherWord);
-	bool operator>(Word otherWord);
-	bool operator<(Word otherWord);
-	bool operator==(Word otherWord);
+	bool intersects(const Word& otherWord) const;
+	bool operator>(const Word& otherWord) const;
+	bool operator<(const Word& otherWord) const;
+	bool operator==(const Word& otherWord) const;
 	std::string getText() { return text; }
 	Coordinate getLimits() { return limits; }
 private:

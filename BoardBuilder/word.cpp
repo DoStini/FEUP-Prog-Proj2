@@ -94,8 +94,8 @@ std::vector<std::string> getSimilarWords(const std::vector<std::string>& diction
  *
  * @param otherWord The word that is compared
  */
-bool Word::intersects(Word otherWord) {
-	Coordinate otherLimits = otherWord.getLimits();
+bool Word::intersects(const Word& otherWord) const {
+	Coordinate otherLimits = otherWord.limits;
 
 	return !(limits.first - 1 > otherLimits.second || limits.second + 1 < otherLimits.first);
 }
@@ -105,8 +105,8 @@ bool Word::intersects(Word otherWord) {
  *
  * @param otherWord The word that is compared
  */
-bool Word::operator>(Word otherWord) {
-	Coordinate otherLimits = otherWord.getLimits();
+bool Word::operator>(const Word& otherWord) const {
+	Coordinate otherLimits = otherWord.limits;
 
 	return (limits.first - 1 > otherLimits.second);
 }
@@ -116,8 +116,8 @@ bool Word::operator>(Word otherWord) {
  *
  * @param otherWord The word that is compared
  */
-bool Word::operator<(Word otherWord) {
-	Coordinate otherLimits = otherWord.getLimits();
+bool Word::operator<(const Word& otherWord) const {
+	Coordinate otherLimits = otherWord.limits;
 
 	return (limits.second + 1 < otherLimits.first);
 }
@@ -128,9 +128,8 @@ bool Word::operator<(Word otherWord) {
  *
  * @param otherWord The word that is compared
  */
-bool Word::operator==(Word otherWord)
-{
-	return otherWord.getText() == text && otherWord.getLimits().first == limits.first; 
+bool Word::operator==(const Word& otherWord) const{
+	return otherWord.text == text && otherWord.limits.first == limits.first; 
 }
 
 /**

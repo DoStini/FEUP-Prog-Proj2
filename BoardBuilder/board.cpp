@@ -533,8 +533,6 @@ void Board::rewriteOnArray(bool vertical, std::pair<unsigned short, unsigned sho
  */
 WordsIterator Board::checkWordOnBoard(Word word, Coordinate position, bool vertical) {
 	WordsIterator result;
-	std::string text = word.getText();
-	size_t textSize = text.size();
 
 	std::vector<Word>* orientationWords = vertical ? &vWords[position.second] : &hWords[position.first];
 
