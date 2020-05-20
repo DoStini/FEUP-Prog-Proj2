@@ -56,7 +56,6 @@ BOARD.TXT
 *.exe
 *.out
 *.app
-!WORDS.TXT
 
 #Cmake
 
